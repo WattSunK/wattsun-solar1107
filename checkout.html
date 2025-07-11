@@ -161,7 +161,8 @@
     <!-- Checkout form with Netlify Forms and hidden cart summary -->
     <form class="checkout-form" id="checkoutForm"
           name="order" method="POST" data-netlify="true" action="/thankyou.html">
-      <input type="hidden" name="cart_summary" id="cart_summary" />
+      <input type="hidden" name="form-name" value="order" />
+      <input id="cart_summary" name="cart_summary" type="hidden"/>
       <label for="fullName">Full Name</label>
       <input id="fullName" name="fullName" type="text" required placeholder="Your full name"/>
       <label for="email">Email Address</label>
@@ -176,68 +177,5 @@
 
   <script>
     // Cart summary with dynamic quantity
-    const cartTable = document.querySelector("#cartTable tbody");
-    const totalDisplay = document.getElementById("totalAmount");
 
-    function renderCheckoutCart() {
-      let items = JSON.parse(localStorage.getItem("cart")) || [];
-      let totalDeposit = 0;
-      cartTable.innerHTML = "";
-      items.forEach((item, idx) => {
-        const quantity = item.quantity || 1;
-        const totalPrice = item.price * quantity;
-        const totalItemDeposit = item.deposit * quantity;
-        totalDeposit += totalItemDeposit;
-        const row = document.createElement("tr");
-        row.innerHTML = `
-          <td>${item.name}</td>
-          <td>KES ${item.price.toLocaleString()}</td>
-          <td>KES ${item.deposit.toLocaleString()}</td>
-          <td>
-            <div class="qty-control">
-              <button class="qty-btn" onclick="changeQty(${idx}, -1)" type="button">–</button>
-              <span>${quantity}</span>
-              <button class="qty-btn" onclick="changeQty(${idx}, 1)" type="button">+</button>
-            </div>
-          </td>
-          <td>KES ${totalPrice.toLocaleString()}</td>
-          <td>KES ${totalItemDeposit.toLocaleString()}</td>
-        `;
-        cartTable.appendChild(row);
-      });
-      totalDisplay.innerText = "Total Deposit: KES " + totalDeposit.toLocaleString();
-    }
-
-    function changeQty(index, delta) {
-      let items = JSON.parse(localStorage.getItem("cart")) || [];
-      if (items[index]) {
-        items[index].quantity = (items[index].quantity || 1) + delta;
-        if (items[index].quantity < 1) {
-          items.splice(index, 1);
-        }
-        localStorage.setItem("cart", JSON.stringify(items));
-        renderCheckoutCart();
-      }
-    }
-
-    window.onload = renderCheckoutCart;
-    window.changeQty = changeQty;
-
-    // Fill hidden cart_summary field before form submit
-    document.getElementById("checkoutForm").addEventListener("submit", function(e) {
-      var cart = JSON.parse(localStorage.getItem("cart")) || [];
-      var summary = cart.length === 0 ? "EMPTY CART" : cart.map(item =>
-        `${item.name} | Qty: ${item.quantity || 1} | Deposit/Unit: KES ${item.deposit} | Total Deposit: KES ${(item.deposit * (item.quantity || 1)).toLocaleString()}`
-      ).join('\n');
-      document.getElementById("cart_summary").value = summary;
-      // Allow form to submit to Netlify (do not preventDefault)
-      // Optionally, clear cart on order:
-      localStorage.removeItem("cart");
-    });
-  </script>
-
-  <footer>
-    &copy; 2025 WattSun Solar Kenya | <a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a>
-  </footer>
-</body>
-</html>
+    
