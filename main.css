@@ -429,3 +429,18 @@ section {
   margin-bottom: 18px !important;
   padding-bottom: 14px !important;
 }
+.whatsapp-link {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  vertical-align: middle;
+  background: url('https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg') no-repeat center center/contain;
+  margin-left: 10px;
+  text-indent: -9999px; /* Hides any text */
+  border-radius: 50%;
+  transition: filter 0.2s, transform 0.2s;
+}
+.whatsapp-link:hover {
+  filter: brightness(1.2);
+  transform: scale(1.08);
+}
