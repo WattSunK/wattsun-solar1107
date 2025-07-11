@@ -32,7 +32,7 @@ header nav {
     text-align: center;
 }
 header nav a {
-    color: #fff;
+    color: #fff;  /* White text */
     font-family: 'Montserrat', Arial, sans-serif;
     font-weight: 700;
     text-decoration: none;
@@ -42,7 +42,7 @@ header nav a {
     letter-spacing: 0.2px;
 }
 header nav a:hover {
-    color: #fffbe0;
+    color: #17b169;  /* Green on hover */
     text-shadow: 0 1px 8px #fff5;
 }
 /* HERO SECTION */
@@ -398,19 +398,17 @@ footer a {
     }
 }
 .card-footer, .packages-footer {
-  text-align: center;
-  margin-top: 6px;
-  margin-bottom: 0;
+    text-align: center;
+    margin-top: 6px;
+    margin-bottom: 0;
 }
-
 .card-footer .loan-btn, .packages-footer .loan-btn {
-  margin-bottom: 4px;
-  margin-top: 0;
+    margin-bottom: 4px;
+    margin-top: 0;
 }
-
 .card-footer .table-note, .packages-footer .table-note {
-  margin-top: 7px;
-  margin-bottom: 0;
+    margin-top: 7px;
+    margin-bottom: 0;
 }
 
 /* Reduce section spacing for a more compact look */
