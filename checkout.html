@@ -160,7 +160,7 @@
 
     <!-- Checkout form with Netlify Forms and hidden cart summary -->
     <form class="checkout-form" id="checkoutForm"
-          name="order" method="POST" data-netlify="true" action="thankyou.html">
+          name="order" method="POST" data-netlify="true" action="/thankyou.html">
       <input type="hidden" name="cart_summary" id="cart_summary" />
       <label for="fullName">Full Name</label>
       <input id="fullName" name="fullName" type="text" required placeholder="Your full name"/>
@@ -241,7 +241,3 @@
   </footer>
 </body>
 </html>
-
-<!-- End of checkout.html -->
-<!-- Note: This code assumes you have a cart stored in localStorage with items having 'name', 'price', and 'deposit' properties. -->
-<!-- The form submission is basic and should be replaced with actual backend logic for processing orders. -->
