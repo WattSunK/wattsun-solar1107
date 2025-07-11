@@ -1,0 +1,431 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+header {
+    background: linear-gradient(90deg, #ffc371 0%, #ffb347 100%);
+    padding: 0;
+    margin: 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+header h1 {
+    text-align: center;
+    font-size: 3em;
+    margin: 0;
+    font-family: 'Montserrat', Arial, sans-serif;
+    color: #fff;
+    font-weight: bold;
+    padding-top: 30px;
+    padding-bottom: 12px;
+    letter-spacing: 1px;
+}
+header nav {
+    background: #fcc142;
+    padding: 12px 0 10px 0;
+    text-align: center;
+}
+header nav a {
+    color: #fff;
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 1.15em;
+    margin: 0 20px;
+    transition: color 0.15s;
+    letter-spacing: 0.2px;
+}
+header nav a:hover {
+    color: #fffbe0;
+    text-shadow: 0 1px 8px #fff5;
+}
+/* HERO SECTION */
+.hero {
+    background: none;
+    color: #111;
+    text-align: center;
+    padding: 60px 20px 40px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.hero-inner {
+    max-width: 900px;
+    margin: auto;
+}
+.hero h1 {
+    font-size: 2.6em;
+    font-weight: bold;
+    margin-bottom: 18px;
+    margin-top: 0;
+    color: #111;
+}
+.hero p {
+    font-size: 1.2em;
+    margin: 10px 0 18px;
+    color: #111;
+}
+.hero .btn {
+    background: #f7b733;
+    color: white;
+    padding: 14px 30px;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 18px;
+    transition: background 0.25s, box-shadow 0.25s, color 0.2s;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.07);
+    display: inline-block;
+}
+.hero .btn:hover {
+    background: #ffb347;
+    color: #9b5c00;
+    box-shadow: 0 4px 22px rgba(247,183,51, 0.16);
+}
+section {
+    padding: 20px 0 14px 0;
+    margin-bottom: 10px;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+h2, .centered-section-title {
+    margin-top: 0.3em;
+    margin-bottom: 0.7em;
+}
+.centered-section-title {
+    text-align: center;
+    font-size: 1.6em;
+    font-weight: bold;
+    margin-bottom: 34px;
+    letter-spacing: 0.2px;
+    color: #b39708;
+}
+
+/* --- Packages Row Styling --- */
+.packages-row {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 2em;
+    justify-content: center;
+    margin: 32px auto 18px auto;
+    max-width: 1050px;
+}
+.package-tier {
+    background: #fff;
+    border-radius: 18px;
+    padding: 2em 1.4em 1.7em 1.4em;
+    box-shadow: 0 4px 24px rgba(247,183,51,0.11), 0 1.5px 9px rgba(0,0,0,0.05);
+    min-width: 260px;
+    max-width: 330px;
+    flex: 1 1 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.package-tier h3 {
+    margin-top: 0;
+    margin-bottom: 0.7em;
+    font-size: 1.35em;
+    color: #b39708;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+.package-tier ul {
+    margin: 0 0 0.3em 0;
+    padding-left: 1.1em;
+    font-size: 1.01em;
+    color: #444;
+}
+
+/* GOLD BUTTON (Loan/CTA) */
+.loan-btn {
+    background: linear-gradient(90deg, #f8d147 0%, #ffe481 100%);
+    color: #184211 !important;
+    padding: 14px 32px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 24px;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(248,209,71, 0.14);
+    letter-spacing: 0.5px;
+    display: inline-block;
+    cursor: pointer;
+    margin-top: 16px;
+    margin-bottom: 12px;
+    transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+}
+.loan-btn:hover {
+    background: linear-gradient(90deg, #ffe481 0%, #f8d147 100%);
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 6px 20px rgba(248,209,71, 0.20);
+    color: #b39708 !important;
+}
+
+/* Card-style container for tables */
+.card-table-container {
+    background: #fffbe6; /* very light gold */
+    border-radius: 18px;
+    box-shadow: 0 2px 18px rgba(248, 209, 71, 0.12);
+    padding: 28px 18px 22px 18px;
+    margin-bottom: 36px;
+    max-width: 740px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Modern, clean table style */
+.styled-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 1.07em;
+    background: transparent;
+}
+.styled-table th {
+    background: linear-gradient(90deg, #f8d147 0%, #ffe481 100%);
+    color: #184211;
+    font-weight: bold;
+    padding: 13px 10px;
+    text-align: left;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    font-size: 1.09em;
+}
+.styled-table td {
+    padding: 11px 10px;
+    border-bottom: 1px solid #f8e7a5;
+    vertical-align: middle;
+}
+.styled-table tr:nth-child(even) {
+    background: #fff7cc;
+}
+.styled-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Note below tables */
+.table-note {
+    font-size: 0.98em;
+    color: #a68a14;
+    margin: 16px 0 8px 0;
+    font-style: italic;
+}
+
+/* Make tables horizontally scrollable on small screens */
+@media (max-width: 650px) {
+    .card-table-container {
+        padding: 12px 4px 15px 4px;
+    }
+    .styled-table,
+    .styled-table thead,
+    .styled-table tbody,
+    .styled-table th,
+    .styled-table td,
+    .styled-table tr {
+        display: block;
+        width: 100%;
+    }
+    .styled-table th, .styled-table td {
+        padding: 11px 7px;
+        text-align: left;
+    }
+    .styled-table tr {
+        margin-bottom: 8px;
+    }
+    .packages-row {
+        flex-direction: column;
+        gap: 18px;
+    }
+    .package-tier {
+        width: 98%;
+        margin: 0 auto 14px auto;
+        padding: 1.1em 0.7em 1.2em 0.9em;
+    }
+}
+
+/* --- Feature/Steps Cards --- */
+.feature-row {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+.feature-box {
+    background: #fff6e4;
+    border-radius: 14px;
+    box-shadow: 0 2px 12px rgba(247,183,51, 0.09);
+    display: flex;
+    align-items: flex-start;
+    min-width: 210px;
+    max-width: 280px;
+    flex: 1 1 0;
+    padding: 20px 20px 18px 18px;
+    margin-bottom: 10px;
+    gap: 13px;
+}
+.feature-icon {
+    font-size: 1.6em;
+    margin-right: 6px;
+    margin-top: 2px;
+    min-width: 30px;
+    text-align: center;
+}
+.feature-title {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #b39708;
+    letter-spacing: 0.1px;
+}
+.feature-desc {
+    font-size: 1em;
+    color: #222;
+    margin-bottom: 2px;
+}
+
+.steps-row {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+.step-box {
+    background: #fff6e4;
+    border-radius: 14px;
+    box-shadow: 0 2px 12px rgba(247,183,51, 0.09);
+    min-width: 210px;
+    max-width: 280px;
+    flex: 1 1 0;
+    padding: 18px 18px 16px 18px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.step-title {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 7px;
+}
+.step-desc {
+    font-size: 1em;
+    color: #333;
+}
+
+/* CTA Section Centering */
+.cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 24px;
+    margin-bottom: 0;
+}
+.cta h2 {
+    margin-bottom: 7px;
+    font-size: 1.5em;
+}
+.cta p {
+    margin-bottom: 16px;
+    margin-top: 0;
+    font-size: 1.07em;
+}
+
+footer {
+    flex-shrink: 0;
+    background: linear-gradient(90deg, #f7b733 0%, #fcf6ba 100%);
+    color: #18140a;
+    text-align: center;
+    padding: 2em;
+    margin-top: 36px;
+    font-size: 1.06em;
+    letter-spacing: 0.01em;
+    font-weight: 500;
+}
+footer a {
+    color: #18140a;
+    text-decoration: underline;
+}
+
+/* Testimonials (used on Home) */
+.testimonials-list {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    margin-top: 24px;
+}
+.testimonial-row {
+    display: flex;
+    align-items: center;
+    background: #f0f0f0;
+    border-left: 5px solid #f7b733;
+    border-radius: 10px;
+    padding: 20px;
+    gap: 24px;
+}
+.testimonial-img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    background: #fff;
+}
+.testimonial-text {
+    flex: 1;
+}
+@media (max-width: 700px) {
+    .testimonial-row {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        gap: 12px;
+    }
+    .testimonial-img {
+        width: 70px;
+        height: 70px;
+    }
+}
+.card-footer, .packages-footer {
+  text-align: center;
+  margin-top: 6px;
+  margin-bottom: 0;
+}
+
+.card-footer .loan-btn, .packages-footer .loan-btn {
+  margin-bottom: 4px;
+  margin-top: 0;
+}
+
+.card-footer .table-note, .packages-footer .table-note {
+  margin-top: 7px;
+  margin-bottom: 0;
+}
+
+/* Reduce section spacing for a more compact look */
+section {
+  padding: 22px 0 10px 0 !important;
+  margin-bottom: 7px !important;
+}
+
+/* Reduce gap below section titles */
+.centered-section-title {
+  margin-bottom: 16px !important;
+}
+
+/* Remove extra margin between tables/footers/next headings */
+.card-table-container, .packages-row {
+  margin-bottom: 18px !important;
+  padding-bottom: 14px !important;
+}

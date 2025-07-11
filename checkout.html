@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Checkout - WattSun Solar</title>
+  <link rel="stylesheet" href="main.css"/>
+  <style>
+    body { background: #fafafa; }
+    .container {
+      max-width: 680px;
+      margin: 44px auto;
+      padding: 38px 26px 30px 26px;
+      background: #fff;
+      border-radius: 13px;
+      box-shadow: 0 4px 20px rgba(247,183,51,0.10), 0 1.5px 9px rgba(0,0,0,0.04);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 26px;
+      font-size: 2em;
+      font-weight: bold;
+      color: #b47d08;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      margin-bottom: 22px;
+      border-radius: 10px;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.07);
+      overflow: hidden;
+    }
+    th, td {
+      text-align: left;
+      padding: 12px 10px;
+      border-bottom: 1px solid #f2e2b6;
+      font-size: 1em;
+      vertical-align: middle;
+    }
+    th {
+      background-color: #f9eabb;
+      color: #444;
+      font-weight: bold;
+    }
+    .qty-control {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .qty-btn {
+      background: linear-gradient(90deg, #f7b733 0%, #fcf6ba 100%);
+      color: #965700;
+      border: none;
+      border-radius: 5px;
+      width: 26px;
+      height: 26px;
+      font-size: 1.13em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+      box-shadow: 0 1px 4px #f7b73344;
+    }
+    .qty-btn:hover {
+      background: linear-gradient(90deg, #fcf6ba 0%, #f7b733 100%);
+      color: #b37900 !important;
+    }
+    .total {
+      text-align: right;
+      margin-top: 10px;
+      font-size: 1.12em;
+      font-weight: bold;
+      color: #3E9F50;
+    }
+    .checkout-form label {
+      display: block;
+      margin-bottom: 7px;
+      font-weight: bold;
+      font-size: 1.08em;
+      margin-top: 12px;
+    }
+    .checkout-form input,
+    .checkout-form textarea {
+      width: 100%;
+      padding: 12px 10px;
+      margin-bottom: 12px;
+      border: 1.1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1em;
+      background: #faf9f7;
+      transition: border-color 0.2s;
+    }
+    .checkout-form input:focus,
+    .checkout-form textarea:focus {
+      border-color: #f7b733;
+      outline: none;
+    }
+    .btn {
+      padding: 14px 36px;
+      font-size: 1.08em;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      background: linear-gradient(90deg, #f7b733 0%, #fcf6ba 100%);
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(247,183,51, 0.14);
+      letter-spacing: 0.5px;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+      margin-top: 18px;
+      margin-bottom: 6px;
+      display: inline-block;
+    }
+    .btn:hover {
+      background: linear-gradient(90deg, #fcf6ba 0%, #f7b733 100%);
+      color: #b37900 !important;
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 6px 20px rgba(247,183,51, 0.20);
+    }
+    @media (max-width: 900px) {
+      .container { padding: 18px 5vw; }
+      table th, table td { font-size: 0.98em; }
+      .qty-control { gap: 2px; }
+      .qty-btn { width: 20px; height: 20px; font-size: 1em; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header: From main.css -->
+  <header>
+    <h1>WattSun Solar</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="solutions.html">Solutions</a>
+      <a href="shop.html">Shop</a>
+      <a href="financing.html">Financing</a>
+      <a href="projects.html">Projects</a>
+      <a href="contact.html">Contact</a>
+      <a href="cart.html">🛒 Cart</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2>Checkout</h2>
+    <!-- Cart summary table -->
+    <table id="cartTable">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Unit Price</th>
+          <th>Deposit/Unit</th>
+          <th>Quantity</th>
+          <th>Total Price</th>
+          <th>Total Deposit</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <div class="total" id="totalAmount">Total Deposit: KES 0</div>
+
+    <!-- Checkout form with Netlify Forms and hidden cart summary -->
+    <form class="checkout-form" id="checkoutForm"
+          name="order" method="POST" data-netlify="true" action="thankyou.html">
+      <input type="hidden" name="cart_summary" id="cart_summary" />
+      <label for="fullName">Full Name</label>
+      <input id="fullName" name="fullName" type="text" required placeholder="Your full name"/>
+      <label for="email">Email Address</label>
+      <input id="email" name="email" type="email" required placeholder="you@example.com"/>
+      <label for="phone">Phone Number</label>
+      <input id="phone" name="phone" type="tel" required placeholder="+254 7XX XXX XXX"/>
+      <label for="address">Delivery Address</label>
+      <textarea id="address" name="address" rows="3" required placeholder="Enter delivery location"></textarea>
+      <button type="submit" class="btn">Place Order &rarr;</button>
+    </form>
+  </div>
+
+  <script>
+    // Cart summary with dynamic quantity
+    const cartTable = document.querySelector("#cartTable tbody");
+    const totalDisplay = document.getElementById("totalAmount");
+
+    function renderCheckoutCart() {
+      let items = JSON.parse(localStorage.getItem("cart")) || [];
+      let totalDeposit = 0;
+      cartTable.innerHTML = "";
+      items.forEach((item, idx) => {
+        const quantity = item.quantity || 1;
+        const totalPrice = item.price * quantity;
+        const totalItemDeposit = item.deposit * quantity;
+        totalDeposit += totalItemDeposit;
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${item.name}</td>
+          <td>KES ${item.price.toLocaleString()}</td>
+          <td>KES ${item.deposit.toLocaleString()}</td>
+          <td>
+            <div class="qty-control">
+              <button class="qty-btn" onclick="changeQty(${idx}, -1)" type="button">–</button>
+              <span>${quantity}</span>
+              <button class="qty-btn" onclick="changeQty(${idx}, 1)" type="button">+</button>
+            </div>
+          </td>
+          <td>KES ${totalPrice.toLocaleString()}</td>
+          <td>KES ${totalItemDeposit.toLocaleString()}</td>
+        `;
+        cartTable.appendChild(row);
+      });
+      totalDisplay.innerText = "Total Deposit: KES " + totalDeposit.toLocaleString();
+    }
+
+    function changeQty(index, delta) {
+      let items = JSON.parse(localStorage.getItem("cart")) || [];
+      if (items[index]) {
+        items[index].quantity = (items[index].quantity || 1) + delta;
+        if (items[index].quantity < 1) {
+          items.splice(index, 1);
+        }
+        localStorage.setItem("cart", JSON.stringify(items));
+        renderCheckoutCart();
+      }
+    }
+
+    window.onload = renderCheckoutCart;
+    window.changeQty = changeQty;
+
+    // Fill hidden cart_summary field before form submit
+    document.getElementById("checkoutForm").addEventListener("submit", function(e) {
+      var cart = JSON.parse(localStorage.getItem("cart")) || [];
+      var summary = cart.length === 0 ? "EMPTY CART" : cart.map(item =>
+        `${item.name} | Qty: ${item.quantity || 1} | Deposit/Unit: KES ${item.deposit} | Total Deposit: KES ${(item.deposit * (item.quantity || 1)).toLocaleString()}`
+      ).join('\n');
+      document.getElementById("cart_summary").value = summary;
+      // Allow form to submit to Netlify (do not preventDefault)
+      // Optionally, clear cart on order:
+      localStorage.removeItem("cart");
+    });
+  </script>
+
+  <footer>
+    &copy; 2025 WattSun Solar Kenya | <a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a>
+  </footer>
+</body>
+</html>
+
+<!-- End of checkout.html -->
+<!-- Note: This code assumes you have a cart stored in localStorage with items having 'name', 'price', and 'deposit' properties. -->
+<!-- The form submission is basic and should be replaced with actual backend logic for processing orders. -->

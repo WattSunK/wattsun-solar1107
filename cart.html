@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Cart - WattSun Solar</title>
+  <link rel="stylesheet" href="main.css"/>
+  <style>
+    body { background: #fafafa; }
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 36px 24px 28px 24px;
+      background: #fff;
+      border-radius: 13px;
+      box-shadow: 0 4px 20px rgba(247,183,51,0.10), 0 1.5px 9px rgba(0,0,0,0.04);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2em;
+      font-weight: bold;
+      color: #b47d08;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      margin-bottom: 22px;
+      border-radius: 10px;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.07);
+      overflow: hidden;
+    }
+    th, td {
+      text-align: left;
+      padding: 14px 12px;
+      border-bottom: 1px solid #f2e2b6;
+      font-size: 1em;
+    }
+    th {
+      background-color: #f9eabb;
+      color: #444;
+      font-weight: bold;
+    }
+    .total {
+      text-align: right;
+      margin-top: 15px;
+      font-size: 1.15em;
+      font-weight: bold;
+      color: #3E9F50;
+    }
+    .actions {
+      text-align: center;
+      margin-top: 30px;
+    }
+    .btn {
+      padding: 14px 36px;
+      font-size: 1.08em;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      background: linear-gradient(90deg, #f7b733 0%, #fcf6ba 100%);
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(247,183,51, 0.14);
+      letter-spacing: 0.5px;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+      margin-top: 18px;
+      margin-bottom: 6px;
+      display: inline-block;
+    }
+    .btn:hover {
+      background: linear-gradient(90deg, #fcf6ba 0%, #f7b733 100%);
+      color: #b37900 !important;
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 6px 20px rgba(247,183,51, 0.20);
+    }
+    .btn-clear {
+      margin-left: 18px;
+      margin-top: 18px;
+      margin-bottom: 6px;
+    }
+    @media (max-width: 900px) {
+      .container { padding: 18px 5vw; }
+      table th, table td { font-size: 0.98em; }
+      .btn, .btn-clear { width: 100%; margin: 10px 0; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>WattSun Solar</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="solutions.html">Solutions</a>
+      <a href="shop.html">Shop</a>
+      <a href="financing.html">Financing</a>
+      <a href="projects.html">Projects</a>
+      <a href="contact.html">Contact</a>
+      <a href="cart.html">🛒 Cart</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2>Your Cart</h2>
+    <table id="cartTable">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Unit Price</th>
+          <th>Deposit/Unit</th>
+          <th>Quantity</th>
+          <th>Total Price</th>
+          <th>Total Deposit</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <div class="total" id="totalAmount">Total Deposit: KES 0</div>
+    <div class="actions">
+      <a class="btn" href="checkout.html">Proceed to Checkout</a>
+      <button class="btn btn-clear" id="clearCartBtn" type="button" style="display:none;">Clear Cart</button>
+      <div style="margin-bottom:36px;"></div>
+    </div>
+  </div>
+  <script>
+    const cartTable = document.querySelector("#cartTable tbody");
+    const totalDisplay = document.getElementById("totalAmount");
+    const clearCartBtn = document.getElementById("clearCartBtn");
+
+    function loadCart() {
+      let items = JSON.parse(localStorage.getItem("cart")) || [];
+      let totalDeposit = 0;
+      cartTable.innerHTML = "";
+      items.forEach(item => {
+        const quantity = item.quantity || 1;
+        const row = document.createElement("tr");
+        const totalPrice = item.price * quantity;
+        const totalItemDeposit = item.deposit * quantity;
+        row.innerHTML = `
+          <td>${item.name}</td>
+          <td>KES ${item.price.toLocaleString()}</td>
+          <td>KES ${item.deposit.toLocaleString()}</td>
+          <td>${quantity}</td>
+          <td>KES ${totalPrice.toLocaleString()}</td>
+          <td>KES ${totalItemDeposit.toLocaleString()}</td>
+        `;
+        totalDeposit += totalItemDeposit;
+        cartTable.appendChild(row);
+      });
+      totalDisplay.innerText = "Total Deposit: KES " + totalDeposit.toLocaleString();
+      // Show/hide clear cart button
+      clearCartBtn.style.display = items.length > 0 ? "inline-block" : "none";
+    }
+
+    function clearCart() {
+      localStorage.removeItem("cart");
+      loadCart();
+    }
+
+    window.onload = loadCart;
+    clearCartBtn.addEventListener("click", clearCart);
+  </script>
+
+  <footer>
+    &copy; 2025 WattSun Solar Kenya | <a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a>
+  </footer>
+</body>
+</html>
+
+<!-- This is the cart page for WattSun Solar, displaying items in the user's cart and total deposit. -->
+<!-- End of cart.html -->
+<!-- This file is part of the WattSun Solar project, providing a simple cart page for users

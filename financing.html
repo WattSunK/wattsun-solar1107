@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Flexible Solar Financing Options</title>
+  <link rel="stylesheet" href="main.css"/>
+  <style>
+    body {
+      background: #f7f7f7;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      color: #333;
+    }
+    .container {
+      max-width: 700px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 40px 35px 30px 35px;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 2em;
+      font-weight: bold;
+      letter-spacing: 0.1px;
+    }
+    p {
+      font-size: 1.13em;
+      line-height: 1.5;
+      margin-bottom: 28px;
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin: 15px 0 6px 0;
+      font-weight: bold;
+      font-size: 1.11em;
+    }
+    input, select {
+      width: 100%;
+      padding: 13px 12px;
+      margin-bottom: 13px;
+      border: 1.2px solid #ccc;
+      border-radius: 5px;
+      font-size: 1em;
+      box-sizing: border-box;
+      background: #faf9f7;
+      transition: border-color 0.2s;
+    }
+    input:focus, select:focus {
+      border-color: #f7b733;
+      outline: none;
+    }
+    button {
+      width: 100%;
+      background: #ffc043;
+      color: #fff;
+      border: none;
+      padding: 15px;
+      border-radius: 6px;
+      font-size: 1.15em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      margin-top: 10px;
+      margin-bottom: 8px;
+      box-shadow: 0 3px 18px rgba(247,183,51,0.11);
+      letter-spacing: 0.04em;
+    }
+    button:hover {
+      background: #ffb347;
+      color: #965700;
+    }
+    .result {
+      margin-top: 18px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.16em;
+    }
+    .disclaimer {
+      font-size: 0.98em;
+      text-align: center;
+      color: #888;
+      margin-top: 14px;
+    }
+    @media (max-width: 800px) {
+      .container {
+        max-width: 98vw;
+        padding: 22px 5vw;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header: From main.css -->
+  <header>
+    <h1>WattSun Solar</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="solutions.html">Solutions</a>
+      <a href="shop.html">Shop</a>
+      <a href="financing.html">Financing</a>
+      <a href="projects.html">Projects</a>      
+      <a href="contact.html">Contact</a>
+      <!-- <a href="cart.html">🛒 Cart</a> -->
+    </nav>
+  </header>
+
+  <!-- Main content: as in screenshot -->
+  <div class="container">
+    <h2>Flexible Solar Financing Options</h2>
+    <p>WattSun Solar offers tailored financing plans to help you transition to clean, renewable energy without the burden of large upfront costs. Use the estimator below to calculate your expected monthly repayment based on system size and interest terms.</p>
+    <form id="loanForm">
+      <label for="system">Select System Size:</label>
+      <select id="system" required>
+        <option value="">-- Select --</option>
+        <option value="150000">1 kW – KES 150,000</option>
+        <option value="400000">3 kW – KES 400,000</option>
+        <option value="700000">6 kW – KES 700,000</option>
+        <option value="1050000">9 kW – KES 1,050,000</option>
+        <option value="1420000">12 kW – KES 1,420,000</option>
+      </select>
+      <label for="deposit">Your Deposit (KES):</label>
+      <input id="deposit" required type="number"/>
+      <label for="term">Loan Term (Months):</label>
+      <input id="term" max="36" min="6" required type="number" value="36"/>
+      <button type="submit">Calculate Loan</button>
+    </form>
+    <div class="result" id="result"></div>
+    <div class="disclaimer">* This is an indicative estimate. Actual loan terms may vary.</div>
+  </div>
+
+  <script>
+    document.getElementById('loanForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const systemCost = parseFloat(document.getElementById('system').value);
+      const deposit = parseFloat(document.getElementById('deposit').value);
+      const term = parseInt(document.getElementById('term').value);
+      if (!systemCost || isNaN(deposit) || isNaN(term)) {
+        document.getElementById('result').textContent = "Please fill in all fields.";
+        return;
+      }
+      const minDeposit = 0.5 * systemCost;
+      if (deposit < minDeposit) {
+        document.getElementById('result').textContent = "Minimum deposit is KES " + minDeposit.toLocaleString("en-KE");
+        return;
+      }
+      const loanAmount = systemCost - deposit;
+      const annualInterestRate = 0.15;
+      const monthlyInterestRate = annualInterestRate / 12;
+      const monthlyRepayment = (loanAmount * monthlyInterestRate) / (1 - Math.pow(1 + monthlyInterestRate, -term));
+      document.getElementById('result').textContent =
+        "Loan Amount: KES " + loanAmount.toLocaleString("en-KE") +
+        " | Monthly Repayment: KES " + monthlyRepayment.toFixed(0).toLocaleString("en-KE");
+    });
+  </script>
+
+  <!-- Footer: From main.css -->
+  <footer>
+    &copy; 2025 WattSun Solar Kenya | <a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a>
+  </footer>
+</body>
+</html>
+<!-- End of financing.html -->
+<!-- This file is part of the WattSun Solar project, providing a simple financing calculator page for users
+These are recently edited files. Do not suggest code that has been deleted.
