@@ -2,24 +2,112 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
-  <title>Solutions | WattSun Solar</title>
+  <title>Solar Solutions | WattSun Solar</title>
   <link rel="stylesheet" href="main.css">
+  <style>
+    body { background: #f6f9f5; }
+    /* Page-specific styles only, do NOT touch header/footer */
+    .solutions-calc-cta {
+      text-align: center;
+      margin: 38px auto 20px auto;
+    }
+    .solutions-calc-cta .loan-btn {
+      font-size: 1.16em;
+      padding: 15px 42px;
+      border-radius: 28px;
+      box-shadow: 0 2px 14px rgba(247,183,51,0.12);
+      display: inline-block;
+      font-weight: 600;
+      margin-bottom: 7px;
+    }
+    .solutions-calc-cta .loan-btn:hover {
+      background: linear-gradient(90deg, #fcf6ba 0%, #f7b733 100%);
+      color: #b37900 !important;
+      transform: translateY(-1px) scale(1.03);
+    }
+    .solutions-calc-cta .calc-desc {
+      color: #9c861a;
+      margin-top: 7px;
+      font-size: 0.99em;
+    }
+    .section-card {
+      max-width: 900px;
+      width: 100%;
+      margin: 34px auto 0 auto;
+      padding: 26px 10px 22px 10px;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 2.5px 18px rgba(247,183,51,0.07), 0 1.5px 7px rgba(44,62,80,0.04);
+    }
+    .centered-section-title {
+      text-align: center;
+      font-size: 2.01em;
+      color: #b47d08;
+      font-weight: bold;
+      margin-bottom: 15px;
+      margin-top: 5px;
+      letter-spacing: 0.2px;
+    }
+    .card-table-container, .packages-row { margin: 0 auto 12px auto; }
+    .card-footer { text-align: center; margin-top: 8px; }
+    .loan-btn { margin: 0 auto 7px auto;}
+    .table-note { text-align:center; color:#887b19; font-size:0.94em;}
+    .packages-row {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .package-tier {
+      background: #faf9f6;
+      border-radius: 15px;
+      box-shadow: 0 1.5px 9px rgba(32,120,12,0.04);
+      padding: 18px 22px 16px 22px;
+      min-width: 160px;
+      max-width: 240px;
+      flex: 1 1 180px;
+    }
+    .package-tier h3 {
+      color: #b47d08;
+      font-size: 1.08em;
+      margin-bottom: 7px;
+      margin-top: 0;
+      font-weight: bold;
+    }
+    .package-tier ul { padding-left: 20px; font-size:0.98em;}
+    @media (max-width: 900px) {
+      .section-card, .solutions-calc-cta { padding-left: 1vw; padding-right: 1vw; }
+      .packages-row { flex-direction: column; gap: 18px;}
+      nav a { padding: 11px 10px 11px 10px; font-size: 1em;}
+      header h1 { font-size: 2em; }
+    }
+  </style>
 </head>
 <body>
 <header>
     <h1>WattSun Solar</h1>
-   <nav>
-    <a href="index.html">Home</a>
-    <a href="solutions.html">Solutions</a>
-    <a href="shop.html">Shop</a>
-    <a href="financing.html">Financing</a>
-    <a href="projects.html">Projects</a>
-    <a href="contact.html">Contact</a>
-    <!-- <a href="cart.html">🛒 Cart</a>-->
-   </nav>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="solutions.html">Solutions</a>
+        <a href="shop.html">Shop</a>
+        <a href="financing.html">Financing</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+        <!--<a href="cart.html">🛒 Cart</a>-->
+    </nav>
 </header>
 
-<section>
+<div class="solutions-calc-cta">
+  <a href="calculator.html" class="loan-btn">
+    Try our Solar Kit Calculator
+  </a>
+  <div class="calc-desc">
+    Use our interactive calculator to find your perfect package.
+  </div>
+</div>
+
+<div class="section-card">
   <h2 class="centered-section-title">Residential Solar Packages</h2>
   <div class="card-table-container">
     <table class="styled-table">
@@ -33,27 +121,27 @@
       <tbody>
         <tr>
           <td>1 kW</td>
-          <td>KES 150,000</td>
+          <td>150,000</td>
           <td>💡 1–2 rooms, 📺 TV, 🔋 phone charging</td>
         </tr>
         <tr>
           <td>3 kW</td>
-          <td>KES 400,000</td>
+          <td>400,000</td>
           <td>🏠 Small home, 🧊 fridge, TV, 🌐 internet</td>
         </tr>
         <tr>
           <td>6 kW</td>
-          <td>KES 720,000</td>
+          <td>720,000</td>
           <td>🏡 Full house: appliances, entertainment, 💧 water pump</td>
         </tr>
         <tr>
           <td>9 kW</td>
-          <td>KES 1,050,000</td>
+          <td>1,050,000</td>
           <td>👨‍👩‍👧‍👦 Large family homes, partial A/C</td>
         </tr>
         <tr>
           <td>12 kW</td>
-          <td>KES 1,420,000</td>
+          <td>1,420,000</td>
           <td>🏘️ Premium homes, backup + solar split loads</td>
         </tr>
       </tbody>
@@ -63,42 +151,41 @@
       <p class="table-note">* Prices are estimates for standard hybrid systems. Custom quotes available upon request.</p>
     </div>
   </div>
-</section>
+</div>
 
-<section>
+<div class="section-card">
   <h2 class="centered-section-title">Our Installation Packages</h2>
   <div class="packages-row">
-      <div class="package-tier">
-          <h3>Access</h3>
-          <ul>
-              <li>Standard solar panels + mounting</li>
-              <li>Installation &amp; commissioning</li>
-              <li>25-year panel &amp; service warranty</li>
-          </ul>
-      </div>
-      <div class="package-tier">
-          <h3>Premium</h3>
-          <ul>
-              <li>High-efficiency panels</li>
-              <li>30-year panel &amp; service warranty</li>
-          </ul>
-      </div>
-      <div class="package-tier">
-          <h3>Excellence</h3>
-          <ul>
-              <li>Maxeon-grade solar panels</li>
-              <li>40-year panel &amp; service warranty</li>
-              <li>Micro-inverters &amp; monitoring</li>
-          </ul>
-      </div>
+    <div class="package-tier">
+      <h3>Access</h3>
+      <ul>
+        <li>Standard solar panels + mounting</li>
+        <li>Installation &amp; commissioning</li>
+        <li>25-year panel &amp; service warranty</li>
+      </ul>
+    </div>
+    <div class="package-tier">
+      <h3>Premium</h3>
+      <ul>
+        <li>High-efficiency panels</li>
+        <li>30-year panel &amp; service warranty</li>
+      </ul>
+    </div>
+    <div class="package-tier">
+      <h3>Excellence</h3>
+      <ul>
+        <li>Maxeon-grade solar panels</li>
+        <li>40-year panel &amp; service warranty</li>
+        <li>Micro-inverters &amp; monitoring</li>
+      </ul>
+    </div>
   </div>
   <div class="packages-footer">
-      <!-- <a class="loan-btn" href="shop.html">Buy Now</a> -->
-      <p class="table-note" style="margin-top: 7px;">* All packages include installation, grid connection, monitoring setup, and long-term warranty.</p>
+    <p class="table-note" style="margin-top: 7px;">* All packages include installation, grid connection, monitoring setup, and long-term warranty.</p>
   </div>
-</section>
+</div>
 
-<section>
+<div class="section-card">
   <h2 class="centered-section-title">Compare Our Packages</h2>
   <div class="card-table-container">
     <table class="styled-table">
@@ -132,18 +219,45 @@
       </tbody>
     </table>
   </div>
-</section>
+</div>
 
-<section class="cta">
-    <h2>Ready to Start?</h2>
-    <p>Request a quote or speak to an expert today.</p>
-    <a class="loan-btn" href="contact.html">Get a Free Quote</a>
-</section>
+<!-- CTA Section, as in your screenshot -->
+<div style="text-align:center; margin:52px auto 0 auto;">
+  <h2 style="font-size:2em; font-weight:700; color:#222; margin-bottom:8px;">
+    Ready to Start?
+  </h2>
+  <div style="color:#444; font-size:1.13em; margin-bottom:32px;">
+    Request a quote or speak to an expert today.
+  </div>
+  <a href="contact.html"
+     style="
+      display: inline-block;
+      background: linear-gradient(90deg, #ffe180 0%, #ffd449 100%);
+      color: #184211;
+      font-weight: 700;
+      font-size: 1.15em;
+      padding: 15px 38px 14px 38px;
+      border: none;
+      border-radius: 2em;
+      box-shadow: 0 2px 12px rgba(247,183,51,0.09);
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      transition: background 0.14s, color 0.13s, transform 0.13s;
+      margin-bottom: 9px;
+    "
+    onmouseover="this.style.background='linear-gradient(90deg, #ffd449 0%, #ffe180 100%)'; this.style.color='#0c4906';"
+    onmouseout="this.style.background='linear-gradient(90deg, #ffe180 0%, #ffd449 100%)'; this.style.color='#184211';"
+  >
+    Get a Free Quote
+  </a>
+</div>
 
 <footer>
-    <p>WattSun Solar © 2025 | Harness the Sun. Live Better.</p>
-    <p>M-Pesa payments accepted. Delivery anywhere in Kenya.</p>
+  <div class="footer-contacts">
+    <a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a>
+  </div>
+  <p>© 2025 WattSun Solar. All rights reserved.</p>
 </footer>
-  <script src="main.js"></script>
+<script src="main.js"></script>
 </body>
 </html>

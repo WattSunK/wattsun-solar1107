@@ -23,28 +23,60 @@
     }
     table {
       width: 100%;
-      border-collapse: collapse;
+      border-collapse: separate;
+      border-spacing: 0;
       background: #fff;
       margin-bottom: 22px;
       border-radius: 10px;
       box-shadow: 0 1px 8px rgba(0,0,0,0.07);
       overflow: hidden;
+      table-layout: fixed;
+      font-size: 0.97em;
     }
     th, td {
-      text-align: left;
-      padding: 12px 10px;
+      padding: 11px 7px 11px 7px;
       border-bottom: 1px solid #f2e2b6;
-      font-size: 1em;
+      font-size: 0.97em;
       vertical-align: middle;
     }
     th {
       background-color: #f9eabb;
       color: #444;
       font-weight: bold;
+      text-align: center;
+    }
+    td {
+      text-align: center;
+    }
+    td.product-col {
+      text-align: left;
+      font-weight: 500;
+      width: 21%;
+      word-break: break-word;
+    }
+    td.desc-col {
+      max-width: 170px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 0.97em;
+      text-align: left;
+    }
+    td input[type="text"].deposit-input {
+      width: 74px;
+      padding: 7px 2px;
+      font-size: 0.98em;
+      border-radius: 6px;
+      border: 1.1px solid #ccc;
+      text-align: right;
+      background: #faf9f7;
+      margin: 0 auto;
+      display: inline-block;
     }
     .qty-control {
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 5px;
     }
     .qty-btn {
@@ -52,13 +84,17 @@
       color: #965700;
       border: none;
       border-radius: 5px;
-      width: 26px;
-      height: 26px;
-      font-size: 1.13em;
+      width: 22px;
+      height: 22px;
+      font-size: 1em;
       font-weight: bold;
       cursor: pointer;
       transition: background 0.2s;
       box-shadow: 0 1px 4px #f7b73344;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .qty-btn:hover {
       background: linear-gradient(90deg, #fcf6ba 0%, #f7b733 100%);
@@ -67,15 +103,16 @@
     .total {
       text-align: right;
       margin-top: 10px;
-      font-size: 1.12em;
+      font-size: 1.06em;
       font-weight: bold;
-      color: #3E9F50;
+      color: #1ab13d;
+      letter-spacing: 0.3px;
     }
     .checkout-form label {
       display: block;
       margin-bottom: 7px;
       font-weight: bold;
-      font-size: 1.08em;
+      font-size: 1.04em;
       margin-top: 12px;
     }
     .checkout-form input,
@@ -95,8 +132,8 @@
       outline: none;
     }
     .btn {
-      padding: 14px 36px;
-      font-size: 1.08em;
+      padding: 13px 33px;
+      font-size: 1.01em;
       border: none;
       border-radius: 8px;
       color: #fff;
@@ -119,63 +156,165 @@
     }
     @media (max-width: 900px) {
       .container { padding: 18px 5vw; }
-      table th, table td { font-size: 0.98em; }
+      table th, table td { font-size: 0.93em; }
       .qty-control { gap: 2px; }
-      .qty-btn { width: 20px; height: 20px; font-size: 1em; }
+      .qty-btn { width: 18px; height: 18px; font-size: 0.95em; }
+      td.desc-col { max-width: 90px; }
+      td.product-col { width: 29%; }
     }
   </style>
 </head>
 <body>
-  <!-- Header: From main.css -->
-  <header>
-    <h1>WattSun Solar</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="solutions.html">Solutions</a>
-      <a href="shop.html">Shop</a>
-      <a href="financing.html">Financing</a>
-      <a href="projects.html">Projects</a>
-      <a href="contact.html">Contact</a>
-      <a href="cart.html">🛒 Cart</a>
-    </nav>
-  </header>
-
-  <div class="container">
-    <h2>Checkout</h2>
-    <!-- Cart summary table -->
-    <table id="cartTable">
-      <thead>
-        <tr>
-          <th>Product</th>
-          <th>Unit Price</th>
-          <th>Deposit/Unit</th>
-          <th>Quantity</th>
-          <th>Total Price</th>
-          <th>Total Deposit</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-    <div class="total" id="totalAmount">Total Deposit: KES 0</div>
-
-    <!-- Checkout form with Netlify Forms and hidden cart summary -->
-    <form class="checkout-form" id="checkoutForm"
-          name="order" method="POST" data-netlify="true" action="/thankyou.html">
-      <input type="hidden" name="form-name" value="order" />
-      <input id="cart_summary" name="cart_summary" type="hidden"/>
-      <label for="fullName">Full Name</label>
-      <input id="fullName" name="fullName" type="text" required placeholder="Your full name"/>
-      <label for="email">Email Address</label>
-      <input id="email" name="email" type="email" required placeholder="you@example.com"/>
-      <label for="phone">Phone Number</label>
-      <input id="phone" name="phone" type="tel" required placeholder="+254 7XX XXX XXX"/>
-      <label for="address">Delivery Address</label>
-      <textarea id="address" name="address" rows="3" required placeholder="Enter delivery location"></textarea>
-      <button type="submit" class="btn">Place Order &rarr;</button>
-    </form>
-  </div>
-
-  <script>
-    // Cart summary with dynamic quantity
-
-    
+<header>
+  <h1>WattSun Solar</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="solutions.html">Solutions</a>
+    <a href="shop.html">Shop</a>
+    <a href="calculator.html">Calculator</a>
+    <a href="financing.html">Financing</a>
+    <a href="projects.html">Projects</a>
+    <a href="contact.html">Contact</a>
+    <a href="cart.html">🛒 Cart</a>
+  </nav>
+</header>
+<div class="container">
+  <h2>Checkout</h2>
+  <table id="cartTable">
+    <thead>
+      <tr>
+        <th style="width:19%">Product</th>
+        <th style="width:23%">Description</th>
+        <th style="width:14%">Unit Price (KES)</th>
+        <th style="width:15%">Deposit/Unit (KES)</th>
+        <th style="width:13%">Quantity</th>
+        <th style="width:13%">Total Price (KES)</th>
+        <th style="width:13%">Total Deposit (KES)</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  <div class="total" id="totalAmount">Total Deposit: KES 0</div>
+  <form class="checkout-form" id="checkoutForm"
+        name="order" method="POST" data-netlify="true" action="/thankyou.html">
+    <input type="hidden" name="form-name" value="order" />
+    <input id="cart_summary" name="cart_summary" type="hidden"/>
+    <label for="fullName">Full Name</label>
+    <input id="fullName" name="fullName" type="text" required placeholder="Your full name"/>
+    <label for="email">Email Address</label>
+    <input id="email" name="email" type="email" required placeholder="you@example.com"/>
+    <label for="phone">Phone Number</label>
+    <input id="phone" name="phone" type="tel" required placeholder="+254 7XX XXX XXX"/>
+    <label for="address">Delivery Address</label>
+    <textarea id="address" name="address" rows="3" required placeholder="Enter delivery location"></textarea>
+    <button type="submit" class="btn">Place Order &rarr;</button>
+  </form>
+</div>
+<script>
+const productsData = [
+  {name: "1 kW Solar System", price: 150000, description: "Entry-level home or shop system. Runs lighting, TV, phone charging. Suitable for 1–2 rooms or kiosks."},
+  {name: "3 kW Solar System", price: 400000, description: "For homes & offices: lighting, fridge, TV, laptop, phone charging. Runs most standard appliances."},
+  {name: "6 kW Solar System", price: 700000, description: "Medium/large homes, offices or light commercial. Runs fridge, freezer, TV, computer, water pump, lighting, etc."},
+  {name: "9 kW Solar System", price: 1050000, description: "Full home + business or school. Runs high-power appliances, pumps, entertainment, and more."},
+  {name: "450W Monocrystalline Solar Panel", price: 29000, description: "High efficiency solar module for home & industrial use."},
+  {name: "Battery 24V 100Ah", price: 60000, description: "LiFePO₄ Battery 24V 100Ah – Safe lithium storage with long life and fast charge."},
+  {name: "Solar Cleaning Kit", price: 4500, description: "Essential tools for keeping your system at peak efficiency."},
+  {name: "5kW Inverter", price: 85000, description: "Seamlessly manage solar and grid power with hybrid tech."}
+];
+const kitDataFromCalc = JSON.parse(localStorage.getItem('wattSunSelectedKit') || 'null');
+if (kitDataFromCalc) {
+  let kitName = kitDataFromCalc.kit.replace('Kit','Solar System').replace(/\s+/g,' ').trim();
+  let kitEntry = productsData.find(p => kitName.includes(p.name.split(' ')[0]));
+  if (!kitEntry) {
+    kitEntry = {
+      name: kitDataFromCalc.kit.replace('Kit','Solar System'),
+      price: kitDataFromCalc.price,
+      description: `Custom solar kit sized for your needs.`
+    };
+  }
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const kitIdx = cart.findIndex(item => item.name === kitEntry.name);
+  if (kitIdx === -1) {
+    cart.push({
+      name: kitEntry.name,
+      price: kitDataFromCalc.price,
+      description: kitEntry.description,
+      deposit: Math.round(kitDataFromCalc.price * 0.5),
+      quantity: 1
+    });
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }
+  localStorage.removeItem('wattSunSelectedKit');
+}
+// Format numbers with thousands separator
+function formatNumber(num) {
+  return Number(num).toLocaleString('en-US');
+}
+function truncate(str, n) {
+  return str.length > n ? str.slice(0, n) + '…' : str;
+}
+function renderCart() {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const tbody = document.querySelector("#cartTable tbody");
+  tbody.innerHTML = "";
+  let totalDeposit = 0;
+  let cartSummaryArr = [];
+  cart.forEach((item, idx) => {
+    const product = productsData.find(p => p.name === item.name);
+    const desc = product ? product.description : (item.description || "");
+    const descShort = truncate(desc, 60);
+    const unitDeposit = item.deposit ? item.deposit : Math.round(item.price * 0.5);
+    const totalDepositItem = unitDeposit * item.quantity;
+    const totalPrice = item.price * item.quantity;
+    totalDeposit += totalDepositItem;
+    cartSummaryArr.push(`${item.name} (x${item.quantity}): Price ${item.price}, Deposit ${unitDeposit}`);
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td class="product-col">${item.name}</td>
+      <td class="desc-col" title="${desc.replace(/"/g, '&quot;')}">${descShort}</td>
+      <td>${formatNumber(item.price)}</td>
+      <td><input type="text" min="0" step="1" value="${formatNumber(unitDeposit)}" data-idx="${idx}" class="deposit-input" style="width:70px;font-size:0.98em;"/></td>
+      <td>
+        <div class="qty-control">
+          <button class="qty-btn" onclick="changeQty(${idx}, -1);return false;">-</button>
+          <span>${item.quantity}</span>
+          <button class="qty-btn" onclick="changeQty(${idx}, 1);return false;">+</button>
+        </div>
+      </td>
+      <td>${formatNumber(totalPrice)}</td>
+      <td>${formatNumber(totalDepositItem)}</td>
+    `;
+    tbody.appendChild(row);
+  });
+  document.getElementById("totalAmount").textContent = `Total Deposit: KES ${formatNumber(totalDeposit)}`;
+  document.getElementById("cart_summary").value = cartSummaryArr.join('\n');
+  // Add input formatting for deposit fields
+  document.querySelectorAll(".deposit-input").forEach(input => {
+    input.oninput = function() {
+      // Remove non-digit chars, format with comma
+      let raw = this.value.replace(/[^\d]/g, "");
+      if(raw === "") raw = "0";
+      this.value = formatNumber(raw);
+    };
+    input.onchange = function() {
+      const i = +this.dataset.idx;
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      // Remove formatting
+      let val = this.value.replace(/[^\d]/g, "");
+      cart[i].deposit = Math.max(0, Number(val));
+      localStorage.setItem("cart", JSON.stringify(cart));
+      renderCart();
+    };
+  });
+}
+function changeQty(idx, delta) {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  cart[idx].quantity += delta;
+  if (cart[idx].quantity < 1) cart[idx].quantity = 1;
+  localStorage.setItem("cart", JSON.stringify(cart));
+  renderCart();
+}
+window.addEventListener("DOMContentLoaded", renderCart);
+</script>
+</body>
+</html>
