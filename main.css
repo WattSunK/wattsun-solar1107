@@ -15,7 +15,6 @@ header {
     width: 100%;
     box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
-/* Header Bar Flex Layout */
 .header-bar {
     display: flex;
     align-items: center;
@@ -34,13 +33,12 @@ header {
     padding-bottom: 12px;
     letter-spacing: 1px;
 }
-/* Hamburger Icon */
 .nav-toggle {
     display: none;
     font-size: 2em;
     background: none;
     border: none;
-    color: #111; /* Black for visibility */
+    color: #111;
     position: absolute;
     right: 8px;
     top: 50%;
@@ -54,7 +52,7 @@ header nav {
     text-align: center;
 }
 header nav a {
-    color: #fff;  /* White text */
+    color: #fff;
     font-family: 'Montserrat', Arial, sans-serif;
     font-weight: 700;
     text-decoration: none;
@@ -64,9 +62,10 @@ header nav a {
     letter-spacing: 0.2px;
 }
 header nav a:hover {
-    color: #17b169;  /* Green on hover */
+    color: #17b169;
     text-shadow: 0 1px 8px #fff5;
 }
+
 /* HERO SECTION */
 .hero {
     background: none;
@@ -243,38 +242,6 @@ h2, .centered-section-title {
     font-style: italic;
 }
 
-/* Make tables horizontally scrollable on small screens */
-@media (max-width: 650px) {
-    .card-table-container {
-        padding: 12px 4px 15px 4px;
-    }
-    .styled-table,
-    .styled-table thead,
-    .styled-table tbody,
-    .styled-table th,
-    .styled-table td,
-    .styled-table tr {
-        display: block;
-        width: 100%;
-    }
-    .styled-table th, .styled-table td {
-        padding: 11px 7px;
-        text-align: left;
-    }
-    .styled-table tr {
-        margin-bottom: 8px;
-    }
-    .packages-row {
-        flex-direction: column;
-        gap: 18px;
-    }
-    .package-tier {
-        width: 98%;
-        margin: 0 auto 14px auto;
-        padding: 1.1em 0.7em 1.2em 0.9em;
-    }
-}
-
 /* --- Feature/Steps Cards --- */
 .feature-row {
     display: flex;
@@ -419,220 +386,76 @@ footer a {
         height: 70px;
     }
 }
-.card-footer, .packages-footer {
-    text-align: center;
-    margin-top: 6px;
-    margin-bottom: 0;
-}
-.card-footer .loan-btn, .packages-footer .loan-btn {
-    margin-bottom: 4px;
-    margin-top: 0;
-}
-.card-footer .table-note, .packages-footer .table-note {
-    margin-top: 7px;
-    margin-bottom: 0;
-}
 
-/* Reduce section spacing for a more compact look */
-section {
-  padding: 22px 0 10px 0 !important;
-  margin-bottom: 7px !important;
-}
-
-/* Reduce gap below section titles */
-.centered-section-title {
-  margin-bottom: 16px !important;
-}
-
-/* Remove extra margin between tables/footers/next headings */
-.card-table-container, .packages-row {
-  margin-bottom: 18px !important;
-  padding-bottom: 14px !important;
-}
-.whatsapp-link {
-  display: inline-block;
-  width: 28px;
-  height: 28px;
-  vertical-align: middle;
-  background: url('https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg') no-repeat center center/contain;
-  margin-left: 10px;
-  text-indent: -9999px; /* Hides any text */
-  border-radius: 50%;
-  transition: filter 0.2s, transform 0.2s;
-}
-.whatsapp-link:hover {
-  filter: brightness(1.2);
-  transform: scale(1.08);
-}
-/* --- Universal form field styling for calculator/loan forms --- */
-.calculator-form label {
-    display: block;
-    font-weight: 500;
-    color: #222;
-    margin-bottom: 6px;
-    margin-top: 12px;
-}
-.calculator-form input[type="number"] {
-    width: 100%;
-    padding: 12px 10px;
-    font-size: 1.08em;
-    border-radius: 8px;
-    border: 1px solid #eee;
-    margin-bottom: 2px;
-    background: #fafafa;
-    transition: border 0.2s;
-    box-sizing: border-box;
-}
-.calculator-form input[type="number"]:focus {
-    border: 1.5px solid #ffc63a;
-    outline: none;
-    background: #fffbe7;
-}
-.calculator-form .form-group {
-    margin-bottom: 14px;
-}
-.calculator-form .form-note {
-    color: #888;
-    text-align: center;
-    font-size: 0.97em;
-    margin-top: 22px;
-}
-.calculator-grid {
-  display: grid;
-  grid-template-columns: 1fr 90px;
-  gap: 0 16px;
-  align-items: center;
-}
+/* --- MOBILE-FIXED RESPONSIVE SECTION --- */
 @media (max-width: 700px) {
-  .calculator-grid {
-    grid-template-columns: 1fr;
+  html, body {
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
   }
-  .calculator-grid label, .calculator-grid input {
-    margin-bottom: 8px;
+  /* Main containers fit mobile */
+  .container, section, .grid {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding-left: 2vw !important;
+    padding-right: 2vw !important;
   }
-}
-.calculator-grid label {
-  font-weight: 500;
-  color: #222;
-  margin-top: 10px;
-  margin-bottom: 6px;
-}
-.calculator-grid input[type="number"] {
-  width: 80px;
-  padding: 11px 9px;
-  font-size: 1em;
-  border-radius: 8px;
-  border: 1px solid #eee;
-  background: #fafafa;
-  transition: border 0.2s;
-  box-sizing: border-box;
-}
-.calculator-grid input[type="number"]:focus {
-  border: 1.5px solid #ffc63a;
-  outline: none;
-  background: #fffbe7;
-}
-
-/* ====== MOBILE NAV & HAMBURGER MENU ====== */
-@media (max-width: 700px) {
-  header {
-    position: relative !important;
-    padding-bottom: 0;
-    min-height: 0;
-  }
-  .header-bar {
-    min-height: 48px;
-    justify-content: center;
-    position: relative;
-    z-index: 2;
-    background: linear-gradient(90deg, #ffc371 0%, #ffb347 100%);
-  }
-  .header-bar h1 {
-    font-size: 1.1em;
-    padding: 6px 0 4px 0;
-    text-align: center;
-    flex: 1;
-  }
-  .nav-toggle {
-    display: block;
-  }
-  header nav {
-    display: none;
-    flex-direction: column;
-    align-items: flex-start;
-    background: #fcc142;
-    box-shadow: 0 6px 22px rgba(0,0,0,0.08);
-    position: absolute;
-    left: 0;
-    top: 100%; /* Appears below header-bar */
-    width: 100vw;
-    padding: 10px 0 10px 8px;
-    z-index: 1;
-    border-radius: 0 0 14px 14px;
-  }
-  header.nav-open nav {
-    display: flex;
-  }
-  header nav a {
-    width: 100vw;
-    text-align: left;
-    font-size: 1em;
-    margin: 0 0 2px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.15);
-    padding: 12px 0 12px 8px;
-  }
+  /* Feature rows/cards stack and fill width (no scrollbars) */
   .feature-row, .steps-row {
     flex-direction: column !important;
-    gap: 16px !important;
+    gap: 12px !important;
     align-items: stretch !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
   }
-  .feature-box, .step-box {
-    min-width: 0;
-    width: 95%;
-    margin: 0 auto 12px auto;
-    max-width: 500px;
-    font-size: 1em;
+  .feature-box, .step-box, .card, .package-tier, .testimonial-row {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 0 12px 0 !important;
+    box-sizing: border-box !important;
+    display: block !important;
+    overflow-x: visible !important;
+    border-radius: 14px !important;
   }
-  .testimonial-row {
-    flex-direction: column;
-    gap: 14px;
-    text-align: left;
-    align-items: flex-start;
-    padding: 15px;
+  /* Responsive tables */
+  .card-table-container {
+    overflow-x: auto !important;
+    padding-left: 2vw !important;
+    padding-right: 2vw !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100vw !important;
   }
-  .hero {
-    padding: 28px 2px 18px 2px;
+  table, .styled-table {
+    display: block;
+    width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100vw !important;
+    background: inherit;
+    box-sizing: border-box !important;
   }
-  .hero-inner {
-    font-size: 1em;
-    padding: 0 1vw;
-    max-width: 98vw;
+  thead, tbody, tfoot, tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
   }
-  section, .cta {
-    padding: 12px 5px;
-    margin-bottom: 7px;
+  td, th {
+    word-break: break-word;
+    white-space: pre-line;
+    max-width: 99vw !important;
+    box-sizing: border-box;
   }
-  img, .testimonial-img {
-    max-width: 100%;
-    height: auto;
+  img {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100vw !important;
+    display: block;
   }
-}
-
-@media (max-width: 500px) {
-  .header-bar h1 {
-    font-size: 1em;
-    padding-top: 4px;
-    padding-bottom: 4px;
-  }
-  .feature-box, .step-box {
-    font-size: 0.98em;
-    padding: 10px 4px;
-  }
-  .cta h2 { font-size: 1.13em; }
-  .loan-btn, .hero .btn { font-size: 1em; min-width: 110px; padding: 10px 0; }
-}
-/* --- Mobile Hamburger & Header Fix --- */
-@media (max-width: 700px) {
   .header-bar {
     display: flex !important;
     align-items: center !important;
@@ -640,6 +463,9 @@ section {
     position: relative !important;
     width: 100% !important;
     box-sizing: border-box;
+    min-height: 48px;
+    background: linear-gradient(90deg, #ffc371 0%, #ffb347 100%);
+    z-index: 2;
   }
   .header-bar h1 {
     flex: 1 1 auto !important;
@@ -661,121 +487,49 @@ section {
     z-index: 1100 !important;
     cursor: pointer !important;
   }
-  /* Ensure nav does not overflow horizontally */
-  nav, header nav, .header-bar, body, html {
-    max-width: 100vw !important;
-    overflow-x: hidden !important;
+  header {
+    position: relative !important;
+    padding-bottom: 0;
+    min-height: 0;
+    width: 100% !important;
+  }
+  header nav {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    background: #fcc142;
+    box-shadow: 0 6px 22px rgba(0,0,0,0.08);
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100vw;
+    padding: 10px 0 10px 8px;
+    z-index: 1;
+    border-radius: 0 0 14px 14px;
     box-sizing: border-box !important;
   }
-  /* Common containers should not exceed device width */
-  .container, .grid, section {
-    max-width: 100vw !important;
-    width: 100vw !important;
-    box-sizing: border-box !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    padding-left: 2vw !important;
-    padding-right: 2vw !important;
+  header.nav-open nav {
+    display: flex;
+  }
+  header nav a {
+    width: 100vw;
+    text-align: left;
+    font-size: 1em;
+    margin: 0 0 2px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    padding: 12px 0 12px 8px;
   }
 }
-@media (max-width: 700px) {
-  html, body {
-    max-width: 100vw !important;
-    overflow-x: hidden !important;
+@media (max-width: 500px) {
+  .header-bar h1 {
+    font-size: 1em;
+    padding-top: 4px;
+    padding-bottom: 4px;
   }
-  .container, section, .grid, [class*="row"], [class*="box"], [class*="card"], table, thead, tbody, tfoot, tr, th, td, img {
-    box-sizing: border-box !important;
-    max-width: 100vw !important;
-    width: 100% !important;
-    overflow-x: auto !important;
-    /* This prevents tables/images/cards from causing scroll */
+  .feature-box, .step-box {
+    font-size: 0.98em;
+    padding: 10px 4px;
   }
-  /* For images: */
-  img {
-    width: 100% !important;
-    height: auto !important;
-    max-width: 100vw !important;
-    display: block;
-  }
-  /* For tables, enable scrolling if needed */
-  table {
-    display: block;
-    overflow-x: auto;
-    width: 100% !important;
-  }
-  /* Prevent long words/links from overflowing */
-  td, th {
-    word-break: break-word;
-    white-space: pre-line;
-  }
+  .cta h2 { font-size: 1.13em; }
+  .loan-btn, .hero .btn { font-size: 1em; min-width: 110px; padding: 10px 0; }
 }
-@media (max-width: 700px) {
-  /* Universal page fit & overflow fix */
-  html, body {
-    max-width: 100vw !important;
-    overflow-x: hidden !important;
-  }
-
-  /* Main containers, rows, cards, and grids fit the viewport */
-  .container, section, .grid, [class*="row"], [class*="box"], [class*="card"] {
-    max-width: 100vw !important;
-    width: 100vw !important;
-    box-sizing: border-box !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    padding-left: 2vw !important;
-    padding-right: 2vw !important;
-  }
-
-  /* Responsive images */
-  img {
-    width: 100% !important;
-    height: auto !important;
-    max-width: 100vw !important;
-    display: block;
-  }
-
-  /* --- Responsive tables --- */
-  table {
-    display: block;
-    width: 100% !important;
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch;
-    max-width: 100vw !important;
-    background: inherit;
-  }
-  thead, tbody, tfoot, tr {
-    display: table;
-    width: 100%;
-    table-layout: fixed;
-  }
-  td, th {
-    word-break: break-word;
-    white-space: pre-line;
-    max-width: 99vw !important;
-    box-sizing: border-box;
-  }
-  /* Table containers scroll if needed */
-  .card-table-container {
-    overflow-x: auto !important;
-    padding-left: 2vw !important;
-    padding-right: 2vw !important;
-  }
-}
-@media (max-width: 700px) {
-  .feature-row {
-    flex-direction: column !important;
-    gap: 12px !important;
-    align-items: stretch !important;
-    width: 100% !important;
-    margin: 0 auto !important;
-  }
-  .feature-box {
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 auto 12px auto !important;
-    box-sizing: border-box !important;
-    display: block !important;
-  }
-}
-
