@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta content="width=device-width, initial-scale=1" name="viewport"/><meta charset="utf-8"/>
-<title>Cart - WattSun Solar</title>
-<link href="main.css" rel="stylesheet"/>
-<style>
+  <meta charset="utf-8"/>
+  <title>Cart - WattSun Solar</title>
+  <link rel="stylesheet" href="main.css"/>
+  <style>
     body { background: #fafafa; }
     .container {
       max-width: 900px;
@@ -89,44 +88,48 @@
   </style>
 </head>
 <body>
-<header>
-<div class="header-bar">
-<h1>WattSun Solar</h1>
-<button aria-label="Open menu" class="nav-toggle">☰</button>
-</div>
-<nav>
-<a href="index.html">Home</a>
-<a href="solutions.html">Solutions</a>
-<a href="shop.html">Shop</a>
-<a href="financing.html">Financing</a>
-<a href="projects.html">Projects</a>
-<a href="contact.html">Contact</a>
-<!--<a href="cart.html">🛒 Cart</a>-->
-</nav>
-</header>
-<div class="container">
-<h2>Your Cart</h2>
-<table id="cartTable">
-<thead>
-<tr>
-<th>Product</th>
-<th>Unit Price</th>
-<th>Deposit/Unit</th>
-<th>Quantity</th>
-<th>Total Price</th>
-<th>Total Deposit</th>
-</tr>
-</thead>
-<tbody></tbody>
-</table>
-<div class="total" id="totalAmount">Total Deposit: KES 0</div>
-<div class="actions">
-<a class="btn" href="checkout.html">Proceed to Checkout</a>
-<button class="btn btn-clear" id="clearCartBtn" style="display:none;" type="button">Clear Cart</button>
-<div style="margin-bottom:36px;"></div>
-</div>
-</div>
-<script>
+  <header>
+    <div class="header-bar">
+      <h1>WattSun Solar</h1>
+      <button class="nav-toggle" aria-label="Menu" onclick="toggleNav()">&#9776;</button>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="solutions.html">Solutions</a>
+      <a href="shop.html">Shop</a>
+      <a href="financing.html">Financing</a>
+      <a href="projects.html">Projects</a>
+      <a href="contact.html">Contact</a>
+      <a href="cart.html">🛒 Cart</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2>Your Cart</h2>
+    <table id="cartTable">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Unit Price</th>
+          <th>Deposit/Unit</th>
+          <th>Quantity</th>
+          <th>Total Price</th>
+          <th>Total Deposit</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <div class="total" id="totalAmount">Total Deposit: KES 0</div>
+    <div class="actions">
+      <a class="btn" href="checkout.html">Proceed to Checkout</a>
+      <button class="btn btn-clear" id="clearCartBtn" type="button" style="display:none;">Clear Cart</button>
+      <div style="margin-bottom:36px;"></div>
+    </div>
+  </div>
+  <script>
+    function toggleNav() {
+      document.querySelector('header').classList.toggle('nav-open');
+    }
     const cartTable = document.querySelector("#cartTable tbody");
     const totalDisplay = document.getElementById("totalAmount");
     const clearCartBtn = document.getElementById("clearCartBtn");
@@ -164,23 +167,9 @@
     window.onload = loadCart;
     clearCartBtn.addEventListener("click", clearCart);
   </script>
-<footer>
-    © 2025 WattSun Solar Kenya | <div class="footer-contacts"><a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a></div>
-</footer>
 
-<script>
-  const navToggle = document.querySelector('.nav-toggle');
-  const header = document.querySelector('header');
-  navToggle.addEventListener('click', function() {
-    header.classList.toggle('nav-open');
-  });
-  document.querySelectorAll('header nav a').forEach(link => {
-    link.addEventListener('click', () => header.classList.remove('nav-open'));
-  });
-</script>
-<script src="main.js"></script>
+  <footer>
+    &copy; 2025 WattSun Solar Kenya | <div class="footer-contacts"><a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a></div>
+  </footer>
 </body>
 </html>
-<!-- This is the cart page for WattSun Solar, displaying items in the user's cart and total deposit. -->
-<!-- End of cart.html -->
-&lt;!-- This file is part of the WattSun Solar project, providing a simple cart page for users
