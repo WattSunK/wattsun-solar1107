@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta content="width=device-width, initial-scale=1" name="viewport"/><meta charset="utf-8"/>
-<title>Flexible Solar Financing Options</title>
-<link href="main.css" rel="stylesheet"/>
-<style>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta charset="utf-8"/>
+  <title>Flexible Solar Financing Options</title>
+  <link href="main.css" rel="stylesheet"/>
+  <style>
     body {
       background: #f7f7f7;
       margin: 0;
@@ -87,96 +87,128 @@
       color: #888;
       margin-top: 14px;
     }
+    /* Hamburger & header styling (fixes button right) */
+    .header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .header-bar h1 {
+      flex: 1 1 auto;
+      margin: 0;
+      text-align: center;
+      font-size: 3em;
+      font-family: 'Montserrat', Arial, sans-serif;
+      color: #fff;
+      font-weight: bold;
+      padding-top: 30px;
+      padding-bottom: 12px;
+      letter-spacing: 1px;
+    }
+    .nav-toggle {
+      display: block;
+      font-size: 2em;
+      background: none;
+      border: none;
+      color: #111;
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1100;
+      cursor: pointer;
+    }
     @media (max-width: 800px) {
       .container {
         max-width: 98vw;
         padding: 22px 5vw;
       }
     }
+    @media (max-width: 700px) {
+      .header-bar h1 { font-size: 1.2em !important; padding: 7px 0 7px 0 !important; }
+      .nav-toggle { font-size: 2em !important; right: 12px !important; }
+    }
   </style>
 </head>
 <body>
-<!-- Header: From main.css -->
+<!-- Header -->
 <header>
-<div class="header-bar">
-<h1>WattSun Solar</h1>
-<button aria-label="Open menu" class="nav-toggle">☰</button>
-</div>
-<nav>
-<a href="index.html">Home</a>
-<a href="solutions.html">Solutions</a>
-<a href="shop.html">Shop</a>
-<a href="financing.html">Financing</a>
-<a href="projects.html">Projects</a>
-<a href="contact.html">Contact</a>
-<!--<a href="cart.html">🛒 Cart</a>-->
-</nav>
+  <div class="header-bar">
+    <h1>WattSun Solar</h1>
+    <button class="nav-toggle" aria-label="Menu" onclick="toggleNav()">&#9776;</button>
+  </div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="solutions.html">Solutions</a>
+    <a href="shop.html">Shop</a>
+    <a href="financing.html">Financing</a>
+    <a href="projects.html">Projects</a>
+    <a href="contact.html">Contact</a>
+    <!-- <a href="cart.html">🛒 Cart</a> -->
+  </nav>
 </header>
-<!-- Main content: as in screenshot -->
+<!-- Main content -->
 <div class="container">
-<h2>Flexible Solar Financing Options</h2>
-<p>WattSun Solar offers tailored financing plans to help you transition to clean, renewable energy without the burden of large upfront costs. Use the estimator below to calculate your expected monthly repayment based on system size and interest terms.</p>
-<form id="loanForm">
-<label for="system">Select System Size:</label>
-<select id="system" required="">
-<option value="">-- Select --</option>
-<option value="150000">1 kW – KES 150,000</option>
-<option value="400000">3 kW – KES 400,000</option>
-<option value="700000">6 kW – KES 700,000</option>
-<option value="1050000">9 kW – KES 1,050,000</option>
-<option value="1420000">12 kW – KES 1,420,000</option>
-</select>
-<label for="deposit">Your Deposit (KES):</label>
-<input id="deposit" required="" type="number"/>
-<label for="term">Loan Term (Months):</label>
-<input id="term" max="36" min="6" required="" type="number" value="36"/>
-<button type="submit">Calculate Loan</button>
-</form>
-<div class="result" id="result"></div>
-<div class="disclaimer">* This is an indicative estimate. Actual loan terms may vary.</div>
+  <h2>Flexible Solar Financing Options</h2>
+  <p>
+    WattSun Solar offers tailored financing plans to help you transition to clean, renewable energy without the burden of large upfront costs. Use the estimator below to calculate your expected monthly repayment based on system size and interest terms.
+  </p>
+  <form id="loanForm">
+    <label for="system">Select System Size:</label>
+    <select id="system" required="">
+      <option value="">-- Select --</option>
+      <option value="150000">1 kW – KES 150,000</option>
+      <option value="400000">3 kW – KES 400,000</option>
+      <option value="700000">6 kW – KES 700,000</option>
+      <option value="1050000">9 kW – KES 1,050,000</option>
+      <option value="1420000">12 kW – KES 1,420,000</option>
+    </select>
+    <label for="deposit">Your Deposit (KES):</label>
+    <input id="deposit" required="" type="number" min="0"/>
+    <label for="term">Loan Term (Months):</label>
+    <input id="term" max="36" min="6" required="" type="number" value="36"/>
+    <button type="submit">Calculate Loan</button>
+  </form>
+  <div class="result" id="result"></div>
+  <div class="disclaimer">* This is an indicative estimate. Actual loan terms may vary.</div>
 </div>
-<script>
-    document.getElementById('loanForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const systemCost = parseFloat(document.getElementById('system').value);
-      const deposit = parseFloat(document.getElementById('deposit').value);
-      const term = parseInt(document.getElementById('term').value);
-      if (!systemCost || isNaN(deposit) || isNaN(term)) {
-        document.getElementById('result').textContent = "Please fill in all fields.";
-        return;
-      }
-      const minDeposit = 0.5 * systemCost;
-      if (deposit < minDeposit) {
-        document.getElementById('result').textContent = "Minimum deposit is KES " + minDeposit.toLocaleString("en-KE");
-        return;
-      }
-      const loanAmount = systemCost - deposit;
-      const annualInterestRate = 0.15;
-      const monthlyInterestRate = annualInterestRate / 12;
-      const monthlyRepayment = (loanAmount * monthlyInterestRate) / (1 - Math.pow(1 + monthlyInterestRate, -term));
-      document.getElementById('result').textContent =
-        "Loan Amount: KES " + loanAmount.toLocaleString("en-KE") +
-        " | Monthly Repayment: KES " + monthlyRepayment.toFixed(0).toLocaleString("en-KE");
-    });
-  </script>
-<!-- Footer: From main.css -->
 <footer>
-    © 2025 WattSun Solar Kenya | <div class="footer-contacts"><a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a></div>
+  © 2025 WattSun Solar Kenya | <div class="footer-contacts"><a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a></div>
 </footer>
-
 <script>
-  const navToggle = document.querySelector('.nav-toggle');
-  const header = document.querySelector('header');
-  navToggle.addEventListener('click', function() {
-    header.classList.toggle('nav-open');
-  });
-  document.querySelectorAll('header nav a').forEach(link => {
-    link.addEventListener('click', () => header.classList.remove('nav-open'));
+  // Hamburger toggle
+  function toggleNav() {
+    document.querySelector('header').classList.toggle('nav-open');
+  }
+  // Loan calculator logic with correct deposit maximum check!
+  document.getElementById('loanForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const systemCost = parseFloat(document.getElementById('system').value);
+    const deposit = parseFloat(document.getElementById('deposit').value);
+    const term = parseInt(document.getElementById('term').value);
+    const resultDiv = document.getElementById('result');
+    if (!systemCost || isNaN(deposit) || isNaN(term)) {
+      resultDiv.textContent = "Please fill in all fields.";
+      return;
+    }
+    const minDeposit = 0.5 * systemCost;
+    if (deposit < minDeposit) {
+      resultDiv.textContent = "Minimum deposit is KES " + minDeposit.toLocaleString("en-KE");
+      return;
+    }
+    if (deposit > systemCost) {
+      resultDiv.textContent = "Deposit cannot be greater than system cost (KES " + systemCost.toLocaleString("en-KE") + ")";
+      return;
+    }
+    const loanAmount = systemCost - deposit;
+    const annualInterestRate = 0.15;
+    const monthlyInterestRate = annualInterestRate / 12;
+    const monthlyRepayment = (loanAmount * monthlyInterestRate) / (1 - Math.pow(1 + monthlyInterestRate, -term));
+    resultDiv.textContent =
+      "Loan Amount: KES " + loanAmount.toLocaleString("en-KE") +
+      " | Monthly Repayment: KES " + monthlyRepayment.toFixed(0).toLocaleString("en-KE");
   });
 </script>
-<script src="main.js"></script>
 </body>
 </html>
-<!-- End of financing.html -->
-&lt;!-- This file is part of the WattSun Solar project, providing a simple financing calculator page for users
-These are recently edited files. Do not suggest code that has been deleted.
