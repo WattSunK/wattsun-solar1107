@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <title>Flexible Solar Financing Options</title>
-  <link rel="stylesheet" href="main.css"/>
-  <style>
+<meta content="width=device-width, initial-scale=1" name="viewport"/><meta charset="utf-8"/>
+<title>Flexible Solar Financing Options</title>
+<link href="main.css" rel="stylesheet"/>
+<style>
     body {
       background: #f7f7f7;
       margin: 0;
@@ -95,45 +96,46 @@
   </style>
 </head>
 <body>
-  <!-- Header: From main.css -->
-  <header>
-    <h1>WattSun Solar</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="solutions.html">Solutions</a>
-      <a href="shop.html">Shop</a>
-      <a href="financing.html">Financing</a>
-      <a href="projects.html">Projects</a>      
-      <a href="contact.html">Contact</a>
-      <!-- <a href="cart.html">🛒 Cart</a> -->
-    </nav>
-  </header>
-
-  <!-- Main content: as in screenshot -->
-  <div class="container">
-    <h2>Flexible Solar Financing Options</h2>
-    <p>WattSun Solar offers tailored financing plans to help you transition to clean, renewable energy without the burden of large upfront costs. Use the estimator below to calculate your expected monthly repayment based on system size and interest terms.</p>
-    <form id="loanForm">
-      <label for="system">Select System Size:</label>
-      <select id="system" required>
-        <option value="">-- Select --</option>
-        <option value="150000">1 kW – KES 150,000</option>
-        <option value="400000">3 kW – KES 400,000</option>
-        <option value="700000">6 kW – KES 700,000</option>
-        <option value="1050000">9 kW – KES 1,050,000</option>
-        <option value="1420000">12 kW – KES 1,420,000</option>
-      </select>
-      <label for="deposit">Your Deposit (KES):</label>
-      <input id="deposit" required type="number"/>
-      <label for="term">Loan Term (Months):</label>
-      <input id="term" max="36" min="6" required type="number" value="36"/>
-      <button type="submit">Calculate Loan</button>
-    </form>
-    <div class="result" id="result"></div>
-    <div class="disclaimer">* This is an indicative estimate. Actual loan terms may vary.</div>
-  </div>
-
-  <script>
+<!-- Header: From main.css -->
+<header>
+<div class="header-bar">
+<h1>WattSun Solar</h1>
+<button aria-label="Open menu" class="nav-toggle">☰</button>
+</div>
+<nav>
+<a href="index.html">Home</a>
+<a href="solutions.html">Solutions</a>
+<a href="shop.html">Shop</a>
+<a href="financing.html">Financing</a>
+<a href="projects.html">Projects</a>
+<a href="contact.html">Contact</a>
+<!--<a href="cart.html">🛒 Cart</a>-->
+</nav>
+</header>
+<!-- Main content: as in screenshot -->
+<div class="container">
+<h2>Flexible Solar Financing Options</h2>
+<p>WattSun Solar offers tailored financing plans to help you transition to clean, renewable energy without the burden of large upfront costs. Use the estimator below to calculate your expected monthly repayment based on system size and interest terms.</p>
+<form id="loanForm">
+<label for="system">Select System Size:</label>
+<select id="system" required="">
+<option value="">-- Select --</option>
+<option value="150000">1 kW – KES 150,000</option>
+<option value="400000">3 kW – KES 400,000</option>
+<option value="700000">6 kW – KES 700,000</option>
+<option value="1050000">9 kW – KES 1,050,000</option>
+<option value="1420000">12 kW – KES 1,420,000</option>
+</select>
+<label for="deposit">Your Deposit (KES):</label>
+<input id="deposit" required="" type="number"/>
+<label for="term">Loan Term (Months):</label>
+<input id="term" max="36" min="6" required="" type="number" value="36"/>
+<button type="submit">Calculate Loan</button>
+</form>
+<div class="result" id="result"></div>
+<div class="disclaimer">* This is an indicative estimate. Actual loan terms may vary.</div>
+</div>
+<script>
     document.getElementById('loanForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const systemCost = parseFloat(document.getElementById('system').value);
@@ -157,14 +159,24 @@
         " | Monthly Repayment: KES " + monthlyRepayment.toFixed(0).toLocaleString("en-KE");
     });
   </script>
+<!-- Footer: From main.css -->
+<footer>
+    © 2025 WattSun Solar Kenya | <div class="footer-contacts"><a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a></div>
+</footer>
 
-  <!-- Footer: From main.css -->
-  <footer>
-    &copy; 2025 WattSun Solar Kenya | <div class="footer-contacts"><a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a></div>
-  </footer>
-  <script src="main.js"></script>
+<script>
+  const navToggle = document.querySelector('.nav-toggle');
+  const header = document.querySelector('header');
+  navToggle.addEventListener('click', function() {
+    header.classList.toggle('nav-open');
+  });
+  document.querySelectorAll('header nav a').forEach(link => {
+    link.addEventListener('click', () => header.classList.remove('nav-open'));
+  });
+</script>
+<script src="main.js"></script>
 </body>
 </html>
 <!-- End of financing.html -->
-<!-- This file is part of the WattSun Solar project, providing a simple financing calculator page for users
+&lt;!-- This file is part of the WattSun Solar project, providing a simple financing calculator page for users
 These are recently edited files. Do not suggest code that has been deleted.

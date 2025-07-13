@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <title>Thank You – WattSun Solar</title>
-  <link rel="stylesheet" href="main.css"/>
-  <style>
+<meta content="width=device-width, initial-scale=1" name="viewport"/><meta charset="utf-8"/>
+<title>Thank You – WattSun Solar</title>
+<link href="main.css" rel="stylesheet"/>
+<style>
     body {
       background: #f7f6ec;
       text-align: center;
@@ -41,14 +42,25 @@
   </style>
 </head>
 <body>
-  <div class="box">
-    <h1>Thank You!</h1>
-    <p>Your order has been received.<br>
-      We’ll contact you soon to confirm details and arrange delivery.<br>
+<div class="box">
+<h1>Thank You!</h1>
+<p>Your order has been received.<br/>
+      We’ll contact you soon to confirm details and arrange delivery.<br/>
       For urgent questions, email <a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a>.
     </p>
-    <a href="index.html" class="button">Return to Home</a>
-  </div>
-  <script src="main.js"></script>
+<a class="button" href="index.html">Return to Home</a>
+</div>
+
+<script>
+  const navToggle = document.querySelector('.nav-toggle');
+  const header = document.querySelector('header');
+  navToggle.addEventListener('click', function() {
+    header.classList.toggle('nav-open');
+  });
+  document.querySelectorAll('header nav a').forEach(link => {
+    link.addEventListener('click', () => header.classList.remove('nav-open'));
+  });
+</script>
+<script src="main.js"></script>
 </body>
 </html>

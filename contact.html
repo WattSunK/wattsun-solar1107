@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <title>Contact Us | WattSun Solar</title>
-  <link rel="stylesheet" href="main.css"/>
-  <style>
+<meta content="width=device-width, initial-scale=1" name="viewport"/><meta charset="utf-8"/>
+<title>Contact Us | WattSun Solar</title>
+<link href="main.css" rel="stylesheet"/>
+<style>
     body { background: #FFFAF0; }
     section { max-width: 950px; margin: 42px auto 0 auto; padding: 0 16px; }
     .contact-container {
@@ -80,62 +81,72 @@
   </style>
 </head>
 <body>
-  <!-- Header: Unchanged -->
-  <header>
-    <h1>WattSun Solar</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="solutions.html">Solutions</a>
-      <a href="shop.html">Shop</a>
-      <a href="financing.html">Financing</a>
-      <a href="projects.html">Projects</a>
-      <a href="contact.html">Contact</a>
-      <!--<a href="cart.html">🛒 Cart</a>-->
-    </nav>
-  </header>
-
-  <section>
-    <div class="contact-container">
-      <div class="contact-form">
-        <!-- Netlify-enabled contact form -->
-        <form name="contact" method="POST" data-netlify="true">
-          <input type="hidden" name="form-name" value="contact">
-          <label for="name">Full Name</label>
-          <input id="name" name="name" placeholder="Your name" required type="text"/>
-          <label for="email">Email Address</label>
-          <input id="email" name="email" placeholder="you@example.com" required type="email"/>
-          <label for="phone">Phone Number</label>
-          <input id="phone" name="phone" placeholder="+254 7XX XXX XXX" type="tel"/>
-          <label for="message">Your Message</label>
-          <textarea id="message" name="message" placeholder="Tell us about your project..." required rows="6"></textarea>
-          <button type="submit">Send Inquiry</button>
-        </form>
-      </div>
-      <div class="contact-info">
-  <h3>Our Office</h3>
-  <p><strong>WattSun Solar</strong></p>
-  <p>Loresho Ridge, next to Qaribu Inn,<br/>Nairobi, Kenya</p>
-  <h3>Contact</h3>
-  <p style="display: flex; align-items: center; gap: 10px; margin-bottom: 7px;">
-    <a class="whatsapp-link" href="https://wa.me/254722761212" target="_blank" rel="noopener" title="Chat with us on WhatsApp"></a>
-    <a href="mailto:info@wattsunsolar.co.ke" style="color:inherit; text-decoration:underline; margin-left:2px;">info@wattsunsolar.co.ke</a>
-  </p>
-  <h3>Office Hours</h3>
-  <p>Mon–Sat: 9 AM – 6 PM EAT</p>
+<!-- Header: Unchanged -->
+<header>
+<div class="header-bar">
+<h1>WattSun Solar</h1>
+<button aria-label="Open menu" class="nav-toggle">☰</button>
 </div>
-    </div>
-    <div class="map">
-      <iframe allowfullscreen height="300" loading="lazy"
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15955.00815487748!2d36.81667!3d-1.28333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f11726626627d%3A0x9ad4d4d4d4d4d4d4!2sNairobi!5e0!3m2!1sen!2ske!4v1590000000000!5m2!1sen!2ske"
-        style="border:0;" width="100%"></iframe>
-    </div>
-  </section>
+<nav>
+<a href="index.html">Home</a>
+<a href="solutions.html">Solutions</a>
+<a href="shop.html">Shop</a>
+<a href="financing.html">Financing</a>
+<a href="projects.html">Projects</a>
+<a href="contact.html">Contact</a>
+<!--<a href="cart.html">🛒 Cart</a>-->
+</nav>
+</header>
+<section>
+<div class="contact-container">
+<div class="contact-form">
+<!-- Netlify-enabled contact form -->
+<form data-netlify="true" method="POST" name="contact">
+<input name="form-name" type="hidden" value="contact"/>
+<label for="name">Full Name</label>
+<input id="name" name="name" placeholder="Your name" required="" type="text">
+<label for="email">Email Address</label>
+<input id="email" name="email" placeholder="you@example.com" required="" type="email"/>
+<label for="phone">Phone Number</label>
+<input id="phone" name="phone" placeholder="+254 7XX XXX XXX" type="tel"/>
+<label for="message">Your Message</label>
+<textarea id="message" name="message" placeholder="Tell us about your project..." required="" rows="6"></textarea>
+<button type="submit">Send Inquiry</button>
+</input></form>
+</div>
+<div class="contact-info">
+<h3>Our Office</h3>
+<p><strong>WattSun Solar</strong></p>
+<p>Loresho Ridge, next to Qaribu Inn,<br/>Nairobi, Kenya</p>
+<h3>Contact</h3>
+<p style="display: flex; align-items: center; gap: 10px; margin-bottom: 7px;">
+<a class="whatsapp-link" href="https://wa.me/254722761212" rel="noopener" target="_blank" title="Chat with us on WhatsApp"></a>
+<a href="mailto:info@wattsunsolar.co.ke" style="color:inherit; text-decoration:underline; margin-left:2px;">info@wattsunsolar.co.ke</a>
+</p>
+<h3>Office Hours</h3>
+<p>Mon–Sat: 9 AM – 6 PM EAT</p>
+</div>
+</div>
+<div class="map">
+<iframe allowfullscreen="" height="300" loading="lazy" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15955.00815487748!2d36.81667!3d-1.28333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f11726626627d%3A0x9ad4d4d4d4d4d4d4!2sNairobi!5e0!3m2!1sen!2ske!4v1590000000000!5m2!1sen!2ske" style="border:0;" width="100%"></iframe>
+</div>
+</section>
+<!-- Footer: Unchanged -->
+<footer>
+    © 2025 WattSun Solar Kenya | <div class="footer-contacts"><a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a></div>
+</footer>
 
-  <!-- Footer: Unchanged -->
-  <footer>
-    &copy; 2025 WattSun Solar Kenya | <div class="footer-contacts"><a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a></div>
-  </footer>
-  <script src="main.js"></script>
+<script>
+  const navToggle = document.querySelector('.nav-toggle');
+  const header = document.querySelector('header');
+  navToggle.addEventListener('click', function() {
+    header.classList.toggle('nav-open');
+  });
+  document.querySelectorAll('header nav a').forEach(link => {
+    link.addEventListener('click', () => header.classList.remove('nav-open'));
+  });
+</script>
+<script src="main.js"></script>
 </body>
 </html>
 <!-- End of contact.html -->

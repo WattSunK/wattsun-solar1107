@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <title>Checkout - WattSun Solar</title>
-  <link rel="stylesheet" href="main.css"/>
-  <style>
+<meta content="width=device-width, initial-scale=1" name="viewport"/><meta charset="utf-8"/>
+<title>Checkout - WattSun Solar</title>
+<link href="main.css" rel="stylesheet"/>
+<style>
     body { background: #fafafa; }
     .container {
       max-width: 680px;
@@ -166,49 +167,50 @@
 </head>
 <body>
 <header>
-  <h1>WattSun Solar</h1>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="solutions.html">Solutions</a>
-    <a href="shop.html">Shop</a>
-    <a href="calculator.html">Calculator</a>
-    <a href="financing.html">Financing</a>
-    <a href="projects.html">Projects</a>
-    <a href="contact.html">Contact</a>
-    <a href="cart.html">🛒 Cart</a>
-  </nav>
+<div class="header-bar">
+<h1>WattSun Solar</h1>
+<button aria-label="Open menu" class="nav-toggle">☰</button>
+</div>
+<nav>
+<a href="index.html">Home</a>
+<a href="solutions.html">Solutions</a>
+<a href="shop.html">Shop</a>
+<a href="financing.html">Financing</a>
+<a href="projects.html">Projects</a>
+<a href="contact.html">Contact</a>
+<!--<a href="cart.html">🛒 Cart</a>-->
+</nav>
 </header>
 <div class="container">
-  <h2>Checkout</h2>
-  <table id="cartTable">
-    <thead>
-      <tr>
-        <th style="width:19%">Product</th>
-        <th style="width:23%">Description</th>
-        <th style="width:14%">Unit Price (KES)</th>
-        <th style="width:15%">Deposit/Unit (KES)</th>
-        <th style="width:13%">Quantity</th>
-        <th style="width:13%">Total Price (KES)</th>
-        <th style="width:13%">Total Deposit (KES)</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
-  <div class="total" id="totalAmount">Total Deposit: KES 0</div>
-  <form class="checkout-form" id="checkoutForm"
-        name="order" method="POST" data-netlify="true" action="/thankyou.html">
-    <input type="hidden" name="form-name" value="order" />
-    <input id="cart_summary" name="cart_summary" type="hidden"/>
-    <label for="fullName">Full Name</label>
-    <input id="fullName" name="fullName" type="text" required placeholder="Your full name"/>
-    <label for="email">Email Address</label>
-    <input id="email" name="email" type="email" required placeholder="you@example.com"/>
-    <label for="phone">Phone Number</label>
-    <input id="phone" name="phone" type="tel" required placeholder="+254 7XX XXX XXX"/>
-    <label for="address">Delivery Address</label>
-    <textarea id="address" name="address" rows="3" required placeholder="Enter delivery location"></textarea>
-    <button type="submit" class="btn">Place Order &rarr;</button>
-  </form>
+<h2>Checkout</h2>
+<table id="cartTable">
+<thead>
+<tr>
+<th style="width:19%">Product</th>
+<th style="width:23%">Description</th>
+<th style="width:14%">Unit Price (KES)</th>
+<th style="width:15%">Deposit/Unit (KES)</th>
+<th style="width:13%">Quantity</th>
+<th style="width:13%">Total Price (KES)</th>
+<th style="width:13%">Total Deposit (KES)</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+<div class="total" id="totalAmount">Total Deposit: KES 0</div>
+<form action="/thankyou.html" class="checkout-form" data-netlify="true" id="checkoutForm" method="POST" name="order">
+<input name="form-name" type="hidden" value="order"/>
+<input id="cart_summary" name="cart_summary" type="hidden"/>
+<label for="fullName">Full Name</label>
+<input id="fullName" name="fullName" placeholder="Your full name" required="" type="text"/>
+<label for="email">Email Address</label>
+<input id="email" name="email" placeholder="you@example.com" required="" type="email"/>
+<label for="phone">Phone Number</label>
+<input id="phone" name="phone" placeholder="+254 7XX XXX XXX" required="" type="tel"/>
+<label for="address">Delivery Address</label>
+<textarea id="address" name="address" placeholder="Enter delivery location" required="" rows="3"></textarea>
+<button class="btn" type="submit">Place Order →</button>
+</form>
 </div>
 <script>
 const productsData = [
@@ -315,6 +317,17 @@ function changeQty(idx, delta) {
   renderCart();
 }
 window.addEventListener("DOMContentLoaded", renderCart);
+</script>
+
+<script>
+  const navToggle = document.querySelector('.nav-toggle');
+  const header = document.querySelector('header');
+  navToggle.addEventListener('click', function() {
+    header.classList.toggle('nav-open');
+  });
+  document.querySelectorAll('header nav a').forEach(link => {
+    link.addEventListener('click', () => header.classList.remove('nav-open'));
+  });
 </script>
 </body>
 </html>

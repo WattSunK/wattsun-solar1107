@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <title>Shop - WattSun</title>
-    <link rel="stylesheet" href="main.css">
-    <style>
+<meta content="width=device-width, initial-scale=1" name="viewport"/><meta charset="utf-8"/>
+<title>Shop - WattSun</title>
+<link href="main.css" rel="stylesheet"/>
+<style>
         html, body {
             height: 100%;
             min-height: 100%;
@@ -150,103 +151,104 @@
 </head>
 <body>
 <header>
-    <h1>WattSun Solar</h1>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="solutions.html">Solutions</a>
-        <a href="shop.html">Shop</a>
-        <a href="financing.html">Financing</a>
-        <a href="projects.html">Projects</a>
-        <a href="contact.html">Contact</a>
-        <a href="cart.html">🛒 Cart</a>
-    </nav>
+<div class="header-bar">
+<h1>WattSun Solar</h1>
+<button aria-label="Open menu" class="nav-toggle">☰</button>
+</div>
+<nav>
+<a href="index.html">Home</a>
+<a href="solutions.html">Solutions</a>
+<a href="shop.html">Shop</a>
+<a href="financing.html">Financing</a>
+<a href="projects.html">Projects</a>
+<a href="contact.html">Contact</a>
+<!--<a href="cart.html">🛒 Cart</a>-->
+</nav>
 </header>
-
 <div class="container">
-    <h2>Available Solar Systems</h2>
-    <p style="text-align:center; font-style:italic; color:#666;">
+<h2>Available Solar Systems</h2>
+<p style="text-align:center; font-style:italic; color:#666;">
         Note: A minimum deposit of 50% is required for installation to commence.
     </p>
-    <div class="grid">
-        <div class="product-card">
-            <img src="images/solar1kw.jpg" alt="1kW Solar System">
-            <div class="product-info">
-                <h3>1 kW Solar System</h3>
-                <p>Total Price: KES 150,000</p>
-            </div>
-            <input id="dep1" placeholder="Enter your deposit (KES)" type="number"/>
-            <button class="loan-btn" onclick="addToCart('1 kW Solar System', 150000, 'dep1')">Add to Cart</button>
-        </div>
-        <div class="product-card">
-            <img src="images/solar3kw.jpg" alt="3kW Solar System">
-            <div class="product-info">
-                <h3>3 kW Solar System</h3>
-                <p>Total Price: KES 400,000</p>
-            </div>
-            <input id="dep3" placeholder="Enter your deposit (KES)" type="number"/>
-            <button class="loan-btn" onclick="addToCart('3 kW Solar System', 400000, 'dep3')">Add to Cart</button>
-        </div>
-        <div class="product-card">
-            <img src="images/solar6kw.jpg" alt="6kW Solar System">
-            <div class="product-info">
-                <h3>6 kW Solar System</h3>
-                <p>Total Price: KES 700,000</p>
-            </div>
-            <input id="dep6" placeholder="Enter your deposit (KES)" type="number"/>
-            <button class="loan-btn" onclick="addToCart('6 kW Solar System', 700000, 'dep6')">Add to Cart</button>
-        </div>
-        <div class="product-card">
-            <img src="images/solar9kw.jpg" alt="9kW Solar System">
-            <div class="product-info">
-                <h3>9 kW Solar System</h3>
-                <p>Total Price: KES 1,050,000</p>
-            </div>
-            <input id="dep9" placeholder="Enter your deposit (KES)" type="number"/>
-            <button class="loan-btn" onclick="addToCart('9 kW Solar System', 1050000, 'dep9')">Add to Cart</button>
-        </div>
-        <div class="product-card">
-            <img src="images/panel450w.jpg" alt="450W Monocrystalline Solar Panel">
-            <div class="product-info">
-                <h3>450W Monocrystalline Solar Panel</h3>
-                <p>High efficiency solar module for home &amp; industrial use.</p>
-                <p>Total Price: KES 29,000</p>
-            </div>
-            <input id="dep_panel" placeholder="Enter your deposit (KES)" type="number"/>
-            <button class="loan-btn" onclick="addToCart('450W Monocrystalline Solar Panel', 29000, 'dep_panel')">Add to Cart</button>
-        </div>
-        <div class="product-card">
-            <div class="product-img-placeholder"></div>
-            <div class="product-info">
-                <h3>Battery 24V 100Ah</h3>
-                <p>LiFePO₄ Battery 24V 100Ah – Safe lithium storage with long life and fast charge.</p>
-                <p>Total Price: KES 60,000</p>
-            </div>
-            <input id="dep_batt24" placeholder="Enter your deposit (KES)" type="number"/>
-            <button class="loan-btn" onclick="addToCart('Battery 24V 100Ah', 60000, 'dep_batt24')">Add to Cart</button>
-        </div>
-        <div class="product-card">
-            <div class="product-img-placeholder"></div>
-            <div class="product-info">
-                <h3>Solar Cleaning Kit</h3>
-                <p>Essential tools for keeping your system at peak efficiency.</p>
-                <p>Total Price: KES 4,500</p>
-            </div>
-            <input id="dep_cleaning" placeholder="Enter your deposit (KES)" type="number"/>
-            <button class="loan-btn" onclick="addToCart('Solar Cleaning Kit', 4500, 'dep_cleaning')">Add to Cart</button>
-        </div>
-        <div class="product-card">
-            <div class="product-img-placeholder"></div>
-            <div class="product-info">
-                <h3>5kW Inverter</h3>
-                <p>Seamlessly manage solar and grid power with hybrid tech.</p>
-                <p>Total Price: KES 85,000</p>
-            </div>
-            <input id="dep_inv5kw" placeholder="Enter your deposit (KES)" type="number"/>
-            <button class="loan-btn" onclick="addToCart('5kW Inverter', 85000, 'dep_inv5kw')">Add to Cart</button>
-        </div>
-    </div>
+<div class="grid">
+<div class="product-card">
+<img alt="1kW Solar System" src="images/solar1kw.jpg"/>
+<div class="product-info">
+<h3>1 kW Solar System</h3>
+<p>Total Price: KES 150,000</p>
 </div>
-
+<input id="dep1" placeholder="Enter your deposit (KES)" type="number"/>
+<button class="loan-btn" onclick="addToCart('1 kW Solar System', 150000, 'dep1')">Add to Cart</button>
+</div>
+<div class="product-card">
+<img alt="3kW Solar System" src="images/solar3kw.jpg"/>
+<div class="product-info">
+<h3>3 kW Solar System</h3>
+<p>Total Price: KES 400,000</p>
+</div>
+<input id="dep3" placeholder="Enter your deposit (KES)" type="number"/>
+<button class="loan-btn" onclick="addToCart('3 kW Solar System', 400000, 'dep3')">Add to Cart</button>
+</div>
+<div class="product-card">
+<img alt="6kW Solar System" src="images/solar6kw.jpg"/>
+<div class="product-info">
+<h3>6 kW Solar System</h3>
+<p>Total Price: KES 700,000</p>
+</div>
+<input id="dep6" placeholder="Enter your deposit (KES)" type="number"/>
+<button class="loan-btn" onclick="addToCart('6 kW Solar System', 700000, 'dep6')">Add to Cart</button>
+</div>
+<div class="product-card">
+<img alt="9kW Solar System" src="images/solar9kw.jpg"/>
+<div class="product-info">
+<h3>9 kW Solar System</h3>
+<p>Total Price: KES 1,050,000</p>
+</div>
+<input id="dep9" placeholder="Enter your deposit (KES)" type="number"/>
+<button class="loan-btn" onclick="addToCart('9 kW Solar System', 1050000, 'dep9')">Add to Cart</button>
+</div>
+<div class="product-card">
+<img alt="450W Monocrystalline Solar Panel" src="images/panel450w.jpg"/>
+<div class="product-info">
+<h3>450W Monocrystalline Solar Panel</h3>
+<p>High efficiency solar module for home &amp; industrial use.</p>
+<p>Total Price: KES 29,000</p>
+</div>
+<input id="dep_panel" placeholder="Enter your deposit (KES)" type="number"/>
+<button class="loan-btn" onclick="addToCart('450W Monocrystalline Solar Panel', 29000, 'dep_panel')">Add to Cart</button>
+</div>
+<div class="product-card">
+<div class="product-img-placeholder"></div>
+<div class="product-info">
+<h3>Battery 24V 100Ah</h3>
+<p>LiFePO₄ Battery 24V 100Ah – Safe lithium storage with long life and fast charge.</p>
+<p>Total Price: KES 60,000</p>
+</div>
+<input id="dep_batt24" placeholder="Enter your deposit (KES)" type="number"/>
+<button class="loan-btn" onclick="addToCart('Battery 24V 100Ah', 60000, 'dep_batt24')">Add to Cart</button>
+</div>
+<div class="product-card">
+<div class="product-img-placeholder"></div>
+<div class="product-info">
+<h3>Solar Cleaning Kit</h3>
+<p>Essential tools for keeping your system at peak efficiency.</p>
+<p>Total Price: KES 4,500</p>
+</div>
+<input id="dep_cleaning" placeholder="Enter your deposit (KES)" type="number"/>
+<button class="loan-btn" onclick="addToCart('Solar Cleaning Kit', 4500, 'dep_cleaning')">Add to Cart</button>
+</div>
+<div class="product-card">
+<div class="product-img-placeholder"></div>
+<div class="product-info">
+<h3>5kW Inverter</h3>
+<p>Seamlessly manage solar and grid power with hybrid tech.</p>
+<p>Total Price: KES 85,000</p>
+</div>
+<input id="dep_inv5kw" placeholder="Enter your deposit (KES)" type="number"/>
+<button class="loan-btn" onclick="addToCart('5kW Inverter', 85000, 'dep_inv5kw')">Add to Cart</button>
+</div>
+</div>
+</div>
 <script>
 function addToCart(item, price, inputId) {
     const depositValue = document.getElementById(inputId).value;
@@ -279,14 +281,24 @@ function addToCart(item, price, inputId) {
     alert("Added to cart:\n" + item + "\nDeposit: KES " + deposit.toLocaleString());
 }
 </script>
-
 <footer>
-  <div class="footer-contacts">
-    <a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a>
-  </div>
-  <p>© 2025 WattSun Solar. All rights reserved.</p>
+<div class="footer-contacts">
+<a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a>
+</div>
+<p>© 2025 WattSun Solar. All rights reserved.</p>
 </footer>
-  <script src="main.js"></script>
+
+<script>
+  const navToggle = document.querySelector('.nav-toggle');
+  const header = document.querySelector('header');
+  navToggle.addEventListener('click', function() {
+    header.classList.toggle('nav-open');
+  });
+  document.querySelectorAll('header nav a').forEach(link => {
+    link.addEventListener('click', () => header.classList.remove('nav-open'));
+  });
+</script>
+<script src="main.js"></script>
 </body>
 </html>
 <!-- This is the shop page for WattSun Solar, displaying available solar systems and products. -->
