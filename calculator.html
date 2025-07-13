@@ -41,10 +41,6 @@
       color: #b39708;
     }
     .calc-section.collapsed .calc-chevron { transform: rotate(-90deg);}
-    @media (max-width: 700px) {
-      .container { max-width:97vw; }
-      .calc-grid { grid-template-columns: 1fr; }
-    }
     /* Button styles for result */
     .calc-btn-row {
       display: flex;
@@ -96,6 +92,8 @@
       display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:#0005; z-index:2000;
     }
     @media (max-width: 700px) {
+      .container { max-width:97vw; }
+      .calc-grid { grid-template-columns: 1fr; }
       #sizingPanel {
         width: 98vw !important;
         min-width: 0 !important;
@@ -103,6 +101,55 @@
         padding-left: 6vw !important;
         padding-right: 6vw !important;
         border-radius: 18px 0 0 0 !important;
+      }
+    }
+    /* --------- STRONGER MOBILE FIX: NO HORIZONTAL SCROLL --------- */
+    @media (max-width: 700px) {
+      .container {
+        width: 100vw !important;
+        max-width: 100vw !important;
+        min-width: 0 !important;
+        margin: 10vw auto 18vw auto !important;
+        border-radius: 0 !important;
+        padding-left: 2vw !important;
+        padding-right: 2vw !important;
+        box-sizing: border-box !important;
+      }
+      .calc-grid {
+        grid-template-columns: 1fr !important;
+        gap: 2px 0 !important;
+      }
+      .calc-section-header {
+        font-size: 1.1em !important;
+        padding: 8px 0 8px 0 !important;
+      }
+      .calc-section-body label,
+      .calc-section-body input {
+        width: 100% !important;
+        max-width: 100vw !important;
+        box-sizing: border-box !important;
+        display: block !important;
+        font-size: 1em !important;
+      }
+      .calc-section-body input {
+        margin-bottom: 10px !important;
+      }
+      .calc-btn-row button,
+      .calc-btn-row a {
+        min-width: 0 !important;
+        font-size: 1em !important;
+      }
+      h2 {
+        font-size: 1.3em !important;
+        word-break: break-word;
+      }
+      #sizingPanel {
+        width: 98vw !important;
+        min-width: 0 !important;
+        right: -102vw !important;
+        border-radius: 18px 0 0 0 !important;
+        padding-left: 4vw !important;
+        padding-right: 4vw !important;
       }
     }
   </style>

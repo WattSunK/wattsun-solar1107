@@ -5,7 +5,6 @@
   <title>Checkout - WattSun Solar</title>
   <link rel="stylesheet" href="main.css"/>
   <style>
-    /* Paste your original checkout page styles here, e.g.: */
     body { background: #fafafa; }
     .container {
       max-width: 680px;
@@ -132,7 +131,7 @@
       border-color: #f7b733;
       outline: none;
     }
-    .btn {
+    .btn, .loan-btn {
       padding: 13px 33px;
       font-size: 1.01em;
       border: none;
@@ -149,11 +148,23 @@
       margin-bottom: 6px;
       display: inline-block;
     }
-    .btn:hover {
+    .btn:hover, .loan-btn:hover {
       background: linear-gradient(90deg, #fcf6ba 0%, #f7b733 100%);
       color: #b37900 !important;
       transform: translateY(-2px) scale(1.03);
       box-shadow: 0 6px 20px rgba(247,183,51, 0.20);
+    }
+    .loan-btn.secondary {
+      background: #eee;
+      color: #555 !important;
+      border: 1px solid #d5c99c;
+      box-shadow: none;
+      margin-top: 0;
+      margin-bottom: 18px;
+    }
+    .loan-btn.secondary:hover {
+      background: #ffe180;
+      color: #7a6000 !important;
     }
     @media (max-width: 900px) {
       .container { padding: 18px 5vw; }
@@ -184,6 +195,10 @@
 </header>
 <div class="container">
   <h2>Checkout</h2>
+  <!-- Back to Shop Button -->
+  <div style="margin-bottom:12px;">
+    <a href="shop.html" class="loan-btn secondary" style="display:inline-block;">&#8592; Back to Shop</a>
+  </div>
   <table id="cartTable">
     <thead>
       <tr>
