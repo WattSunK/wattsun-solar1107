@@ -144,8 +144,8 @@
       letter-spacing: 0.5px;
       text-decoration: none;
       transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
-      margin-top: 18px;
-      margin-bottom: 6px;
+      margin-top: 0;
+      margin-bottom: 0;
       display: inline-block;
     }
     .btn:hover, .loan-btn:hover {
@@ -160,11 +160,31 @@
       border: 1px solid #d5c99c;
       box-shadow: none;
       margin-top: 0;
-      margin-bottom: 18px;
+      margin-bottom: 0;
     }
     .loan-btn.secondary:hover {
       background: #ffe180;
       color: #7a6000 !important;
+    }
+    .checkout-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-top: 12px;
+      margin-bottom: 6px;
+    }
+    @media (max-width: 700px) {
+      .checkout-actions {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }
+      .checkout-actions a,
+      .checkout-actions button {
+        width: 100%;
+        min-width: 0;
+      }
     }
     @media (max-width: 900px) {
       .container { padding: 18px 5vw; }
@@ -195,10 +215,6 @@
 </header>
 <div class="container">
   <h2>Checkout</h2>
-  <!-- Back to Shop Button -->
-  <div style="margin-bottom:12px;">
-    <a href="shop.html" class="loan-btn secondary" style="display:inline-block;">&#8592; Back to Shop</a>
-  </div>
   <table id="cartTable">
     <thead>
       <tr>
@@ -226,7 +242,10 @@
     <input id="phone" name="phone" type="tel" required placeholder="+254 7XX XXX XXX"/>
     <label for="address">Delivery Address</label>
     <textarea id="address" name="address" rows="3" required placeholder="Enter delivery location"></textarea>
-    <button type="submit" class="btn">Place Order &rarr;</button>
+    <div class="checkout-actions">
+      <a href="shop.html" class="loan-btn secondary">&#8592; Back to Shop</a>
+      <button type="submit" class="btn">Place Order &rarr;</button>
+    </div>
   </form>
 </div>
 <script>
