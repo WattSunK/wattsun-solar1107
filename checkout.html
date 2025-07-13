@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta content="width=device-width, initial-scale=1" name="viewport"/><meta charset="utf-8"/>
-<title>Checkout - WattSun Solar</title>
-<link href="main.css" rel="stylesheet"/>
-<style>
+  <meta charset="utf-8"/>
+  <title>Checkout - WattSun Solar</title>
+  <link rel="stylesheet" href="main.css"/>
+  <style>
+    /* Paste your original checkout page styles here, e.g.: */
     body { background: #fafafa; }
     .container {
       max-width: 680px;
@@ -167,52 +167,59 @@
 </head>
 <body>
 <header>
-<div class="header-bar">
-<h1>WattSun Solar</h1>
-<button aria-label="Open menu" class="nav-toggle">☰</button>
-</div>
-<nav>
-<a href="index.html">Home</a>
-<a href="solutions.html">Solutions</a>
-<a href="shop.html">Shop</a>
-<a href="financing.html">Financing</a>
-<a href="projects.html">Projects</a>
-<a href="contact.html">Contact</a>
-<!--<a href="cart.html">🛒 Cart</a>-->
-</nav>
+  <div class="header-bar">
+    <h1>WattSun Solar</h1>
+    <button class="nav-toggle" aria-label="Menu" onclick="toggleNav()">&#9776;</button>
+  </div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="solutions.html">Solutions</a>
+    <a href="shop.html">Shop</a>
+    <a href="calculator.html">Calculator</a>
+    <a href="financing.html">Financing</a>
+    <a href="projects.html">Projects</a>
+    <a href="contact.html">Contact</a>
+    <a href="cart.html">🛒 Cart</a>
+  </nav>
 </header>
 <div class="container">
-<h2>Checkout</h2>
-<table id="cartTable">
-<thead>
-<tr>
-<th style="width:19%">Product</th>
-<th style="width:23%">Description</th>
-<th style="width:14%">Unit Price (KES)</th>
-<th style="width:15%">Deposit/Unit (KES)</th>
-<th style="width:13%">Quantity</th>
-<th style="width:13%">Total Price (KES)</th>
-<th style="width:13%">Total Deposit (KES)</th>
-</tr>
-</thead>
-<tbody></tbody>
-</table>
-<div class="total" id="totalAmount">Total Deposit: KES 0</div>
-<form action="/thankyou.html" class="checkout-form" data-netlify="true" id="checkoutForm" method="POST" name="order">
-<input name="form-name" type="hidden" value="order"/>
-<input id="cart_summary" name="cart_summary" type="hidden"/>
-<label for="fullName">Full Name</label>
-<input id="fullName" name="fullName" placeholder="Your full name" required="" type="text"/>
-<label for="email">Email Address</label>
-<input id="email" name="email" placeholder="you@example.com" required="" type="email"/>
-<label for="phone">Phone Number</label>
-<input id="phone" name="phone" placeholder="+254 7XX XXX XXX" required="" type="tel"/>
-<label for="address">Delivery Address</label>
-<textarea id="address" name="address" placeholder="Enter delivery location" required="" rows="3"></textarea>
-<button class="btn" type="submit">Place Order →</button>
-</form>
+  <h2>Checkout</h2>
+  <table id="cartTable">
+    <thead>
+      <tr>
+        <th style="width:19%">Product</th>
+        <th style="width:23%">Description</th>
+        <th style="width:14%">Unit Price (KES)</th>
+        <th style="width:15%">Deposit/Unit (KES)</th>
+        <th style="width:13%">Quantity</th>
+        <th style="width:13%">Total Price (KES)</th>
+        <th style="width:13%">Total Deposit (KES)</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  <div class="total" id="totalAmount">Total Deposit: KES 0</div>
+  <form class="checkout-form" id="checkoutForm"
+        name="order" method="POST" data-netlify="true" action="/thankyou.html">
+    <input type="hidden" name="form-name" value="order" />
+    <input id="cart_summary" name="cart_summary" type="hidden"/>
+    <label for="fullName">Full Name</label>
+    <input id="fullName" name="fullName" type="text" required placeholder="Your full name"/>
+    <label for="email">Email Address</label>
+    <input id="email" name="email" type="email" required placeholder="you@example.com"/>
+    <label for="phone">Phone Number</label>
+    <input id="phone" name="phone" type="tel" required placeholder="+254 7XX XXX XXX"/>
+    <label for="address">Delivery Address</label>
+    <textarea id="address" name="address" rows="3" required placeholder="Enter delivery location"></textarea>
+    <button type="submit" class="btn">Place Order &rarr;</button>
+  </form>
 </div>
 <script>
+// Hamburger nav for mobile
+function toggleNav() {
+  document.querySelector('header').classList.toggle('nav-open');
+}
+
 const productsData = [
   {name: "1 kW Solar System", price: 150000, description: "Entry-level home or shop system. Runs lighting, TV, phone charging. Suitable for 1–2 rooms or kiosks."},
   {name: "3 kW Solar System", price: 400000, description: "For homes & offices: lighting, fridge, TV, laptop, phone charging. Runs most standard appliances."},
@@ -248,7 +255,6 @@ if (kitDataFromCalc) {
   }
   localStorage.removeItem('wattSunSelectedKit');
 }
-// Format numbers with thousands separator
 function formatNumber(num) {
   return Number(num).toLocaleString('en-US');
 }
@@ -290,10 +296,8 @@ function renderCart() {
   });
   document.getElementById("totalAmount").textContent = `Total Deposit: KES ${formatNumber(totalDeposit)}`;
   document.getElementById("cart_summary").value = cartSummaryArr.join('\n');
-  // Add input formatting for deposit fields
   document.querySelectorAll(".deposit-input").forEach(input => {
     input.oninput = function() {
-      // Remove non-digit chars, format with comma
       let raw = this.value.replace(/[^\d]/g, "");
       if(raw === "") raw = "0";
       this.value = formatNumber(raw);
@@ -301,7 +305,6 @@ function renderCart() {
     input.onchange = function() {
       const i = +this.dataset.idx;
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      // Remove formatting
       let val = this.value.replace(/[^\d]/g, "");
       cart[i].deposit = Math.max(0, Number(val));
       localStorage.setItem("cart", JSON.stringify(cart));
@@ -317,17 +320,6 @@ function changeQty(idx, delta) {
   renderCart();
 }
 window.addEventListener("DOMContentLoaded", renderCart);
-</script>
-
-<script>
-  const navToggle = document.querySelector('.nav-toggle');
-  const header = document.querySelector('header');
-  navToggle.addEventListener('click', function() {
-    header.classList.toggle('nav-open');
-  });
-  document.querySelectorAll('header nav a').forEach(link => {
-    link.addEventListener('click', () => header.classList.remove('nav-open'));
-  });
 </script>
 </body>
 </html>
