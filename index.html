@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="main.css">
   <style>
-    /* CTA section centering override */
     .cta {
       display: flex;
       flex-direction: column;
@@ -30,7 +29,6 @@
       font-size: 1.14em;
       font-weight: bold;
     }
-
     section {
       margin-bottom: 22px;
       padding-top: 28px;
@@ -52,26 +50,28 @@
 </head>
 <body>
 <header>
+  <div class="header-bar">
     <h1>WattSun Solar</h1>
     <button class="nav-toggle" aria-label="Open menu">&#9776;</button>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="solutions.html">Solutions</a>
-        <a href="shop.html">Shop</a>
-        <a href="financing.html">Financing</a>
-        <a href="projects.html">Projects</a>
-        <a href="contact.html">Contact</a>
-        <!--<a href="cart.html">🛒 Cart</a>-->
-    </nav>
+  </div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="solutions.html">Solutions</a>
+    <a href="shop.html">Shop</a>
+    <a href="financing.html">Financing</a>
+    <a href="projects.html">Projects</a>
+    <a href="contact.html">Contact</a>
+    <!--<a href="cart.html">🛒 Cart</a>-->
+  </nav>
 </header>
 
 <div class="hero">
-    <div class="hero-inner">
-        <h1>Powering Kenya with Clean, Reliable Solar Energy</h1>
-        <p>Affordable solar solutions for homes, businesses, and off-grid communities across Kenya.</p>
-        <p>WattSun Solar is dedicated to empowering communities through clean, renewable energy. We provide tailored solar installations, financing solutions, and after-sales support nationwide.</p>
-        <a class="loan-btn" href="solutions.html">Explore Solutions</a>
-    </div>
+  <div class="hero-inner">
+    <h1>Powering Kenya with Clean, Reliable Solar Energy</h1>
+    <p>Affordable solar solutions for homes, businesses, and off-grid communities across Kenya.</p>
+    <p>WattSun Solar is dedicated to empowering communities through clean, renewable energy. We provide tailored solar installations, financing solutions, and after-sales support nationwide.</p>
+    <a class="loan-btn" href="solutions.html">Explore Solutions</a>
+  </div>
 </div>
 
 <section>
@@ -109,31 +109,27 @@
 </section>
 
 <section>
-<h2 style="text-align:center;">Success Stories</h2>
-<div class="testimonials-list">
-
-  <div class="testimonial-row">
-    <img src="images/family-home-karen.jpg" alt="Family Home – Karen" class="testimonial-img">
-    <div class="testimonial-text">
-      <p><strong> Family Home – Karen</strong>: 3kW rooftop + battery backup.</p>
+  <h2 style="text-align:center;">Success Stories</h2>
+  <div class="testimonials-list">
+    <div class="testimonial-row">
+      <img src="images/family-home-karen.jpg" alt="Family Home – Karen" class="testimonial-img">
+      <div class="testimonial-text">
+        <p><strong> Family Home – Karen</strong>: 3kW rooftop + battery backup.</p>
+      </div>
+    </div>
+    <div class="testimonial-row">
+      <img src="images/nairobi-factory.jpg" alt="Nairobi Factory" class="testimonial-img">
+      <div class="testimonial-text">
+        <p><strong> Nairobi Factory</strong>: 9kW hybrid inverter system for full-time operations.</p>
+      </div>
+    </div>
+    <div class="testimonial-row">
+      <img src="images/offgrid-lodge-naivasha.jpg" alt="Off-Grid Lodge – Naivasha" class="testimonial-img">
+      <div class="testimonial-text">
+        <p><strong> Off-Grid Lodge – Naivasha</strong>: Complete off-grid system with storage.</p>
+      </div>
     </div>
   </div>
-
-  <div class="testimonial-row">
-    <img src="images/nairobi-factory.jpg" alt="Nairobi Factory" class="testimonial-img">
-    <div class="testimonial-text">
-      <p><strong> Nairobi Factory</strong>: 9kW hybrid inverter system for full-time operations.</p>
-    </div>
-  </div>
-
-  <div class="testimonial-row">
-    <img src="images/offgrid-lodge-naivasha.jpg" alt="Off-Grid Lodge – Naivasha" class="testimonial-img">
-    <div class="testimonial-text">
-      <p><strong> Off-Grid Lodge – Naivasha</strong>: Complete off-grid system with storage.</p>
-    </div>
-  </div>
-
-</div>
 </section>
 
 <section>
@@ -171,17 +167,17 @@
   <p>© 2025 WattSun Solar. All rights reserved.</p>
 </footer>
 
-  <script>
-    const navToggle = document.querySelector('.nav-toggle');
-    const header = document.querySelector('header');
-    navToggle.addEventListener('click', function() {
-      header.classList.toggle('nav-open');
-    });
-    // Optional: close menu when a link is clicked
-    document.querySelectorAll('header nav a').forEach(link => {
-      link.addEventListener('click', () => header.classList.remove('nav-open'));
-    });
-  </script>
-  <script src="main.js"></script>
+<script>
+  const navToggle = document.querySelector('.nav-toggle');
+  const header = document.querySelector('header');
+  navToggle.addEventListener('click', function() {
+    header.classList.toggle('nav-open');
+  });
+  // Optional: close menu when a link is clicked
+  document.querySelectorAll('header nav a').forEach(link => {
+    link.addEventListener('click', () => header.classList.remove('nav-open'));
+  });
+</script>
+<script src="main.js"></script>
 </body>
 </html>
