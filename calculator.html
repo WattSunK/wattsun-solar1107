@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8"/>
   <title>Solar Kit Calculator - WattSun Solar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="main.css"/>
   <style>
     body { background:#fafafa; }
@@ -45,7 +46,6 @@
       .container { max-width:97vw; }
       .calc-grid { grid-template-columns: 1fr; }
     }
-    /* Button styles for result */
     .calc-btn-row {
       display: flex;
       flex-direction: column;
@@ -109,18 +109,21 @@
 </head>
 <body>
 <header>
+  <div class="header-bar">
     <h1>WattSun Solar</h1>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="solutions.html">Solutions</a>
-        <a href="shop.html">Shop</a>
-        <a href="financing.html">Financing</a>
-        <a href="projects.html">Projects</a>
-        <a href="contact.html">Contact</a>
-    </nav>
+    <button class="nav-toggle" aria-label="Open menu">&#9776;</button>
+  </div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="solutions.html">Solutions</a>
+    <a href="shop.html">Shop</a>
+    <a href="financing.html">Financing</a>
+    <a href="projects.html">Projects</a>
+    <a href="contact.html">Contact</a>
+    <!--<a href="cart.html">🛒 Cart</a>-->
+  </nav>
 </header>
   <div class="container">
-    <!-- TITLE AND SIZING TABLE BUTTON ROW -->
     <div style="display:flex; align-items:center; justify-content:center; gap:18px; margin-bottom:16px;">
       <h2 style="margin-bottom:0; font-size:2.1em; font-weight:700; color:#222;">Solar Kit Calculator</h2>
       <button type="button" id="showSizingBtn"
@@ -206,11 +209,9 @@
       * This is an indicative estimate. Actual system sizing may vary.
     </div>
   </div>
-  <!-- Footer - leave as-is or update to match your brand -->
 <footer>
     &copy; 2025 WattSun Solar Kenya | <div class="footer-contacts"><a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a></div>
 </footer>
-
 <!-- Sizing Table Side Panel -->
 <div id="sizingPanel" style="
   position:fixed; top:0; right:-420px; width:390px; height:100vh; z-index:2001;
@@ -262,10 +263,18 @@
     *For indicative purposes. Final kit sizing should be confirmed after site survey.
   </div>
 </div>
-<!-- Overlay for side panel -->
 <div id="sizingOverlay"></div>
-
 <script>
+  // Hamburger mobile menu JS
+  const navToggle = document.querySelector('.nav-toggle');
+  const header = document.querySelector('header');
+  navToggle.addEventListener('click', function() {
+    header.classList.toggle('nav-open');
+  });
+  document.querySelectorAll('header nav a').forEach(link => {
+    link.addEventListener('click', () => header.classList.remove('nav-open'));
+  });
+
   // Accordion toggle
   function toggleSection(sectionId) {
     var sec = document.getElementById(sectionId);
@@ -343,11 +352,18 @@
   }
   // Save selection to localStorage and go to checkout
   function goToCheckout(kitName, totalWatt, price) {
-    localStorage.setItem('wattSunSelectedKit', JSON.stringify({
-      kit: kitName,
+    // Add to "cart" as array for compatibility with cart/checkout pages
+    let cart = JSON.parse(localStorage.getItem('wattSunCart') || '[]');
+    // Remove any previous calculator kit (to avoid duplicates)
+    cart = cart.filter(item => !item.isCalculatorKit);
+    cart.push({
+      name: kitName,
       power: totalWatt,
-      price: price
-    }));
+      price: price,
+      quantity: 1,
+      isCalculatorKit: true
+    });
+    localStorage.setItem('wattSunCart', JSON.stringify(cart));
     window.location.href = 'checkout.html';
   }
 
