@@ -87,20 +87,28 @@
       color: #888;
       margin-top: 14px;
     }
-    /* --- Hamburger & header styling fix (always on right) --- */
+
+    /* --- Header & Hamburger --- */
     .header-bar {
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start; /* FIX: left-align children */
       position: relative;
       min-height: 48px;
+      background: none;
+      box-shadow: none;
+      padding: 0;
     }
     .header-bar h1 {
-      flex: 1 1 auto;
-      margin: 0;
+      margin: 0 auto; /* center h1 in the available space */
       text-align: center;
       font-size: 1.5em;
+      flex: 1 1 auto;
+      font-family: 'Montserrat', Arial, sans-serif;
+      color: #fff;
+      font-weight: bold;
       padding: 9px 0 9px 0;
+      letter-spacing: 1px;
     }
     .nav-toggle {
       font-size: 2em;
@@ -114,7 +122,7 @@
       z-index: 1100;
       cursor: pointer;
       margin: 0;
-      /* DO NOT SET display: block! Let main.css control it! */
+      /* Let main.css control visibility (display:none on desktop) */
     }
     @media (max-width: 800px) {
       .container {
