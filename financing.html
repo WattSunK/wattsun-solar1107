@@ -87,57 +87,16 @@
       color: #888;
       margin-top: 14px;
     }
-
-    /* --- Header & Hamburger --- */
-    .header-bar {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start; /* FIX: left-align children */
-      position: relative;
-      min-height: 48px;
-      background: none;
-      box-shadow: none;
-      padding: 0;
-    }
-    .header-bar h1 {
-      margin: 0 auto; /* center h1 in the available space */
-      text-align: center;
-      font-size: 1.5em;
-      flex: 1 1 auto;
-      font-family: 'Montserrat', Arial, sans-serif;
-      color: #fff;
-      font-weight: bold;
-      padding: 9px 0 9px 0;
-      letter-spacing: 1px;
-    }
-    .nav-toggle {
-      font-size: 2em;
-      background: none;
-      border: none;
-      color: #111;
-      position: absolute;
-      right: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 1100;
-      cursor: pointer;
-      margin: 0;
-      /* Let main.css control visibility (display:none on desktop) */
-    }
     @media (max-width: 800px) {
       .container {
         max-width: 98vw;
         padding: 22px 5vw;
       }
     }
-    @media (max-width: 700px) {
-      .header-bar h1 { font-size: 1.2em !important; padding: 7px 0 7px 0 !important; }
-      .nav-toggle { font-size: 2em !important; right: 12px !important; }
-    }
   </style>
 </head>
 <body>
-<!-- Header -->
+<!-- Header: Use global, main.css-driven markup ONLY -->
 <header>
   <div class="header-bar">
     <h1>WattSun Solar</h1>
@@ -153,6 +112,7 @@
     <!-- <a href="cart.html">🛒 Cart</a> -->
   </nav>
 </header>
+
 <!-- Main content -->
 <div class="container">
   <h2>Flexible Solar Financing Options</h2>
