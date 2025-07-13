@@ -263,6 +263,24 @@
     link.addEventListener('click', () => header.classList.remove('nav-open'));
   });
 </script>
-<script src="main.js"></script>
+<script src="main.js">
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.body.addEventListener('click', function(e) {
+    const header = document.querySelector('header');
+    if (!header) return;
+    const nav = header.querySelector('nav');
+    const navToggle = header.querySelector('.nav-toggle');
+    if (
+      header.classList.contains('nav-open') &&
+      !nav.contains(e.target) &&
+      !navToggle.contains(e.target)
+    ) {
+      header.classList.remove('nav-open');
+    }
+  }, true);
+});
+
+</script>
 </body>
 </html>

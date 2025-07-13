@@ -1,11 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <meta charset="utf-8"/>
   <title>Flexible Solar Financing Options</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <link rel="stylesheet" href="main.css"/>
   <style>
+    /* Fix hamburger alignment */
+    .header-bar {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .nav-toggle {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex !important;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-size: 2.2em;
+      color: #fff;
+      height: 44px;
+      width: 44px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Mobile nav toggle */
+    @media (max-width: 700px) {
+      nav {
+        display: none;
+      }
+      header.nav-open nav {
+        display: flex !important;
+        flex-direction: column;
+        background: #ffc947;
+        padding-bottom: 8px;
+        border-top: 1.5px solid #ffd67a;
+      }
+      nav a {
+        color: #fff;
+        padding: 12px 34px;
+        border-bottom: 1px solid #f2e2b6;
+        font-weight: 700;
+      }
+      nav a:last-child {
+        border-bottom: none;
+      }
+    }
+
+    /* Other styles */
     body {
       background: #f7f7f7;
       margin: 0;
@@ -99,13 +147,13 @@
 <header>
   <div class="header-bar">
     <h1>WattSun Solar</h1>
-    <button class="nav-toggle" aria-label="Menu" onclick="toggleNav()">&#9776;</button>
+    <button class="nav-toggle" aria-label="Open menu" onclick="toggleNav()">&#9776;</button>
   </div>
   <nav>
     <a href="index.html">Home</a>
     <a href="solutions.html">Solutions</a>
     <a href="shop.html">Shop</a>
-    <a href="financing.html">Financing</a>
+    <a href="financing.html" class="active" aria-current="page">Financing</a>
     <a href="projects.html">Projects</a>
     <a href="contact.html">Contact</a>
     <a href="cart.html">🛒 Cart</a>
@@ -140,31 +188,29 @@
   © 2025 WattSun Solar Kenya | <div class="footer-contacts"><a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a></div>
 </footer>
 <script>
-  // Hamburger toggle
   function toggleNav() {
     document.querySelector('header').classList.toggle('nav-open');
   }
-  // Loan calculator logic with correct deposit maximum check!
   document.getElementById('loanForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    const systemCost = parseFloat(document.getElementById('system').value);
+    const price = parseFloat(document.getElementById('system').value);
     const deposit = parseFloat(document.getElementById('deposit').value);
     const term = parseInt(document.getElementById('term').value);
     const resultDiv = document.getElementById('result');
-    if (!systemCost || isNaN(deposit) || isNaN(term)) {
+    if (!price || isNaN(deposit) || isNaN(term)) {
       resultDiv.textContent = "Please fill in all fields.";
       return;
     }
-    const minDeposit = 0.5 * systemCost;
+    const minDeposit = 0.5 * price;
     if (deposit < minDeposit) {
       resultDiv.textContent = "Minimum deposit is KES " + minDeposit.toLocaleString("en-KE");
       return;
     }
-    if (deposit > systemCost) {
-      resultDiv.textContent = "Deposit cannot be greater than system cost (KES " + systemCost.toLocaleString("en-KE") + ")";
+    if (deposit > price) {
+      resultDiv.textContent = "Deposit cannot be greater than system cost (KES " + price.toLocaleString("en-KE") + ")";
       return;
     }
-    const loanAmount = systemCost - deposit;
+    const loanAmount = price - deposit;
     const annualInterestRate = 0.15;
     const monthlyInterestRate = annualInterestRate / 12;
     const monthlyRepayment = (loanAmount * monthlyInterestRate) / (1 - Math.pow(1 + monthlyInterestRate, -term));

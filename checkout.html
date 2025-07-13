@@ -3,232 +3,260 @@
 <head>
   <meta charset="utf-8"/>
   <title>Checkout - WattSun Solar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <link rel="stylesheet" href="main.css"/>
   <style>
-    body { background: #fafafa; }
-    .container {
-      max-width: 680px;
-      margin: 44px auto;
-      padding: 38px 26px 30px 26px;
-      background: #fff;
-      border-radius: 13px;
-      box-shadow: 0 4px 20px rgba(247,183,51,0.10), 0 1.5px 9px rgba(0,0,0,0.04);
-    }
-    h2 {
-      text-align: center;
-      margin-bottom: 26px;
-      font-size: 2em;
-      font-weight: bold;
-      color: #b47d08;
-    }
-    table {
-      width: 100%;
-      border-collapse: separate;
-      border-spacing: 0;
-      background: #fff;
-      margin-bottom: 22px;
-      border-radius: 10px;
-      box-shadow: 0 1px 8px rgba(0,0,0,0.07);
-      overflow: hidden;
-      table-layout: fixed;
-      font-size: 0.97em;
-    }
-    th, td {
-      padding: 11px 7px 11px 7px;
-      border-bottom: 1px solid #f2e2b6;
-      font-size: 0.97em;
-      vertical-align: middle;
-    }
-    th {
-      background-color: #f9eabb;
-      color: #444;
-      font-weight: bold;
-      text-align: center;
-    }
-    td {
-      text-align: center;
-    }
-    td.product-col {
-      text-align: left;
-      font-weight: 500;
-      width: 21%;
-      word-break: break-word;
-    }
-    td.desc-col {
-      max-width: 170px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      font-size: 0.97em;
-      text-align: left;
-    }
-    td input[type="text"].deposit-input {
-      width: 74px;
-      padding: 7px 2px;
-      font-size: 0.98em;
-      border-radius: 6px;
-      border: 1.1px solid #ccc;
-      text-align: right;
-      background: #faf9f7;
-      margin: 0 auto;
-      display: inline-block;
-    }
-    .qty-control {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-    }
-    .qty-btn {
-      background: linear-gradient(90deg, #f7b733 0%, #fcf6ba 100%);
-      color: #965700;
-      border: none;
-      border-radius: 5px;
-      width: 22px;
-      height: 22px;
-      font-size: 1em;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.2s;
-      box-shadow: 0 1px 4px #f7b73344;
-      padding: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .qty-btn:hover {
-      background: linear-gradient(90deg, #fcf6ba 0%, #f7b733 100%);
-      color: #b37900 !important;
-    }
-    .total {
-      text-align: right;
-      margin-top: 10px;
-      font-size: 1.06em;
-      font-weight: bold;
-      color: #1ab13d;
-      letter-spacing: 0.3px;
-    }
-    .checkout-form label {
-      display: block;
-      margin-bottom: 7px;
-      font-weight: bold;
-      font-size: 1.04em;
-      margin-top: 12px;
-    }
-    .checkout-form input,
-    .checkout-form textarea {
-      width: 100%;
-      padding: 12px 10px;
-      margin-bottom: 12px;
-      border: 1.1px solid #ccc;
-      border-radius: 6px;
-      font-size: 1em;
-      background: #faf9f7;
-      transition: border-color 0.2s;
-    }
-    .checkout-form input:focus,
-    .checkout-form textarea:focus {
-      border-color: #f7b733;
-      outline: none;
-    }
-    .btn, .loan-btn {
-      padding: 13px 33px;
-      font-size: 1.01em;
-      border: none;
-      border-radius: 8px;
-      color: #fff;
-      background: linear-gradient(90deg, #f7b733 0%, #fcf6ba 100%);
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 4px 16px rgba(247,183,51, 0.14);
-      letter-spacing: 0.5px;
-      text-decoration: none;
-      transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
-      margin-top: 0;
-      margin-bottom: 0;
-      display: inline-block;
-    }
-    .btn:hover, .loan-btn:hover {
-      background: linear-gradient(90deg, #fcf6ba 0%, #f7b733 100%);
-      color: #b37900 !important;
-      transform: translateY(-2px) scale(1.03);
-      box-shadow: 0 6px 20px rgba(247,183,51, 0.20);
-    }
-    .loan-btn.secondary {
-      background: #eee;
-      color: #555 !important;
-      border: 1px solid #d5c99c;
-      box-shadow: none;
-      margin-top: 0;
-      margin-bottom: 0;
-    }
-    .loan-btn.secondary:hover {
-      background: #ffe180;
-      color: #7a6000 !important;
-    }
-    .checkout-actions {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      margin-top: 12px;
-      margin-bottom: 6px;
-    }
-    @media (max-width: 700px) {
-      .checkout-actions {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 10px;
-      }
-      .checkout-actions a,
-      .checkout-actions button {
-        width: 100%;
-        min-width: 0;
-      }
-    }
-    @media (max-width: 900px) {
-      .container { padding: 18px 5vw; }
-      table th, table td { font-size: 0.93em; }
-      .qty-control { gap: 2px; }
-      .qty-btn { width: 18px; height: 18px; font-size: 0.95em; }
-      td.desc-col { max-width: 90px; }
-      td.product-col { width: 29%; }
-    }
+/* --- Checkout page only styling --- */
+.container {
+  max-width: 900px;
+  width: 98vw;
+  margin: 44px auto 0 auto;
+  padding: 38px 24px 30px 24px;
+  background: #fff;
+  border-radius: 13px;
+  box-shadow: 0 4px 20px rgba(247,183,51,0.10), 0 1.5px 9px rgba(0,0,0,0.04);
+  box-sizing: border-box;
+}
+h2 {
+  text-align: center;
+  margin-bottom: 26px;
+  font-size: 2em;
+  font-weight: bold;
+  color: #b47d08;
+}
+.table-wrapper {
+  width: 100%;
+  overflow-x: visible;   /* no scroll */
+  background: #fff;
+  margin-bottom: 18px;
+}
+.container table {
+  width: 100%;
+  table-layout: fixed;   /* compress columns */
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.07);
+  font-size: 1em;
+  margin: 0;
+}
+.container th, .container td {
+  padding: 10px 5px;
+  font-size: 1em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 110px;
+  min-width: 50px;
+  vertical-align: middle;
+  text-align: center;
+  box-sizing: border-box;
+}
+th {
+  background-color: #f9eabb;
+  color: #444;
+  font-weight: bold;
+  font-size: 1.05em;
+}
+th.product-col, td.product-col { max-width: 140px; }
+th.checkout-desc-tooltip, td.checkout-desc-tooltip { max-width: 120px; }
+td.product-col {
+  text-align: left;
+  font-weight: 500;
+  min-width: 100px;
+  max-width: 140px;
+  word-break: break-word;
+  white-space: normal;
+}
+td.checkout-desc-tooltip {
+  position: relative;
+  max-width: 120px;
+  min-width: 50px;
+  cursor: pointer;
+  background: none;
+}
+@media (min-width: 700px) {
+  td.checkout-desc-tooltip:hover::after {
+    content: attr(data-desc);
+    position: absolute;
+    left: 0;
+    top: 100%;
+    z-index: 99;
+    min-width: 180px;
+    max-width: 320px;
+    background: #fffbe8;
+    color: #222;
+    border: 1px solid #eccd7e;
+    border-radius: 9px;
+    box-shadow: 0 4px 18px #b47d0844;
+    font-size: 0.99em;
+    padding: 13px 16px;
+    white-space: normal;
+    word-break: break-word;
+    margin-top: 4px;
+    pointer-events: none;
+  }
+  td.checkout-desc-tooltip:hover {
+    background: #fcf6ba;
+    z-index: 20;
+  }
+}
+.qty-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.qty-btn {
+  background: linear-gradient(90deg, #f7b733 0%, #fcf6ba 100%);
+  color: #965700;
+  border: none;
+  border-radius: 5px;
+  width: 22px;
+  height: 22px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+  box-shadow: 0 1px 4px #f7b73344;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.qty-btn:hover {
+  background: linear-gradient(90deg, #fcf6ba 0%, #f7b733 100%);
+  color: #b37900 !important;
+}
+.total {
+  text-align: right;
+  margin-top: 10px;
+  font-size: 1.08em;
+  font-weight: bold;
+  color: #1ab13d;
+  letter-spacing: 0.3px;
+  padding-right: 18px;
+}
+.checkout-form {
+  margin-top: 20px;
+}
+.checkout-form label {
+  display: block;
+  margin-bottom: 7px;
+  font-weight: bold;
+  font-size: 1.04em;
+  margin-top: 12px;
+}
+.checkout-form input,
+.checkout-form textarea {
+  width: 100%;
+  padding: 12px 10px;
+  margin-bottom: 12px;
+  border: 1.1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1em;
+  background: #faf9f7;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+  max-width: 100%;
+  resize: vertical;
+  display: block;
+}
+.checkout-form input:focus,
+.checkout-form textarea:focus {
+  border-color: #f7b733;
+  outline: none;
+}
+.checkout-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-top: 12px;
+  margin-bottom: 6px;
+}
+.btn, .loan-btn {
+  padding: 13px 33px;
+  font-size: 1.01em;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  background: linear-gradient(90deg, #f7b733 0%, #fcf6ba 100%);
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(247,183,51, 0.14);
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+  margin-top: 0;
+  margin-bottom: 0;
+  display: inline-block;
+}
+.btn:hover, .loan-btn:hover {
+  background: linear-gradient(90deg, #fcf6ba 0%, #f7b733 100%);
+  color: #b37900 !important;
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 6px 20px rgba(247,183,51, 0.20);
+}
+.loan-btn.secondary {
+  background: #eee;
+  color: #555 !important;
+  border: 1px solid #d5c99c;
+  box-shadow: none;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.loan-btn.secondary:hover {
+  background: #ffe180;
+  color: #7a6000 !important;
+}
+@media (max-width:1000px) { .container { max-width: 98vw; padding: 16px 2vw; } }
+@media (max-width:700px) {
+  .container { width: 100vw !important; max-width: 100vw !important; margin: 0 !important; padding: 0 !important; box-sizing: border-box !important; }
+  th.col-desc, td.col-desc, th.col-unit, td.col-unit, th.col-total-deposit, td.col-total-deposit { display: none !important; }
+  td.product-col { width: 35% !important; min-width: 80px !important; max-width: 140px !important; }
+  .container, .table-wrapper, table { width: 100vw !important; max-width: 100vw !important; }
+  .checkout-actions { flex-direction: column; align-items: stretch; gap: 10px; }
+  .checkout-actions a, .checkout-actions button { width: 100%; min-width: 0; }
+}
   </style>
 </head>
 <body>
+<!-- HEADER: exactly as your index.html, styled by main.css -->
 <header>
   <div class="header-bar">
     <h1>WattSun Solar</h1>
-    <button class="nav-toggle" aria-label="Menu" onclick="toggleNav()">&#9776;</button>
+    <button class="nav-toggle" aria-label="Open menu" onclick="toggleNav()">&#9776;</button>
   </div>
   <nav>
     <a href="index.html">Home</a>
     <a href="solutions.html">Solutions</a>
     <a href="shop.html">Shop</a>
-    <a href="calculator.html">Calculator</a>
     <a href="financing.html">Financing</a>
     <a href="projects.html">Projects</a>
     <a href="contact.html">Contact</a>
-    <a href="cart.html">🛒 Cart</a>
+    <a href="cart.html">Cart</a>
   </nav>
 </header>
 <div class="container">
   <h2>Checkout</h2>
-  <table id="cartTable">
-    <thead>
-      <tr>
-        <th style="width:19%">Product</th>
-        <th style="width:23%">Description</th>
-        <th style="width:14%">Unit Price (KES)</th>
-        <th style="width:15%">Deposit/Unit (KES)</th>
-        <th style="width:13%">Quantity</th>
-        <th style="width:13%">Total Price (KES)</th>
-        <th style="width:13%">Total Deposit (KES)</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
+  <div class="table-wrapper">
+    <table id="cartTable">
+      <thead>
+        <tr>
+          <th class="product-col">Product</th>
+          <th class="checkout-desc-tooltip">Description</th>
+          <th class="col-unit">Unit Price (KES)</th>
+          <th>Deposit/Unit (KES)</th>
+          <th>Quantity</th>
+          <th class="col-total">Total Price (KES)</th>
+          <th class="col-total-deposit">Total Deposit (KES)</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
   <div class="total" id="totalAmount">Total Deposit: KES 0</div>
   <form class="checkout-form" id="checkoutForm"
         name="order" method="POST" data-netlify="true" action="/thankyou.html">
@@ -248,12 +276,19 @@
     </div>
   </form>
 </div>
+<footer>
+  &copy; 2025 WattSun Solar Kenya | <div class="footer-contacts"><a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a></div>
+</footer>
 <script>
-// Hamburger nav for mobile
 function toggleNav() {
-  document.querySelector('header').classList.toggle('nav-open');
+  const header = document.querySelector('header');
+  header.classList.toggle('nav-open');
 }
-
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('header nav a').forEach(link => {
+    link.addEventListener('click', () => document.querySelector('header').classList.remove('nav-open'));
+  });
+});
 const productsData = [
   {name: "1 kW Solar System", price: 150000, description: "Entry-level home or shop system. Runs lighting, TV, phone charging. Suitable for 1–2 rooms or kiosks."},
   {name: "3 kW Solar System", price: 400000, description: "For homes & offices: lighting, fridge, TV, laptop, phone charging. Runs most standard appliances."},
@@ -264,36 +299,9 @@ const productsData = [
   {name: "Solar Cleaning Kit", price: 4500, description: "Essential tools for keeping your system at peak efficiency."},
   {name: "5kW Inverter", price: 85000, description: "Seamlessly manage solar and grid power with hybrid tech."}
 ];
-const kitDataFromCalc = JSON.parse(localStorage.getItem('wattSunSelectedKit') || 'null');
-if (kitDataFromCalc) {
-  let kitName = kitDataFromCalc.kit.replace('Kit','Solar System').replace(/\s+/g,' ').trim();
-  let kitEntry = productsData.find(p => kitName.includes(p.name.split(' ')[0]));
-  if (!kitEntry) {
-    kitEntry = {
-      name: kitDataFromCalc.kit.replace('Kit','Solar System'),
-      price: kitDataFromCalc.price,
-      description: `Custom solar kit sized for your needs.`
-    };
-  }
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const kitIdx = cart.findIndex(item => item.name === kitEntry.name);
-  if (kitIdx === -1) {
-    cart.push({
-      name: kitEntry.name,
-      price: kitDataFromCalc.price,
-      description: kitEntry.description,
-      deposit: Math.round(kitDataFromCalc.price * 0.5),
-      quantity: 1
-    });
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }
-  localStorage.removeItem('wattSunSelectedKit');
-}
+
 function formatNumber(num) {
   return Number(num).toLocaleString('en-US');
-}
-function truncate(str, n) {
-  return str.length > n ? str.slice(0, n) + '…' : str;
 }
 function renderCart() {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -304,7 +312,6 @@ function renderCart() {
   cart.forEach((item, idx) => {
     const product = productsData.find(p => p.name === item.name);
     const desc = product ? product.description : (item.description || "");
-    const descShort = truncate(desc, 60);
     const unitDeposit = item.deposit ? item.deposit : Math.round(item.price * 0.5);
     const totalDepositItem = unitDeposit * item.quantity;
     const totalPrice = item.price * item.quantity;
@@ -313,9 +320,9 @@ function renderCart() {
     const row = document.createElement('tr');
     row.innerHTML = `
       <td class="product-col">${item.name}</td>
-      <td class="desc-col" title="${desc.replace(/"/g, '&quot;')}">${descShort}</td>
-      <td>${formatNumber(item.price)}</td>
-      <td><input type="text" min="0" step="1" value="${formatNumber(unitDeposit)}" data-idx="${idx}" class="deposit-input" style="width:70px;font-size:0.98em;"/></td>
+      <td class="checkout-desc-tooltip" data-desc="${desc.replace(/"/g, '&quot;')}">${desc}</td>
+      <td class="col-unit">${formatNumber(item.price)}</td>
+      <td>${formatNumber(unitDeposit)}</td>
       <td>
         <div class="qty-control">
           <button class="qty-btn" onclick="changeQty(${idx}, -1);return false;">-</button>
@@ -323,28 +330,13 @@ function renderCart() {
           <button class="qty-btn" onclick="changeQty(${idx}, 1);return false;">+</button>
         </div>
       </td>
-      <td>${formatNumber(totalPrice)}</td>
-      <td>${formatNumber(totalDepositItem)}</td>
+      <td class="col-total">${formatNumber(totalPrice)}</td>
+      <td class="col-total-deposit">${formatNumber(totalDepositItem)}</td>
     `;
     tbody.appendChild(row);
   });
   document.getElementById("totalAmount").textContent = `Total Deposit: KES ${formatNumber(totalDeposit)}`;
   document.getElementById("cart_summary").value = cartSummaryArr.join('\n');
-  document.querySelectorAll(".deposit-input").forEach(input => {
-    input.oninput = function() {
-      let raw = this.value.replace(/[^\d]/g, "");
-      if(raw === "") raw = "0";
-      this.value = formatNumber(raw);
-    };
-    input.onchange = function() {
-      const i = +this.dataset.idx;
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      let val = this.value.replace(/[^\d]/g, "");
-      cart[i].deposit = Math.max(0, Number(val));
-      localStorage.setItem("cart", JSON.stringify(cart));
-      renderCart();
-    };
-  });
 }
 function changeQty(idx, delta) {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -354,6 +346,24 @@ function changeQty(idx, delta) {
   renderCart();
 }
 window.addEventListener("DOMContentLoaded", renderCart);
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.body.addEventListener('click', function(e) {
+    const header = document.querySelector('header');
+    if (!header) return;
+    const nav = header.querySelector('nav');
+    const navToggle = header.querySelector('.nav-toggle');
+    if (
+      header.classList.contains('nav-open') &&
+      !nav.contains(e.target) &&
+      !navToggle.contains(e.target)
+    ) {
+      header.classList.remove('nav-open');
+    }
+  }, true);
+});
+
 </script>
 </body>
 </html>

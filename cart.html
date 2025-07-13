@@ -3,16 +3,23 @@
 <head>
   <meta charset="utf-8"/>
   <title>Cart - WattSun Solar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <link rel="stylesheet" href="main.css"/>
   <style>
+    html, body {
+      width: 100vw;
+      max-width: 100vw;
+      overflow-x: hidden;
+    }
     body { background: #fafafa; }
     .container {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 36px 24px 28px 24px;
+      max-width: 680px;
+      margin: 44px auto;
+      padding: 38px 12px 30px 12px;
       background: #fff;
       border-radius: 13px;
       box-shadow: 0 4px 20px rgba(247,183,51,0.10), 0 1.5px 9px rgba(0,0,0,0.04);
+      box-sizing: border-box;
     }
     h2 {
       text-align: center;
@@ -21,25 +28,50 @@
       font-weight: bold;
       color: #b47d08;
     }
+    .table-wrapper {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+      box-sizing: border-box;
+      background: #fff;
+    }
     table {
       width: 100%;
-      border-collapse: collapse;
+      min-width: 0;
+      border-collapse: separate;
+      border-spacing: 0;
       background: #fff;
       margin-bottom: 22px;
       border-radius: 10px;
       box-shadow: 0 1px 8px rgba(0,0,0,0.07);
       overflow: hidden;
+      table-layout: fixed;
+      font-size: 0.97em;
+      box-sizing: border-box;
     }
     th, td {
       text-align: left;
       padding: 14px 12px;
       border-bottom: 1px solid #f2e2b6;
       font-size: 1em;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      max-width: 120px;
     }
     th {
       background-color: #f9eabb;
       color: #444;
       font-weight: bold;
+      text-align: center;
+    }
+    td.product-col {
+      text-align: left;
+      font-weight: 500;
+      width: 35%;
+      min-width: 110px;
+      max-width: 180px;
+      word-break: break-word;
     }
     .total {
       text-align: right;
@@ -80,12 +112,100 @@
       margin-top: 18px;
       margin-bottom: 6px;
     }
+    @media (min-width: 701px) {
+      th {
+        white-space: normal;
+        text-overflow: unset;
+        overflow: visible;
+        max-width: none;
+        word-break: break-word;
+      }
+    }
+    @media (max-width: 700px) {
+      .container {
+        width: 100vw !important;
+        max-width: 100vw !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        box-sizing: border-box !important;
+      }
+      .table-wrapper {
+        width: 100vw !important;
+        max-width: 100vw !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+        margin-left: 0 !important;
+      }
+      table {
+        width: 100vw !important;
+        max-width: 100vw !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+        table-layout: fixed !important;
+      }
+      .col-unit, .col-total-deposit {
+        display: none;
+      }
+      th, td {
+        font-size: 0.96em;
+        padding: 8px 3px;
+        min-width: 36px;
+        max-width: 90px;
+      }
+      td.product-col {
+        width: 35% !important;
+        min-width: 100px !important;
+        max-width: 180px !important;
+      }
+      .btn, .btn-clear { width: 100%; margin: 10px 0; }
+    }
     @media (max-width: 900px) {
       .container { padding: 18px 5vw; }
       table th, table td { font-size: 0.98em; }
       .btn, .btn-clear { width: 100%; margin: 10px 0; }
     }
-  </style>
+  
+@media (max-width: 700px) {
+  .container {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+  }
+  .table-wrapper {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  th.col-desc, td.col-desc, th.col-unit, td.col-unit, th.col-total-deposit, td.col-total-deposit {
+    display: none !important;
+  }
+  td.product-col {
+    width: 40% !important;
+    min-width: 80px !important;
+    max-width: 140px !important;
+  }
+  table {
+    table-layout: fixed !important;
+  }
+  th, td {
+    padding: 8px 6px !important;
+    font-size: 0.9em !important;
+  }
+  .checkout-actions {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+  }
+  .checkout-actions a, .checkout-actions button {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+}
+
+</style>
 </head>
 <body>
   <header>
@@ -97,28 +217,30 @@
       <a href="index.html">Home</a>
       <a href="solutions.html">Solutions</a>
       <a href="shop.html">Shop</a>
+      <a href="calculator.html">Calculator</a>
       <a href="financing.html">Financing</a>
       <a href="projects.html">Projects</a>
       <a href="contact.html">Contact</a>
       <a href="cart.html">🛒 Cart</a>
     </nav>
   </header>
-
   <div class="container">
     <h2>Your Cart</h2>
-    <table id="cartTable">
-      <thead>
-        <tr>
-          <th>Product</th>
-          <th>Unit Price</th>
-          <th>Deposit/Unit</th>
-          <th>Quantity</th>
-          <th>Total Price</th>
-          <th>Total Deposit</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
+    <div class="table-wrapper">
+      <table id="cartTable">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th class="col-unit">Unit Price (KES)</th>
+            <th>Deposit/Unit (KES)</th>
+            <th>Quantity</th>
+            <th>Total Price (KES)</th>
+            <th class="col-total-deposit">Total Deposit (KES)</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
     <div class="total" id="totalAmount">Total Deposit: KES 0</div>
     <div class="actions">
       <a class="btn" href="checkout.html">Proceed to Checkout</a>
@@ -144,18 +266,17 @@
         const totalPrice = item.price * quantity;
         const totalItemDeposit = item.deposit * quantity;
         row.innerHTML = `
-          <td>${item.name}</td>
-          <td>KES ${item.price.toLocaleString()}</td>
-          <td>KES ${item.deposit.toLocaleString()}</td>
+          <td class="product-col">${item.name}</td>
+          <td class="col-unit">${item.price.toLocaleString()}</td>
+          <td>${item.deposit.toLocaleString()}</td>
           <td>${quantity}</td>
-          <td>KES ${totalPrice.toLocaleString()}</td>
-          <td>KES ${totalItemDeposit.toLocaleString()}</td>
+          <td>${totalPrice.toLocaleString()}</td>
+          <td class="col-total-deposit">${totalItemDeposit.toLocaleString()}</td>
         `;
         totalDeposit += totalItemDeposit;
         cartTable.appendChild(row);
       });
       totalDisplay.innerText = "Total Deposit: KES " + totalDeposit.toLocaleString();
-      // Show/hide clear cart button
       clearCartBtn.style.display = items.length > 0 ? "inline-block" : "none";
     }
 
@@ -166,8 +287,25 @@
 
     window.onload = loadCart;
     clearCartBtn.addEventListener("click", clearCart);
-  </script>
+  
 
+document.addEventListener('DOMContentLoaded', function() {
+  document.body.addEventListener('click', function(e) {
+    const header = document.querySelector('header');
+    if (!header) return;
+    const nav = header.querySelector('nav');
+    const navToggle = header.querySelector('.nav-toggle');
+    if (
+      header.classList.contains('nav-open') &&
+      !nav.contains(e.target) &&
+      !navToggle.contains(e.target)
+    ) {
+      header.classList.remove('nav-open');
+    }
+  }, true);
+});
+
+</script>
   <footer>
     &copy; 2025 WattSun Solar Kenya | <div class="footer-contacts"><a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a></div>
   </footer>
