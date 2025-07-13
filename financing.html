@@ -87,37 +87,34 @@
       color: #888;
       margin-top: 14px;
     }
-    /* Hamburger & header styling (fixes button right) */
+    /* --- Hamburger & header styling fix (always on right) --- */
     .header-bar {
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
+      min-height: 48px;
     }
     .header-bar h1 {
       flex: 1 1 auto;
       margin: 0;
       text-align: center;
-      font-size: 3em;
-      font-family: 'Montserrat', Arial, sans-serif;
-      color: #fff;
-      font-weight: bold;
-      padding-top: 30px;
-      padding-bottom: 12px;
-      letter-spacing: 1px;
+      font-size: 1.5em;
+      padding: 9px 0 9px 0;
     }
     .nav-toggle {
-      display: block;
       font-size: 2em;
       background: none;
       border: none;
       color: #111;
       position: absolute;
-      right: 8px;
+      right: 14px;
       top: 50%;
       transform: translateY(-50%);
       z-index: 1100;
       cursor: pointer;
+      margin: 0;
+      /* DO NOT SET display: block! Let main.css control it! */
     }
     @media (max-width: 800px) {
       .container {
