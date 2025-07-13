@@ -520,6 +520,34 @@ footer a {
     padding: 12px 0 12px 8px;
   }
 }
+/*--- Solar Calculator Mobile Table Fix ---*/
+@media (max-width: 700px) {
+  .calculator-table,
+  .calculator-table table,
+  .calculator-table tbody,
+  .calculator-table tr,
+  .calculator-table td,
+  .calculator-table th {
+    display: block;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    overflow-x: auto;
+  }
+  .calculator-table input[type="text"],
+  .calculator-table input[type="number"] {
+    width: 100% !important;
+    box-sizing: border-box;
+    font-size: 1em;
+  }
+  .calculator-table td,
+  .calculator-table th {
+    padding: 8px 4px;
+    border: none;
+    border-bottom: 1px solid #e6e6e6;
+    background: #fff;
+    min-width: 0;
+  }
+}
 @media (max-width: 500px) {
   .header-bar h1 {
     font-size: 1em;
@@ -532,6 +560,10 @@ footer a {
   }
   .cta h2 { font-size: 1.13em; }
   .loan-btn, .hero .btn { font-size: 1em; min-width: 110px; padding: 10px 0; }
+  /*--- Even more compact calculator table for very small screens ---*/
+  .calculator-table td, .calculator-table th {
+    padding: 6px 2px;
+  }
 }
 @media (max-width: 700px) {
   .header-bar {
@@ -565,3 +597,4 @@ footer a {
     margin: 0 !important;
   }
 }
+/*--- End Solar Calculator Fix ---*/
