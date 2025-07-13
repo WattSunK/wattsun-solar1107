@@ -3,7 +3,6 @@
 <head>
   <meta charset="utf-8"/>
   <title>WattSun Solar - Home</title>
-  <!-- Mobile responsive meta tag added -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="main.css">
   <style>
@@ -32,7 +31,6 @@
       font-weight: bold;
     }
 
-    /* Minimize section spacing */
     section {
       margin-bottom: 22px;
       padding-top: 28px;
@@ -47,7 +45,6 @@
     footer {
       margin-top: 0 !important;
     }
-    /* Remove extra margin from h2 */
     h2, .centered-section-title {
       margin-top: 0;
     }
@@ -56,6 +53,7 @@
 <body>
 <header>
     <h1>WattSun Solar</h1>
+    <button class="nav-toggle" aria-label="Open menu">&#9776;</button>
     <nav>
         <a href="index.html">Home</a>
         <a href="solutions.html">Solutions</a>
@@ -172,6 +170,18 @@
   </div>
   <p>© 2025 WattSun Solar. All rights reserved.</p>
 </footer>
+
+  <script>
+    const navToggle = document.querySelector('.nav-toggle');
+    const header = document.querySelector('header');
+    navToggle.addEventListener('click', function() {
+      header.classList.toggle('nav-open');
+    });
+    // Optional: close menu when a link is clicked
+    document.querySelectorAll('header nav a').forEach(link => {
+      link.addEventListener('click', () => header.classList.remove('nav-open'));
+    });
+  </script>
   <script src="main.js"></script>
 </body>
 </html>
