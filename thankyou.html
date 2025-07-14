@@ -50,7 +50,6 @@
     </p>
 <a class="button" href="index.html">Return to Home</a>
 </div>
-
 <script>
   const navToggle = document.querySelector('.nav-toggle');
   const header = document.querySelector('header');
@@ -79,6 +78,15 @@ document.addEventListener('DOMContentLoaded', function() {
   }, true);
 });
 
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (sessionStorage.getItem("clearCartOnThankYou")) {
+      localStorage.removeItem("cart");
+      sessionStorage.removeItem("clearCartOnThankYou");
+    }
+  });
 </script>
 </body>
 </html>
