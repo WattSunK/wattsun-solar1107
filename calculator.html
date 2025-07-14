@@ -369,74 +369,8 @@ button.loan-btn {
 <div class="form-note">
       * This is an indicative estimate. Actual system sizing may vary.
     </div>
-<div style="text-align: center; margin-top: 24px;">
-<button id="addToCartBtn" style="width: 94%; max-width: 350px; padding: 14px 0; font-size: 1.1em; font-weight: 600; border: none; border-radius: 24px; color: #184211; background: linear-gradient(90deg, #f7b733 0%, #fcf6ba 100%); box-shadow: 0 2px 14px rgba(247,183,51,0.11); transition: background 0.15s, color 0.12s, transform 0.1s; cursor: pointer;">
-    Add to Cart
-  </button>
-</div>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const addToCartBtn = document.getElementById("addToCartBtn");
-  if (addToCartBtn) {
-    addToCartBtn.addEventListener("click", function () {
-      const stored = localStorage.getItem('wattSunSelectedKit');
-      if (stored) {
-        const kit = JSON.parse(stored);
-        const cart = JSON.parse(localStorage.getItem("wattSunCart") || "[]");
-        cart.push({
-          name: kit.kit,
-          power: kit.power,
-          price: kit.price,
-          quantity: 1
-        });
-        localStorage.setItem("wattSunCart", JSON.stringify(cart));
-        
-    const msg = document.createElement("div");
-    msg.textContent = "✓ " + kit.kit + " added to cart.";
-    msg.style.cssText = "color:#0a7c48;font-weight:600;margin-top:10px;";
-    btn.parentNode.insertBefore(msg, btn.nextSibling);
-    btn.disabled = true;
-    btn.style.opacity = "0.6";
-    btn.textContent = "Added";
-    
-      } else {
-        alert("Please calculate your kit first.");
-      }
-    });
-  }
-});
 
-function showLoanAddToCart(systemLabel, price, deposit, loanTerm) {
-  let existing = document.getElementById('loanAddToCartBtn');
-  if (existing) return;
 
-  const btn = document.createElement("button");
-  btn.id = "loanAddToCartBtn";
-  btn.textContent = "Add to Cart";
-  btn.style.cssText = "width:94%;max-width:350px;padding:14px 0;font-size:1.1em;font-weight:600;border:none;border-radius:24px;color:#184211;background:linear-gradient(90deg,#f7b733 0%,#fcf6ba 100%);box-shadow:0 2px 14px rgba(247,183,51,0.11);transition:background 0.15s,color 0.12s,transform 0.1s;cursor:pointer;margin:20px auto 0 auto;display:block;text-align:center;";
-
-  btn.onclick = function () {
-    const cart = JSON.parse(localStorage.getItem("wattSunCart") || "[]");
-    cart.push({
-      name: systemLabel,
-      price: price,
-      deposit: deposit,
-      loanTerm: loanTerm,
-      quantity: 1
-    });
-    localStorage.setItem("wattSunCart", JSON.stringify(cart));
-    btn.disabled = true;
-    btn.textContent = "✓ Added";
-    btn.style.opacity = "0.6";
-  };
-
-  const loanNote = document.querySelector('.form-note');
-  if (loanNote && loanNote.parentNode) {
-    loanNote.parentNode.insertBefore(btn, loanNote.nextSibling);
-  }
-}
-
-</script>
 </div>
 <!-- Sizing Table Side Panel -->
 <div id="sizingPanel" style="
@@ -618,34 +552,44 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-function showLoanAddToCart(systemLabel, price, deposit, loanTerm) {
-  let existing = document.getElementById('loanAddToCartBtn');
-  if (existing) return;
+// Loan calculator logic
+function calculateLoan() {
+  const systemSelect = document.getElementById("loanSystem");
+  const depositInput = document.getElementById("loanDeposit");
+  const termInput = document.getElementById("loanTerm");
+  const result = document.getElementById("loanResult");
 
-  const btn = document.createElement("button");
-  btn.id = "loanAddToCartBtn";
-  btn.textContent = "Add to Cart";
-  btn.style.cssText = "width:94%;max-width:350px;padding:14px 0;font-size:1.1em;font-weight:600;border:none;border-radius:24px;color:#184211;background:linear-gradient(90deg,#f7b733 0%,#fcf6ba 100%);box-shadow:0 2px 14px rgba(247,183,51,0.11);transition:background 0.15s,color 0.12s,transform 0.1s;cursor:pointer;margin:20px auto 0 auto;display:block;text-align:center;";
+  if (!systemSelect || !depositInput || !termInput || !result) return;
 
-  btn.onclick = function () {
-    const cart = JSON.parse(localStorage.getItem("wattSunCart") || "[]");
-    cart.push({
-      name: systemLabel,
-      price: price,
-      deposit: deposit,
-      loanTerm: loanTerm,
-      quantity: 1
-    });
-    localStorage.setItem("wattSunCart", JSON.stringify(cart));
-    btn.disabled = true;
-    btn.textContent = "✓ Added";
-    btn.style.opacity = "0.6";
-  };
+  const selectedOption = systemSelect.options[systemSelect.selectedIndex];
+  const systemLabel = selectedOption.text;
+  const price = parseInt(selectedOption.value);
+  const deposit = parseInt(depositInput.value);
+  const loanTerm = parseInt(termInput.value);
+  const interestRate = 0.12;
 
-  const loanNote = document.querySelector('.form-note');
-  if (loanNote && loanNote.parentNode) {
-    loanNote.parentNode.insertBefore(btn, loanNote.nextSibling);
+  if (isNaN(price) || isNaN(deposit) || isNaN(loanTerm) || deposit >= price || deposit <= 0 || loanTerm <= 0) {
+    result.innerHTML = "<span style='color:red;'>Please enter valid deposit and term values.</span>";
+    return;
   }
+
+  const loanAmount = price - deposit;
+  const monthlyRate = interestRate / 12;
+  const monthlyRepayment = Math.round((loanAmount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -loanTerm)));
+
+  result.innerHTML = "<strong>Loan Amount:</strong> KES " + loanAmount.toLocaleString() +
+                     " | <strong>Monthly Repayment:</strong> KES " + monthlyRepayment.toLocaleString() +
+                     "<br><span style='font-size:0.9em;color:#888;'>* This is an indicative estimate. Actual loan terms may vary.</span>";
+
+  // Store selected kit for cross-page access
+  localStorage.setItem('wattSunSelectedKit', JSON.stringify({
+    kit: systemLabel,
+    price: price,
+    deposit: deposit,
+    loanTerm: loanTerm
+  }));
+
+  
 }
 
 </script>
@@ -654,34 +598,44 @@ function toggleNav() {
   document.querySelector('header').classList.toggle('nav-open');
 }
 
-function showLoanAddToCart(systemLabel, price, deposit, loanTerm) {
-  let existing = document.getElementById('loanAddToCartBtn');
-  if (existing) return;
+// Loan calculator logic
+function calculateLoan() {
+  const systemSelect = document.getElementById("loanSystem");
+  const depositInput = document.getElementById("loanDeposit");
+  const termInput = document.getElementById("loanTerm");
+  const result = document.getElementById("loanResult");
 
-  const btn = document.createElement("button");
-  btn.id = "loanAddToCartBtn";
-  btn.textContent = "Add to Cart";
-  btn.style.cssText = "width:94%;max-width:350px;padding:14px 0;font-size:1.1em;font-weight:600;border:none;border-radius:24px;color:#184211;background:linear-gradient(90deg,#f7b733 0%,#fcf6ba 100%);box-shadow:0 2px 14px rgba(247,183,51,0.11);transition:background 0.15s,color 0.12s,transform 0.1s;cursor:pointer;margin:20px auto 0 auto;display:block;text-align:center;";
+  if (!systemSelect || !depositInput || !termInput || !result) return;
 
-  btn.onclick = function () {
-    const cart = JSON.parse(localStorage.getItem("wattSunCart") || "[]");
-    cart.push({
-      name: systemLabel,
-      price: price,
-      deposit: deposit,
-      loanTerm: loanTerm,
-      quantity: 1
-    });
-    localStorage.setItem("wattSunCart", JSON.stringify(cart));
-    btn.disabled = true;
-    btn.textContent = "✓ Added";
-    btn.style.opacity = "0.6";
-  };
+  const selectedOption = systemSelect.options[systemSelect.selectedIndex];
+  const systemLabel = selectedOption.text;
+  const price = parseInt(selectedOption.value);
+  const deposit = parseInt(depositInput.value);
+  const loanTerm = parseInt(termInput.value);
+  const interestRate = 0.12;
 
-  const loanNote = document.querySelector('.form-note');
-  if (loanNote && loanNote.parentNode) {
-    loanNote.parentNode.insertBefore(btn, loanNote.nextSibling);
+  if (isNaN(price) || isNaN(deposit) || isNaN(loanTerm) || deposit >= price || deposit <= 0 || loanTerm <= 0) {
+    result.innerHTML = "<span style='color:red;'>Please enter valid deposit and term values.</span>";
+    return;
   }
+
+  const loanAmount = price - deposit;
+  const monthlyRate = interestRate / 12;
+  const monthlyRepayment = Math.round((loanAmount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -loanTerm)));
+
+  result.innerHTML = "<strong>Loan Amount:</strong> KES " + loanAmount.toLocaleString() +
+                     " | <strong>Monthly Repayment:</strong> KES " + monthlyRepayment.toLocaleString() +
+                     "<br><span style='font-size:0.9em;color:#888;'>* This is an indicative estimate. Actual loan terms may vary.</span>";
+
+  // Store selected kit for cross-page access
+  localStorage.setItem('wattSunSelectedKit', JSON.stringify({
+    kit: systemLabel,
+    price: price,
+    deposit: deposit,
+    loanTerm: loanTerm
+  }));
+
+  
 }
 
 </script>
@@ -692,113 +646,88 @@ function showLoanAddToCart(systemLabel, price, deposit, loanTerm) {
 </div>
 </footer>
 <script>function toggleNav() { document.querySelector('header').classList.toggle('nav-open'); }
-function showLoanAddToCart(systemLabel, price, deposit, loanTerm) {
-  let existing = document.getElementById('loanAddToCartBtn');
-  if (existing) return;
+// Loan calculator logic
+function calculateLoan() {
+  const systemSelect = document.getElementById("loanSystem");
+  const depositInput = document.getElementById("loanDeposit");
+  const termInput = document.getElementById("loanTerm");
+  const result = document.getElementById("loanResult");
 
-  const btn = document.createElement("button");
-  btn.id = "loanAddToCartBtn";
-  btn.textContent = "Add to Cart";
-  btn.style.cssText = "width:94%;max-width:350px;padding:14px 0;font-size:1.1em;font-weight:600;border:none;border-radius:24px;color:#184211;background:linear-gradient(90deg,#f7b733 0%,#fcf6ba 100%);box-shadow:0 2px 14px rgba(247,183,51,0.11);transition:background 0.15s,color 0.12s,transform 0.1s;cursor:pointer;margin:20px auto 0 auto;display:block;text-align:center;";
+  if (!systemSelect || !depositInput || !termInput || !result) return;
 
-  btn.onclick = function () {
-    const cart = JSON.parse(localStorage.getItem("wattSunCart") || "[]");
-    cart.push({
-      name: systemLabel,
-      price: price,
-      deposit: deposit,
-      loanTerm: loanTerm,
-      quantity: 1
-    });
-    localStorage.setItem("wattSunCart", JSON.stringify(cart));
-    btn.disabled = true;
-    btn.textContent = "✓ Added";
-    btn.style.opacity = "0.6";
-  };
+  const selectedOption = systemSelect.options[systemSelect.selectedIndex];
+  const systemLabel = selectedOption.text;
+  const price = parseInt(selectedOption.value);
+  const deposit = parseInt(depositInput.value);
+  const loanTerm = parseInt(termInput.value);
+  const interestRate = 0.12;
 
-  const loanNote = document.querySelector('.form-note');
-  if (loanNote && loanNote.parentNode) {
-    loanNote.parentNode.insertBefore(btn, loanNote.nextSibling);
+  if (isNaN(price) || isNaN(deposit) || isNaN(loanTerm) || deposit >= price || deposit <= 0 || loanTerm <= 0) {
+    result.innerHTML = "<span style='color:red;'>Please enter valid deposit and term values.</span>";
+    return;
   }
+
+  const loanAmount = price - deposit;
+  const monthlyRate = interestRate / 12;
+  const monthlyRepayment = Math.round((loanAmount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -loanTerm)));
+
+  result.innerHTML = "<strong>Loan Amount:</strong> KES " + loanAmount.toLocaleString() +
+                     " | <strong>Monthly Repayment:</strong> KES " + monthlyRepayment.toLocaleString() +
+                     "<br><span style='font-size:0.9em;color:#888;'>* This is an indicative estimate. Actual loan terms may vary.</span>";
+
+  // Store selected kit for cross-page access
+  localStorage.setItem('wattSunSelectedKit', JSON.stringify({
+    kit: systemLabel,
+    price: price,
+    deposit: deposit,
+    loanTerm: loanTerm
+  }));
+
+  
 }
 
 </script>
 <script>
-function createAddToCartButton() {
-  const existing = document.getElementById('addToCartBtn');
-  if (existing) return;
 
-  const btn = document.createElement("button");
-  btn.id = "addToCartBtn";
-  btn.textContent = "Add to Cart";
-  btn.style.cssText = "width:94%;max-width:350px;padding:14px 0;font-size:1.1em;font-weight:600;border:none;border-radius:24px;color:#184211;background:linear-gradient(90deg,#f7b733 0%,#fcf6ba 100%);box-shadow:0 2px 14px rgba(247,183,51,0.11);transition:background 0.15s,color 0.12s,transform 0.1s;cursor:pointer;margin:20px auto 0 auto;display:block;text-align:center;";
 
-  btn.onclick = function () {
-    const stored = localStorage.getItem('wattSunSelectedKit');
-    if (stored) {
-      const kit = JSON.parse(stored);
-      const cart = JSON.parse(localStorage.getItem("wattSunCart") || "[]");
-      cart.push({
-        name: kit.kit,
-        power: kit.power,
-        price: kit.price,
-        quantity: 1
-      });
-      localStorage.setItem("wattSunCart", JSON.stringify(cart));
-      
-    const msg = document.createElement("div");
-    msg.textContent = "✓ " + kit.kit + " added to cart.";
-    msg.style.cssText = "color:#0a7c48;font-weight:600;margin-top:10px;";
-    btn.parentNode.insertBefore(msg, btn.nextSibling);
-    btn.disabled = true;
-    btn.style.opacity = "0.6";
-    btn.textContent = "Added";
-    
-    } else {
-      alert("Please calculate your kit first.");
-    }
-  };
+// Loan calculator logic
+function calculateLoan() {
+  const systemSelect = document.getElementById("loanSystem");
+  const depositInput = document.getElementById("loanDeposit");
+  const termInput = document.getElementById("loanTerm");
+  const result = document.getElementById("loanResult");
 
-  const note = document.querySelector('.form-note');
-  if (note && note.parentNode) {
-    note.parentNode.insertBefore(btn, note.nextSibling);
+  if (!systemSelect || !depositInput || !termInput || !result) return;
+
+  const selectedOption = systemSelect.options[systemSelect.selectedIndex];
+  const systemLabel = selectedOption.text;
+  const price = parseInt(selectedOption.value);
+  const deposit = parseInt(depositInput.value);
+  const loanTerm = parseInt(termInput.value);
+  const interestRate = 0.12;
+
+  if (isNaN(price) || isNaN(deposit) || isNaN(loanTerm) || deposit >= price || deposit <= 0 || loanTerm <= 0) {
+    result.innerHTML = "<span style='color:red;'>Please enter valid deposit and term values.</span>";
+    return;
   }
-}
 
-const originalCalc = calculateKit;
-calculateKit = function () {
-  originalCalc();
-  setTimeout(createAddToCartButton, 300);
-};
+  const loanAmount = price - deposit;
+  const monthlyRate = interestRate / 12;
+  const monthlyRepayment = Math.round((loanAmount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -loanTerm)));
 
-function showLoanAddToCart(systemLabel, price, deposit, loanTerm) {
-  let existing = document.getElementById('loanAddToCartBtn');
-  if (existing) return;
+  result.innerHTML = "<strong>Loan Amount:</strong> KES " + loanAmount.toLocaleString() +
+                     " | <strong>Monthly Repayment:</strong> KES " + monthlyRepayment.toLocaleString() +
+                     "<br><span style='font-size:0.9em;color:#888;'>* This is an indicative estimate. Actual loan terms may vary.</span>";
 
-  const btn = document.createElement("button");
-  btn.id = "loanAddToCartBtn";
-  btn.textContent = "Add to Cart";
-  btn.style.cssText = "width:94%;max-width:350px;padding:14px 0;font-size:1.1em;font-weight:600;border:none;border-radius:24px;color:#184211;background:linear-gradient(90deg,#f7b733 0%,#fcf6ba 100%);box-shadow:0 2px 14px rgba(247,183,51,0.11);transition:background 0.15s,color 0.12s,transform 0.1s;cursor:pointer;margin:20px auto 0 auto;display:block;text-align:center;";
+  // Store selected kit for cross-page access
+  localStorage.setItem('wattSunSelectedKit', JSON.stringify({
+    kit: systemLabel,
+    price: price,
+    deposit: deposit,
+    loanTerm: loanTerm
+  }));
 
-  btn.onclick = function () {
-    const cart = JSON.parse(localStorage.getItem("wattSunCart") || "[]");
-    cart.push({
-      name: systemLabel,
-      price: price,
-      deposit: deposit,
-      loanTerm: loanTerm,
-      quantity: 1
-    });
-    localStorage.setItem("wattSunCart", JSON.stringify(cart));
-    btn.disabled = true;
-    btn.textContent = "✓ Added";
-    btn.style.opacity = "0.6";
-  };
-
-  const loanNote = document.querySelector('.form-note');
-  if (loanNote && loanNote.parentNode) {
-    loanNote.parentNode.insertBefore(btn, loanNote.nextSibling);
-  }
+  
 }
 
 </script>
