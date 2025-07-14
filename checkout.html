@@ -253,13 +253,11 @@ td.checkout-desc-tooltip {
 <a href="financing.html">Financing</a>
 <a href="projects.html">Projects</a>
 <a href="contact.html">Contact</a>
-
 <span id="cartLinkWrapper" style="display:none;">
 <a href="cart.html">
     🛒 Cart <span id="cartCount" style="font-weight:bold; background:#3E9F50; color:white; padding:2px 6px; border-radius:50%; font-size:0.8em; vertical-align:top;">0</span>
 </a>
 </span>
-
 </nav>
 </header>
 <div class="container">
@@ -387,7 +385,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 </script>
-
 <script>
   function updateCartCount() {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -404,6 +401,25 @@ document.addEventListener('DOMContentLoaded', function() {
         wrapper.style.display = "inline-block";
         updateCartCount();
       }
+    }
+  });
+</script>
+
+<script>
+  if (window.location.pathname.includes("thankyou")) {
+    localStorage.removeItem("cart");
+  }
+
+  document.addEventListener("submit", function(event) {
+    if (event.target && event.target.matches("form")) {
+      sessionStorage.setItem("clearCartOnThankYou", "yes");
+    }
+  });
+
+  document.addEventListener("DOMContentLoaded", function () {
+    if (window.location.pathname.includes("thankyou") && sessionStorage.getItem("clearCartOnThankYou")) {
+      localStorage.removeItem("cart");
+      sessionStorage.removeItem("clearCartOnThankYou");
     }
   });
 </script>
