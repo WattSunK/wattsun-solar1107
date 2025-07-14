@@ -203,6 +203,22 @@ input[type="number"] {
     display: flex;
   }
 }
+</style><style>
+input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 1em;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+@media (max-width: 768px) {
+  .calc-grid {
+    grid-template-columns: 1fr !important;
+    gap: 8px 0 !important;
+  }
+}
 </style></head>
 <body>
 <header>
@@ -299,14 +315,13 @@ input[type="number"] {
 <input id="borehole" min="0" name="borehole" oninput="sanitizeInput(this)" pattern="\d*" step="1" type="number" value="0"/>
 </div>
 </div>
-<button class="loan-btn" onclick="calculateKit()" style="width:100%; font-size:1.1em; font-weight:600; margin-top:22px;" type="button">Calculate</button>
+<button class="loan-btn" onclick="calculateKit()" style="width: 100%; font-size: 1.1em; font-weight: 600; margin-top: 22px; padding: 14px 0; border: none; border-radius: 24px; color: #184211; background: linear-gradient(90deg, #f7b733 0%, #fcf6ba 100%); box-shadow: 0 2px 14px rgba(247,183,51,0.11); transition: background 0.15s, color 0.12s, transform 0.1s; cursor: pointer;" type="button">Calculate</button>
 </form>
 <div class="form-section" id="result" style="display:none; text-align:center; margin-top:26px;"></div>
 <div class="form-note">
       * This is an indicative estimate. Actual system sizing may vary.
     </div>
 </div>
-
 <!-- Sizing Table Side Panel -->
 <div id="sizingPanel" style="
   position:fixed; top:0; right:-420px; width:390px; height:100vh; z-index:2001;
