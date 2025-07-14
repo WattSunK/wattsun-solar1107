@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
@@ -7,215 +6,264 @@
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <link href="main.css" rel="stylesheet"/>
 <style>
-    html, body {
-      width: 100vw;
-      max-width: 100vw;
-      overflow-x: hidden;
-    }
-    body { background: #fafafa; }
-    .container {
-      max-width: 680px;
-      margin: 44px auto;
-      padding: 38px 12px 30px 12px;
-      background: #fff;
-      border-radius: 13px;
-      box-shadow: 0 4px 20px rgba(247,183,51,0.10), 0 1.5px 9px rgba(0,0,0,0.04);
-      box-sizing: border-box;
-    }
-    h2 {
-      text-align: center;
-      margin-bottom: 30px;
-      font-size: 2em;
-      font-weight: bold;
-      color: #b47d08;
-    }
-    .table-wrapper {
-      width: 100%;
-      max-width: 100%;
-      overflow-x: auto;
-      box-sizing: border-box;
-      background: #fff;
-    }
-    table {
-      width: 100%;
-      min-width: 0;
-      border-collapse: separate;
-      border-spacing: 0;
-      background: #fff;
-      margin-bottom: 22px;
-      border-radius: 10px;
-      box-shadow: 0 1px 8px rgba(0,0,0,0.07);
-      overflow: hidden;
-      table-layout: fixed;
-      font-size: 0.97em;
-      box-sizing: border-box;
-    }
-    th, td {
-      text-align: left;
-      padding: 14px 12px;
-      border-bottom: 1px solid #f2e2b6;
-      font-size: 1em;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      max-width: 120px;
-    }
-    th {
-      background-color: #f9eabb;
-      color: #444;
-      font-weight: bold;
-      text-align: center;
-    }
-    td.product-col {
-      text-align: left;
-      font-weight: 500;
-      width: 35%;
-      min-width: 110px;
-      max-width: 180px;
-      word-break: break-word;
-    }
-    .total {
-      text-align: right;
-      margin-top: 15px;
-      font-size: 1.15em;
-      font-weight: bold;
-      color: #3E9F50;
-    }
-    /* --- Actions (Buttons) --- */
-    .actions {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 16px;
-      margin-top: 30px;
-      margin-bottom: 36px;
-      width: 100%;
-    }
-    .actions .btn,
-    .actions .btn-clear {
-      min-width: 120px;
-      max-width: 170px;
-      width: auto !important;
-      font-size: 1em;
-      padding: 9px 18px;
-      margin: 0;
-      display: inline-block;
-      box-sizing: border-box;
-    }
-    .btn {
-      border: none;
-      border-radius: 8px;
-      color: #fff;
-      background: linear-gradient(90deg, #f7b733 0%, #fcf6ba 100%);
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 4px 16px rgba(247,183,51, 0.14);
-      letter-spacing: 0.5px;
-      text-decoration: none;
-      transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
-    }
-    .btn:hover {
-      background: linear-gradient(90deg, #fcf6ba 0%, #f7b733 100%);
-      color: #b37900 !important;
-      transform: translateY(-2px) scale(1.03);
-      box-shadow: 0 6px 20px rgba(247,183,51, 0.20);
-    }
-    /* Responsive: stack buttons on mobile */
-    @media (max-width: 700px) {
-      .container {
-        width: 100vw !important;
-        max-width: 100vw !important;
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-        box-sizing: border-box !important;
-      }
-      .table-wrapper {
-        width: 100vw !important;
-        max-width: 100vw !important;
-        overflow-x: auto !important;
-        -webkit-overflow-scrolling: touch;
-        margin-left: 0 !important;
-      }
-      table {
-        width: 100vw !important;
-        max-width: 100vw !important;
-        min-width: 0 !important;
-        box-sizing: border-box !important;
-        table-layout: fixed !important;
-      }
-      .col-unit, .col-total-deposit {
-        display: none;
-      }
-      th, td {
-        font-size: 0.96em;
-        padding: 8px 3px;
-        min-width: 36px;
-        max-width: 90px;
-      }
-      td.product-col {
-        width: 35% !important;
-        min-width: 100px !important;
-        max-width: 180px !important;
-      }
-      .actions {
-        flex-direction: column !important;
-        align-items: center !important;
-        gap: 12px !important;
-      }
-      .actions .btn,
-      .actions .btn-clear {
-        width: 80vw !important;
-        max-width: 96vw !important;
-        min-width: 0 !important;
-        font-size: 1em;
-      }
-    }
-    @media (max-width: 900px) {
-      .container { padding: 18px 5vw; }
-      table th, table td { font-size: 0.98em; }
-      .btn, .btn-clear { width: 100%; margin: 10px 0; }
-    }
-    @media (max-width: 700px) {
-      .container {
-        width: 100vw !important;
-        max-width: 100vw !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        box-sizing: border-box !important;
-      }
-      .table-wrapper {
-        overflow-x: auto !important;
-        -webkit-overflow-scrolling: touch;
-      }
-      th.col-desc, td.col-desc, th.col-unit, td.col-unit, th.col-total-deposit, td.col-total-deposit {
-        display: none !important;
-      }
-      td.product-col {
-        width: 40% !important;
-        min-width: 80px !important;
-        max-width: 140px !important;
-      }
-      table {
-        table-layout: fixed !important;
-      }
-      th, td {
-        padding: 8px 6px !important;
-        font-size: 0.9em !important;
-      }
-      .actions {
-        flex-direction: column !important;
-        align-items: center !important;
-        gap: 12px !important;
-      }
-      .actions .btn, .actions .btn-clear {
-        width: 80vw !important;
-        max-width: 96vw !important;
-        min-width: 0 !important;
-      }
-    }
-  </style>
+html, body {
+  width: 100vw;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+body { background: #fafafa; }
+.container {
+  max-width: 680px;
+  margin: 44px auto;
+  padding: 38px 12px 30px 12px;
+  background: #fff;
+  border-radius: 13px;
+  box-shadow: 0 4px 20px rgba(247,183,51,0.10), 0 1.5px 9px rgba(0,0,0,0.04);
+  box-sizing: border-box;
+}
+h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2em;
+  font-weight: bold;
+  color: #b47d08;
+}
+.table-wrapper {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  box-sizing: border-box;
+  background: #fff;
+  border-radius: 10px;
+}
+table {
+  width: 100%;
+  min-width: 0;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fff;
+  margin-bottom: 22px;
+  border-radius: 10px;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.07);
+  overflow: hidden;
+  table-layout: fixed;
+  font-size: 0.97em;
+  box-sizing: border-box;
+}
+th, td {
+  text-align: left;
+  padding: 14px 12px;
+  border-bottom: 1px solid #f2e2b6;
+  font-size: 1em;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 120px;
+}
+th {
+  background-color: #f9eabb;
+  color: #444;
+  font-weight: bold;
+  text-align: center;
+}
+td.product-col {
+  text-align: left;
+  font-weight: 500;
+  width: 35%;
+  min-width: 110px;
+  max-width: 180px;
+  word-break: break-word;
+}
+.total {
+  text-align: right;
+  margin-top: 15px;
+  font-size: 1.15em;
+  font-weight: bold;
+  color: #3E9F50;
+}
+/* --- Actions (Buttons) --- */
+.actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 30px;
+  margin-bottom: 36px;
+  width: 100%;
+}
+.actions .btn,
+.actions .btn-clear {
+  min-width: 120px;
+  max-width: 170px;
+  width: auto !important;
+  font-size: 1em;
+  padding: 9px 18px;
+  margin: 0;
+  display: inline-block;
+  box-sizing: border-box;
+}
+.btn {
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  background: linear-gradient(90deg, #f7b733 0%, #fcf6ba 100%);
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(247,183,51, 0.14);
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+}
+.btn:hover {
+  background: linear-gradient(90deg, #fcf6ba 0%, #f7b733 100%);
+  color: #b37900 !important;
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 6px 20px rgba(247,183,51, 0.20);
+}
+/* Hamburger & mobile nav styles */
+.nav-toggle {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: auto;
+}
+@media (max-width: 800px) {
+  .nav-toggle {
+    display: inline-block;
+    z-index: 1001;
+    position: absolute;
+    top: 18px;
+    right: 20px;
+  }
+  nav {
+    display: none;
+    flex-direction: column;
+    background: #fff;
+    position: absolute;
+    right: 0;
+    top: 60px;
+    width: 80vw;
+    border-radius: 0 0 0 20px;
+    box-shadow: 0 10px 32px #ccc;
+    padding: 30px 0 30px 0;
+    z-index: 1000;
+  }
+  nav.active {
+    display: flex !important;
+  }
+  nav a {
+    margin: 12px 0;
+    font-size: 1.3em;
+    padding-left: 28px;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    width: 100%;
+    display: block;
+    text-align: left;
+  }
+  nav span {
+    display: block;
+    padding-left: 28px;
+    margin: 12px 0 0 0;
+  }
+}
+@media (max-width: 700px) {
+  .container {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    box-sizing: border-box !important;
+  }
+  .table-wrapper {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    margin-left: 0 !important;
+  }
+  table {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    table-layout: fixed !important;
+  }
+  .col-unit, .col-total-deposit {
+    display: none;
+  }
+  th, td {
+    font-size: 0.96em;
+    padding: 8px 3px;
+    min-width: 36px;
+    max-width: 90px;
+  }
+  td.product-col {
+    width: 35% !important;
+    min-width: 100px !important;
+    max-width: 180px !important;
+  }
+  .actions {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+  .actions .btn,
+  .actions .btn-clear {
+    width: 80vw !important;
+    max-width: 96vw !important;
+    min-width: 0 !important;
+    font-size: 1em;
+  }
+}
+@media (max-width: 900px) {
+  .container { padding: 18px 5vw; }
+  table th, table td { font-size: 0.98em; }
+  .btn, .btn-clear { width: 100%; margin: 10px 0; }
+}
+@media (max-width: 700px) {
+  .container {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+  }
+  .table-wrapper {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  th.col-desc, td.col-desc, th.col-unit, td.col-unit, th.col-total-deposit, td.col-total-deposit {
+    display: none !important;
+  }
+  td.product-col {
+    width: 40% !important;
+    min-width: 80px !important;
+    max-width: 140px !important;
+  }
+  table {
+    table-layout: fixed !important;
+  }
+  th, td {
+    padding: 8px 6px !important;
+    font-size: 0.9em !important;
+  }
+  .actions {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+  .actions .btn, .actions .btn-clear {
+    width: 80vw !important;
+    max-width: 96vw !important;
+    min-width: 0 !important;
+  }
+}
+</style>
 </head>
 <body>
 <header>
@@ -223,7 +271,7 @@
 <h1>WattSun Solar</h1>
 <button aria-label="Menu" class="nav-toggle" onclick="toggleNav()">☰</button>
 </div>
-<nav>
+<nav id="mainNav">
 <a href="index.html">Home</a>
 <a href="solutions.html">Solutions</a>
 <a href="shop.html">Shop</a>
@@ -231,13 +279,11 @@
 <a href="financing.html">Financing</a>
 <a href="projects.html">Projects</a>
 <a href="contact.html">Contact</a>
-
 <span id="cartLinkWrapper" style="display:none;">
 <a href="cart.html">
     🛒 Cart <span id="cartCount" style="font-weight:bold; background:#3E9F50; color:white; padding:2px 6px; border-radius:50%; font-size:0.8em; vertical-align:top;">0</span>
 </a>
 </span>
-
 </nav>
 </header>
 <div class="container">
@@ -263,19 +309,27 @@
 <button class="btn btn-clear" id="clearCartBtn" style="display:none;" type="button">Clear Cart</button>
 </div>
 </div>
-
 <footer>
     © 2025 WattSun Solar Kenya | <div class="footer-contacts"><a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a></div>
 </footer>
 
-
-
-
 <script>
+// Hamburger menu logic
+function toggleNav() {
+  var nav = document.getElementById("mainNav");
+  nav.classList.toggle("active");
+}
+window.addEventListener('resize', function() {
+    if(window.innerWidth > 800) {
+        document.getElementById("mainNav").classList.remove("active");
+    }
+});
+
 document.addEventListener("DOMContentLoaded", function () {
   const cartTable = document.querySelector("#cartTable tbody");
   const totalDisplay = document.getElementById("totalAmount");
   const clearCartBtn = document.getElementById("clearCartBtn");
+  const cartCount = document.getElementById("cartCount");
 
   function loadCart() {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -305,6 +359,10 @@ document.addEventListener("DOMContentLoaded", function () {
     totalDisplay.innerText =
       "Total Deposit: KES " + totalDeposit.toLocaleString();
     clearCartBtn.style.display = cart.length > 0 ? "inline-block" : "none";
+    // Update dynamic cart quantity badge
+    if (cartCount) {
+      cartCount.textContent = cart.length;
+    }
   }
 
   function clearCart() {
@@ -328,7 +386,5 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 </script>
-
-
 </body>
 </html>

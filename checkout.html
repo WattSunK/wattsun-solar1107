@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
@@ -7,7 +6,6 @@
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <link href="main.css" rel="stylesheet"/>
 <style>
-/* --- Checkout page only styling --- */
 .container {
   max-width: 900px;
   width: 98vw;
@@ -27,20 +25,22 @@ h2 {
 }
 .table-wrapper {
   width: 100%;
-  overflow-x: visible;   /* no scroll */
   background: #fff;
   margin-bottom: 18px;
+  border-radius: 12px;
 }
 .container table {
   width: 100%;
-  table-layout: fixed;   /* compress columns */
+  table-layout: fixed;
   border-collapse: separate;
   border-spacing: 0;
   background: #fff;
-  border-radius: 10px;
+  border-radius: 12px;
+  overflow: hidden;
   box-shadow: 0 1px 8px rgba(0,0,0,0.07);
   font-size: 1em;
   margin: 0;
+  min-width: 0;
 }
 .container th, .container td {
   padding: 10px 5px;
@@ -48,8 +48,7 @@ h2 {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 110px;
-  min-width: 50px;
+  min-width: 36px;
   vertical-align: middle;
   text-align: center;
   box-sizing: border-box;
@@ -60,20 +59,24 @@ th {
   font-weight: bold;
   font-size: 1.05em;
 }
-th.product-col, td.product-col { max-width: 140px; }
-th.checkout-desc-tooltip, td.checkout-desc-tooltip { max-width: 120px; }
+th.product-col, td.product-col { max-width: 130px; min-width: 90px; }
+th.checkout-desc-tooltip, td.checkout-desc-tooltip { max-width: 110px; min-width: 80px; }
+th.col-unit, td.col-unit { max-width: 90px; min-width: 70px; }
+th.col-qty, td.col-qty { min-width: 38px; max-width: 45px; width: 40px; }
+th.col-total, td.col-total { min-width: 95px; max-width: 120px; }
+th.col-total-deposit, td.col-total-deposit { min-width: 95px; max-width: 120px; }
 td.product-col {
   text-align: left;
   font-weight: 500;
-  min-width: 100px;
-  max-width: 140px;
+  min-width: 90px;
+  max-width: 130px;
   word-break: break-word;
   white-space: normal;
 }
 td.checkout-desc-tooltip {
   position: relative;
-  max-width: 120px;
-  min-width: 50px;
+  max-width: 110px;
+  min-width: 80px;
   cursor: pointer;
   background: none;
 }
@@ -103,33 +106,6 @@ td.checkout-desc-tooltip {
     z-index: 20;
   }
 }
-.qty-control {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-}
-.qty-btn {
-  background: linear-gradient(90deg, #f7b733 0%, #fcf6ba 100%);
-  color: #965700;
-  border: none;
-  border-radius: 5px;
-  width: 22px;
-  height: 22px;
-  font-size: 1em;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.2s;
-  box-shadow: 0 1px 4px #f7b73344;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.qty-btn:hover {
-  background: linear-gradient(90deg, #fcf6ba 0%, #f7b733 100%);
-  color: #b37900 !important;
-}
 .total {
   text-align: right;
   margin-top: 10px;
@@ -138,6 +114,11 @@ td.checkout-desc-tooltip {
   color: #1ab13d;
   letter-spacing: 0.3px;
   padding-right: 18px;
+  background: #f9eabb;
+  border-radius: 0 0 14px 14px;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.07);
+  max-width: 100%;
+  overflow-x: auto;
 }
 .checkout-form {
   margin-top: 20px;
@@ -225,10 +206,62 @@ td.checkout-desc-tooltip {
   color: #7a6000 !important;
 }
 @media (max-width:1000px) { .container { max-width: 98vw; padding: 16px 2vw; } }
-@media (max-width:700px) {
-  .container { width: 100vw !important; max-width: 100vw !important; margin: 0 !important; padding: 0 !important; box-sizing: border-box !important; }
+/* Hamburger & mobile nav styles */
+.nav-toggle {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: auto;
+}
+@media (max-width: 800px) {
+  .nav-toggle {
+    display: inline-block;
+    z-index: 1001;
+    position: absolute;
+    top: 18px;
+    right: 20px;
+  }
+  nav {
+    display: none;
+    flex-direction: column;
+    background: #fff;
+    position: absolute;
+    right: 0;
+    top: 60px;
+    width: 80vw;
+    border-radius: 0 0 0 20px;
+    box-shadow: 0 10px 32px #ccc;
+    padding: 30px 0 30px 0;
+    z-index: 1000;
+  }
+  nav.active {
+    display: flex !important;
+  }
+  nav a {
+    margin: 12px 0;
+    font-size: 1.3em;
+    padding-left: 28px;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    width: 100%;
+    display: block;
+    text-align: left;
+  }
+  nav span {
+    display: block;
+    padding-left: 28px;
+    margin: 12px 0 0 0;
+  }
+}
+@media (max-width: 700px) {
+  .header-bar h1 {
+    font-size: 1.4em;
+  }
+  th.checkout-desc-tooltip, td.checkout-desc-tooltip { display: none !important; }
   th.col-desc, td.col-desc, th.col-unit, td.col-unit, th.col-total-deposit, td.col-total-deposit { display: none !important; }
-  td.product-col { width: 35% !important; min-width: 80px !important; max-width: 140px !important; }
+  td.product-col { width: 54vw !important; min-width: 60px !important; max-width: 100vw !important; }
   .container, .table-wrapper, table { width: 100vw !important; max-width: 100vw !important; }
   .checkout-actions {
     flex-direction: column !important;
@@ -242,17 +275,24 @@ td.checkout-desc-tooltip {
     min-width: 0 !important;
     font-size: 1em;
   }
+  .total {
+    font-size: 1em;
+    padding-right: 8vw;
+    padding-left: 1vw;
+  }
+  .table-wrapper, .container table {
+    border-radius: 10px;
+  }
 }
-  </style>
+</style>
 </head>
 <body>
-<!-- HEADER: exactly as your index.html, styled by main.css -->
 <header>
 <div class="header-bar">
 <h1>WattSun Solar</h1>
 <button aria-label="Open menu" class="nav-toggle" onclick="toggleNav()">☰</button>
 </div>
-<nav>
+<nav id="mainNav">
 <a href="index.html">Home</a>
 <a href="solutions.html">Solutions</a>
 <a href="shop.html">Shop</a>
@@ -276,7 +316,7 @@ td.checkout-desc-tooltip {
 <th class="checkout-desc-tooltip">Description</th>
 <th class="col-unit">Unit Price (KES)</th>
 <th>Deposit/Unit (KES)</th>
-<th>Quantity</th>
+<th class="col-qty">Qty</th>
 <th class="col-total">Total Price (KES)</th>
 <th class="col-total-deposit">Total Deposit (KES)</th>
 </tr>
@@ -285,7 +325,7 @@ td.checkout-desc-tooltip {
 </table>
 </div>
 <div class="total" id="totalAmount">Total Deposit: KES 0</div>
-<form action="/thankyou.html" class="checkout-form" data-netlify="true" id="checkoutForm" method="POST" name="order">
+<form action="/thankyou.html" class="checkout-form" data-netlify="true" id="checkoutForm" method="POST" name="order" autocomplete="on">
 <input name="form-name" type="hidden" value="order"/>
 <input id="cart_summary" name="cart_summary" type="hidden"/>
 <label for="fullName">Full Name</label>
@@ -305,25 +345,29 @@ td.checkout-desc-tooltip {
 <footer>
   © 2025 WattSun Solar Kenya | <div class="footer-contacts"><a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a></div>
 </footer>
-
-
-
-
-
 <script>
+function toggleNav() {
+  var nav = document.getElementById("mainNav");
+  nav.classList.toggle("active");
+}
+window.addEventListener('resize', function() {
+    if(window.innerWidth > 800) {
+        document.getElementById("mainNav").classList.remove("active");
+    }
+});
+
 document.addEventListener("DOMContentLoaded", function () {
   // If we've just come from calculator.html, stash the selected kit
   const selectedKit = JSON.parse(localStorage.getItem("wattSunSelectedKit"));
   if (selectedKit) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    // only add once
     if (!cart.some(item => item.name === selectedKit.kit)) {
       cart.push({
         name: selectedKit.kit,
         price: selectedKit.price,
         deposit: Math.round(selectedKit.price * 0.5),
-        // always force qty = 1:
-        quantity: 1
+        quantity: 1,
+        description: selectedKit.description || ""
       });
       localStorage.setItem("cart", JSON.stringify(cart));
     }
@@ -343,7 +387,6 @@ document.addEventListener("DOMContentLoaded", function () {
     let cartSummaryArr = [];
 
     cart.forEach(item => {
-      // ignore any stored quantity—always use 1
       const qty = 1;
       const desc = item.description || "";
       const deposit = item.deposit;
@@ -358,11 +401,10 @@ document.addEventListener("DOMContentLoaded", function () {
       const row = document.createElement('tr');
       row.innerHTML = `
         <td class="product-col">${item.name}</td>
-        <td class="checkout-desc-tooltip"
-            data-desc="${desc.replace(/"/g, '&quot;')}">${desc}</td>
+        <td class="checkout-desc-tooltip" data-desc="${desc.replace(/"/g, '&quot;')}">${desc}</td>
         <td class="col-unit">${formatNumber(item.price)}</td>
         <td>${formatNumber(deposit)}</td>
-        <td>1</td>
+        <td class="col-qty">1</td>
         <td class="col-total">${formatNumber(totalPrice)}</td>
         <td class="col-total-deposit">${formatNumber(totalItemDeposit)}</td>
       `;
@@ -376,13 +418,33 @@ document.addEventListener("DOMContentLoaded", function () {
 
   renderCart();
 
-    // set flag to clear cart on thank you page
-    document.getElementById("checkoutForm").addEventListener("submit", function() {
+  document.getElementById("checkoutForm").addEventListener("submit", function(e) {
+      let valid = true;
+      this.querySelectorAll('input[required], textarea[required]').forEach(input => {
+          if (!input.value.trim() || input.value.trim() === "0") {
+              input.style.borderColor = "red";
+              valid = false;
+          } else {
+              input.style.borderColor = "";
+          }
+      });
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      if (cart.length === 0) {
+          alert("Your cart is empty.");
+          valid = false;
+      }
+      if (!valid) {
+          e.preventDefault();
+          return false;
+      }
       sessionStorage.setItem("clearCartOnThankYou", "true");
-    });
+  });
 });
+
+if (window.location.pathname.endsWith("thankyou.html") && sessionStorage.getItem("clearCartOnThankYou")) {
+    localStorage.removeItem("cart");
+    sessionStorage.removeItem("clearCartOnThankYou");
+}
 </script>
-
-
 </body>
 </html>
