@@ -405,6 +405,37 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+function showLoanAddToCart(systemLabel, price, deposit, loanTerm) {
+  let existing = document.getElementById('loanAddToCartBtn');
+  if (existing) return;
+
+  const btn = document.createElement("button");
+  btn.id = "loanAddToCartBtn";
+  btn.textContent = "Add to Cart";
+  btn.style.cssText = "width:94%;max-width:350px;padding:14px 0;font-size:1.1em;font-weight:600;border:none;border-radius:24px;color:#184211;background:linear-gradient(90deg,#f7b733 0%,#fcf6ba 100%);box-shadow:0 2px 14px rgba(247,183,51,0.11);transition:background 0.15s,color 0.12s,transform 0.1s;cursor:pointer;margin:20px auto 0 auto;display:block;text-align:center;";
+
+  btn.onclick = function () {
+    const cart = JSON.parse(localStorage.getItem("wattSunCart") || "[]");
+    cart.push({
+      name: systemLabel,
+      price: price,
+      deposit: deposit,
+      loanTerm: loanTerm,
+      quantity: 1
+    });
+    localStorage.setItem("wattSunCart", JSON.stringify(cart));
+    btn.disabled = true;
+    btn.textContent = "✓ Added";
+    btn.style.opacity = "0.6";
+  };
+
+  const loanNote = document.querySelector('.form-note');
+  if (loanNote && loanNote.parentNode) {
+    loanNote.parentNode.insertBefore(btn, loanNote.nextSibling);
+  }
+}
+
 </script>
 </div>
 <!-- Sizing Table Side Panel -->
@@ -586,11 +617,73 @@ document.addEventListener('DOMContentLoaded', function() {
   }, true);
 });
 
+
+function showLoanAddToCart(systemLabel, price, deposit, loanTerm) {
+  let existing = document.getElementById('loanAddToCartBtn');
+  if (existing) return;
+
+  const btn = document.createElement("button");
+  btn.id = "loanAddToCartBtn";
+  btn.textContent = "Add to Cart";
+  btn.style.cssText = "width:94%;max-width:350px;padding:14px 0;font-size:1.1em;font-weight:600;border:none;border-radius:24px;color:#184211;background:linear-gradient(90deg,#f7b733 0%,#fcf6ba 100%);box-shadow:0 2px 14px rgba(247,183,51,0.11);transition:background 0.15s,color 0.12s,transform 0.1s;cursor:pointer;margin:20px auto 0 auto;display:block;text-align:center;";
+
+  btn.onclick = function () {
+    const cart = JSON.parse(localStorage.getItem("wattSunCart") || "[]");
+    cart.push({
+      name: systemLabel,
+      price: price,
+      deposit: deposit,
+      loanTerm: loanTerm,
+      quantity: 1
+    });
+    localStorage.setItem("wattSunCart", JSON.stringify(cart));
+    btn.disabled = true;
+    btn.textContent = "✓ Added";
+    btn.style.opacity = "0.6";
+  };
+
+  const loanNote = document.querySelector('.form-note');
+  if (loanNote && loanNote.parentNode) {
+    loanNote.parentNode.insertBefore(btn, loanNote.nextSibling);
+  }
+}
+
 </script>
 <script>
 function toggleNav() {
   document.querySelector('header').classList.toggle('nav-open');
 }
+
+function showLoanAddToCart(systemLabel, price, deposit, loanTerm) {
+  let existing = document.getElementById('loanAddToCartBtn');
+  if (existing) return;
+
+  const btn = document.createElement("button");
+  btn.id = "loanAddToCartBtn";
+  btn.textContent = "Add to Cart";
+  btn.style.cssText = "width:94%;max-width:350px;padding:14px 0;font-size:1.1em;font-weight:600;border:none;border-radius:24px;color:#184211;background:linear-gradient(90deg,#f7b733 0%,#fcf6ba 100%);box-shadow:0 2px 14px rgba(247,183,51,0.11);transition:background 0.15s,color 0.12s,transform 0.1s;cursor:pointer;margin:20px auto 0 auto;display:block;text-align:center;";
+
+  btn.onclick = function () {
+    const cart = JSON.parse(localStorage.getItem("wattSunCart") || "[]");
+    cart.push({
+      name: systemLabel,
+      price: price,
+      deposit: deposit,
+      loanTerm: loanTerm,
+      quantity: 1
+    });
+    localStorage.setItem("wattSunCart", JSON.stringify(cart));
+    btn.disabled = true;
+    btn.textContent = "✓ Added";
+    btn.style.opacity = "0.6";
+  };
+
+  const loanNote = document.querySelector('.form-note');
+  if (loanNote && loanNote.parentNode) {
+    loanNote.parentNode.insertBefore(btn, loanNote.nextSibling);
+  }
+}
+
 </script>
 <footer>
   © 2025 WattSun Solar Kenya | 
@@ -598,7 +691,38 @@ function toggleNav() {
 <a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a>
 </div>
 </footer>
-<script>function toggleNav() { document.querySelector('header').classList.toggle('nav-open'); }</script>
+<script>function toggleNav() { document.querySelector('header').classList.toggle('nav-open'); }
+function showLoanAddToCart(systemLabel, price, deposit, loanTerm) {
+  let existing = document.getElementById('loanAddToCartBtn');
+  if (existing) return;
+
+  const btn = document.createElement("button");
+  btn.id = "loanAddToCartBtn";
+  btn.textContent = "Add to Cart";
+  btn.style.cssText = "width:94%;max-width:350px;padding:14px 0;font-size:1.1em;font-weight:600;border:none;border-radius:24px;color:#184211;background:linear-gradient(90deg,#f7b733 0%,#fcf6ba 100%);box-shadow:0 2px 14px rgba(247,183,51,0.11);transition:background 0.15s,color 0.12s,transform 0.1s;cursor:pointer;margin:20px auto 0 auto;display:block;text-align:center;";
+
+  btn.onclick = function () {
+    const cart = JSON.parse(localStorage.getItem("wattSunCart") || "[]");
+    cart.push({
+      name: systemLabel,
+      price: price,
+      deposit: deposit,
+      loanTerm: loanTerm,
+      quantity: 1
+    });
+    localStorage.setItem("wattSunCart", JSON.stringify(cart));
+    btn.disabled = true;
+    btn.textContent = "✓ Added";
+    btn.style.opacity = "0.6";
+  };
+
+  const loanNote = document.querySelector('.form-note');
+  if (loanNote && loanNote.parentNode) {
+    loanNote.parentNode.insertBefore(btn, loanNote.nextSibling);
+  }
+}
+
+</script>
 <script>
 function createAddToCartButton() {
   const existing = document.getElementById('addToCartBtn');
@@ -646,6 +770,37 @@ calculateKit = function () {
   originalCalc();
   setTimeout(createAddToCartButton, 300);
 };
+
+function showLoanAddToCart(systemLabel, price, deposit, loanTerm) {
+  let existing = document.getElementById('loanAddToCartBtn');
+  if (existing) return;
+
+  const btn = document.createElement("button");
+  btn.id = "loanAddToCartBtn";
+  btn.textContent = "Add to Cart";
+  btn.style.cssText = "width:94%;max-width:350px;padding:14px 0;font-size:1.1em;font-weight:600;border:none;border-radius:24px;color:#184211;background:linear-gradient(90deg,#f7b733 0%,#fcf6ba 100%);box-shadow:0 2px 14px rgba(247,183,51,0.11);transition:background 0.15s,color 0.12s,transform 0.1s;cursor:pointer;margin:20px auto 0 auto;display:block;text-align:center;";
+
+  btn.onclick = function () {
+    const cart = JSON.parse(localStorage.getItem("wattSunCart") || "[]");
+    cart.push({
+      name: systemLabel,
+      price: price,
+      deposit: deposit,
+      loanTerm: loanTerm,
+      quantity: 1
+    });
+    localStorage.setItem("wattSunCart", JSON.stringify(cart));
+    btn.disabled = true;
+    btn.textContent = "✓ Added";
+    btn.style.opacity = "0.6";
+  };
+
+  const loanNote = document.querySelector('.form-note');
+  if (loanNote && loanNote.parentNode) {
+    loanNote.parentNode.insertBefore(btn, loanNote.nextSibling);
+  }
+}
+
 </script>
 </body>
 </html>
