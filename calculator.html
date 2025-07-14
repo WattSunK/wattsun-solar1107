@@ -375,21 +375,26 @@ button.loan-btn {
   </button>
 </div>
 <script>
-document.getElementById("addToCartBtn").addEventListener("click", function() {
-  const stored = localStorage.getItem('wattSunSelectedKit');
-  if (stored) {
-    const kit = JSON.parse(stored);
-    const cart = JSON.parse(localStorage.getItem("wattSunCart") || "[]");
-    cart.push({
-      name: kit.kit,
-      power: kit.power,
-      price: kit.price,
-      quantity: 1
+document.addEventListener("DOMContentLoaded", function () {
+  const addToCartBtn = document.getElementById("addToCartBtn");
+  if (addToCartBtn) {
+    addToCartBtn.addEventListener("click", function () {
+      const stored = localStorage.getItem('wattSunSelectedKit');
+      if (stored) {
+        const kit = JSON.parse(stored);
+        const cart = JSON.parse(localStorage.getItem("wattSunCart") || "[]");
+        cart.push({
+          name: kit.kit,
+          power: kit.power,
+          price: kit.price,
+          quantity: 1
+        });
+        localStorage.setItem("wattSunCart", JSON.stringify(cart));
+        alert(kit.kit + " added to cart.");
+      } else {
+        alert("Please calculate your kit first.");
+      }
     });
-    localStorage.setItem("wattSunCart", JSON.stringify(cart));
-    alert(kit.kit + " added to cart.");
-  } else {
-    alert("Please calculate your kit first.");
   }
 });
 </script>
