@@ -365,6 +365,23 @@ function changeQty(idx, delta) {
   localStorage.setItem("cart", JSON.stringify(cart));
   renderCart();
 }
+
+// If kit was passed from calculator, convert it to cart format
+const selectedKit = JSON.parse(localStorage.getItem("wattSunSelectedKit"));
+if (selectedKit) {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const exists = cart.some(item => item.name === selectedKit.kit);
+  if (!exists) {
+    cart.push({
+      name: selectedKit.kit,
+      price: selectedKit.price,
+      quantity: 1
+    });
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }
+  localStorage.removeItem("wattSunSelectedKit"); // Prevent duplicate on refresh
+}
+
 window.addEventListener("DOMContentLoaded", renderCart);
 
 

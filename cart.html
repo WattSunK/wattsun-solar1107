@@ -263,76 +263,53 @@
 <button class="btn btn-clear" id="clearCartBtn" style="display:none;" type="button">Clear Cart</button>
 </div>
 </div>
-<script>
-    function toggleNav() {
-      document.querySelector('header').classList.toggle('nav-open');
-    }
-    const cartTable = document.querySelector("#cartTable tbody");
-    const totalDisplay = document.getElementById("totalAmount");
-    const clearCartBtn = document.getElementById("clearCartBtn");
 
-    function loadCart() {
-      let items = JSON.parse(localStorage.getItem("cart")) || [];
-      let totalDeposit = 0;
-      cartTable.innerHTML = "";
-      items.forEach(item => {
-        const quantity = item.quantity || 1;
-        const row = document.createElement("tr");
-        const totalPrice = item.price * quantity;
-        const totalItemDeposit = item.deposit * quantity;
-        row.innerHTML = `
-          <td class="product-col">${item.name}</td>
-          <td class="col-unit">${item.price.toLocaleString()}</td>
-          <td>${item.deposit.toLocaleString()}</td>
-          <td>${quantity}</td>
-          <td>${totalPrice.toLocaleString()}</td>
-          <td class="col-total-deposit">${totalItemDeposit.toLocaleString()}</td>
-        `;
-        totalDeposit += totalItemDeposit;
-        cartTable.appendChild(row);
-      });
-      totalDisplay.innerText = "Total Deposit: KES " + totalDeposit.toLocaleString();
-      clearCartBtn.style.display = items.length > 0 ? "inline-block" : "none";
-    }
-
-    function clearCart() {
-      localStorage.removeItem("cart");
-      loadCart();
-    }
-
-    window.onload = loadCart;
-    clearCartBtn.addEventListener("click", clearCart);
-
-    document.addEventListener('DOMContentLoaded', function() {
-      document.body.addEventListener('click', function(e) {
-        const header = document.querySelector('header');
-        if (!header) return;
-        const nav = header.querySelector('nav');
-        const navToggle = header.querySelector('.nav-toggle');
-        if (
-          header.classList.contains('nav-open') &&
-          !nav.contains(e.target) &&
-          !navToggle.contains(e.target)
-        ) {
-          header.classList.remove('nav-open');
-        }
-      }, true);
-    });
-  
-
-  function updateCartCount() {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const count = cart.length;
-    const badge = document.getElementById("cartCount");
-    if (badge) badge.textContent = count;
-  }
-  updateCartCount(); // run once on load
-</script>
 <footer>
     © 2025 WattSun Solar Kenya | <div class="footer-contacts"><a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a></div>
 </footer>
 
+
+
 <script>
+document.addEventListener("DOMContentLoaded", function () {
+  const cartTable = document.querySelector("#cartTable tbody");
+  const totalDisplay = document.getElementById("totalAmount");
+  const clearCartBtn = document.getElementById("clearCartBtn");
+
+  function loadCart() {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    console.log("Cart data:", cart); // Debugging
+
+    let totalDeposit = 0;
+    cartTable.innerHTML = "";
+    cart.forEach(item => {
+      const quantity = item.quantity || 1;
+      const deposit = item.deposit || Math.round(item.price * 0.5);
+      const row = document.createElement("tr");
+      const totalPrice = item.price * quantity;
+      const totalItemDeposit = deposit * quantity;
+
+      row.innerHTML = `
+        <td class="product-col">${item.name}</td>
+        <td class="col-unit">${item.price.toLocaleString()}</td>
+        <td>${deposit.toLocaleString()}</td>
+        <td>${quantity}</td>
+        <td>${totalPrice.toLocaleString()}</td>
+        <td class="col-total-deposit">${totalItemDeposit.toLocaleString()}</td>
+      `;
+      totalDeposit += totalItemDeposit;
+      cartTable.appendChild(row);
+    });
+
+    totalDisplay.innerText = "Total Deposit: KES " + totalDeposit.toLocaleString();
+    clearCartBtn.style.display = cart.length > 0 ? "inline-block" : "none";
+  }
+
+  function clearCart() {
+    localStorage.removeItem("cart");
+    loadCart();
+  }
+
   function updateCartCount() {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
     const count = cart.length;
@@ -340,16 +317,35 @@
     if (badge) badge.textContent = count;
   }
 
-  document.addEventListener("DOMContentLoaded", function () {
-    const page = window.location.pathname.toLowerCase();
-    if (page.includes("shop") || page.includes("cart") || page.includes("checkout") || page.includes("financing")) {
-      const wrapper = document.getElementById("cartLinkWrapper");
-      if (wrapper) {
-        wrapper.style.display = "inline-block";
-        updateCartCount();
-      }
+  clearCartBtn.addEventListener("click", clearCart);
+  loadCart();
+  updateCartCount();
+
+  // Mobile nav handling
+  document.body.addEventListener("click", function (e) {
+    const header = document.querySelector("header");
+    if (!header) return;
+    const nav = header.querySelector("nav");
+    const navToggle = header.querySelector(".nav-toggle");
+    if (
+      header.classList.contains("nav-open") &&
+      !nav.contains(e.target) &&
+      !navToggle.contains(e.target)
+    ) {
+      header.classList.remove("nav-open");
     }
-  });
+  }, true);
+
+  // Show cart badge if on cart, shop, checkout, etc.
+  const page = window.location.pathname.toLowerCase();
+  if (page.includes("shop") || page.includes("cart") || page.includes("checkout") || page.includes("financing")) {
+    const wrapper = document.getElementById("cartLinkWrapper");
+    if (wrapper) {
+      wrapper.style.display = "inline-block";
+    }
+  }
+});
 </script>
+
 </body>
 </html>

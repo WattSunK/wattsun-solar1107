@@ -181,6 +181,24 @@
 </style>
 </head>
 <body>
+<div id="toast" style="
+  display:none;
+  position:fixed;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#3E9F50;
+  color:white;
+  padding:12px 20px;
+  border-radius:8px;
+  font-size:0.95em;
+  box-shadow:0 4px 12px rgba(0,0,0,0.2);
+  z-index:9999;
+  transition:opacity 0.3s ease;
+">
+  Added to cart!
+</div>
+
 <header>
 <div class="header-bar">
 <h1>WattSun Solar</h1>
@@ -315,8 +333,21 @@ function addToCart(item, price, inputId) {
     }
 
     localStorage.setItem("cart", JSON.stringify(cart));
-    alert("Added to cart:\n" + item + "\nDeposit: KES " + deposit.toLocaleString());
+    showToast(item + " added to cart!");
+    updateCartCount();
 }
+
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.style.display = "block";
+  toast.style.opacity = "1";
+  setTimeout(() => {
+    toast.style.opacity = "0";
+    setTimeout(() => toast.style.display = "none", 300);
+  }, 2500);
+}
+
 </script>
 <footer>
 <div class="footer-contacts">
