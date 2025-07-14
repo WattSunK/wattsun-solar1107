@@ -390,7 +390,15 @@ document.addEventListener("DOMContentLoaded", function () {
           quantity: 1
         });
         localStorage.setItem("wattSunCart", JSON.stringify(cart));
-        alert(kit.kit + " added to cart.");
+        
+    const msg = document.createElement("div");
+    msg.textContent = "✓ " + kit.kit + " added to cart.";
+    msg.style.cssText = "color:#0a7c48;font-weight:600;margin-top:10px;";
+    btn.parentNode.insertBefore(msg, btn.nextSibling);
+    btn.disabled = true;
+    btn.style.opacity = "0.6";
+    btn.textContent = "Added";
+    
       } else {
         alert("Please calculate your kit first.");
       }
@@ -613,7 +621,15 @@ function createAddToCartButton() {
         quantity: 1
       });
       localStorage.setItem("wattSunCart", JSON.stringify(cart));
-      alert(kit.kit + " added to cart.");
+      
+    const msg = document.createElement("div");
+    msg.textContent = "✓ " + kit.kit + " added to cart.";
+    msg.style.cssText = "color:#0a7c48;font-weight:600;margin-top:10px;";
+    btn.parentNode.insertBefore(msg, btn.nextSibling);
+    btn.disabled = true;
+    btn.style.opacity = "0.6";
+    btn.textContent = "Added";
+    
     } else {
       alert("Please calculate your kit first.");
     }
