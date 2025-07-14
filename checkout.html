@@ -168,17 +168,28 @@ td.checkout-desc-tooltip {
   border-color: #f7b733;
   outline: none;
 }
+/* ---- BUTTON GROUP CENTERED ---- */
 .checkout-actions {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   gap: 16px;
   margin-top: 12px;
   margin-bottom: 6px;
+  width: 100%;
+}
+.checkout-actions .btn,
+.checkout-actions .loan-btn {
+  min-width: 120px;
+  max-width: 170px;
+  width: auto !important;
+  font-size: 1em;
+  padding: 9px 18px;
+  margin: 0;
+  display: inline-block;
+  box-sizing: border-box;
 }
 .btn, .loan-btn {
-  padding: 13px 33px;
-  font-size: 1.01em;
   border: none;
   border-radius: 8px;
   color: #fff;
@@ -189,9 +200,6 @@ td.checkout-desc-tooltip {
   letter-spacing: 0.5px;
   text-decoration: none;
   transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
-  margin-top: 0;
-  margin-bottom: 0;
-  display: inline-block;
 }
 .btn:hover, .loan-btn:hover {
   background: linear-gradient(90deg, #fcf6ba 0%, #f7b733 100%);
@@ -204,8 +212,6 @@ td.checkout-desc-tooltip {
   color: #555 !important;
   border: 1px solid #d5c99c;
   box-shadow: none;
-  margin-top: 0;
-  margin-bottom: 0;
 }
 .loan-btn.secondary:hover {
   background: #ffe180;
@@ -217,8 +223,18 @@ td.checkout-desc-tooltip {
   th.col-desc, td.col-desc, th.col-unit, td.col-unit, th.col-total-deposit, td.col-total-deposit { display: none !important; }
   td.product-col { width: 35% !important; min-width: 80px !important; max-width: 140px !important; }
   .container, .table-wrapper, table { width: 100vw !important; max-width: 100vw !important; }
-  .checkout-actions { flex-direction: column; align-items: stretch; gap: 10px; }
-  .checkout-actions a, .checkout-actions button { width: 100%; min-width: 0; }
+  .checkout-actions {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+  .checkout-actions .btn,
+  .checkout-actions .loan-btn {
+    width: 80vw !important;
+    max-width: 96vw !important;
+    min-width: 0 !important;
+    font-size: 1em;
+  }
 }
   </style>
 </head>
