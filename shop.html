@@ -193,7 +193,12 @@
 <a href="financing.html">Financing</a>
 <a href="projects.html">Projects</a>
 <a href="contact.html">Contact</a>
-<a href="cart.html">🛒 Cart</a>
+<span id="cartLinkWrapper" style="display:none;">
+<a href="cart.html">
+    🛒 Cart <span id="cartCount" style="font-weight:bold; background:#3E9F50; color:white; padding:2px 6px; border-radius:50%; font-size:0.8em; vertical-align:top;">0</span>
+</a>
+</span>
+
 </nav>
 </header>
 <div class="container">
@@ -280,7 +285,49 @@
 </div>
 </div>
 </div>
+
+<footer>
+<div class="footer-contacts">
+<a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a>
+</div>
+<p>© 2025 WattSun Solar. All rights reserved.</p>
+</footer>
+
+<script src="main.js">
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.body.addEventListener('click', function(e) {
+    const header = document.querySelector('header');
+    if (!header) return;
+    const nav = header.querySelector('nav');
+    const navToggle = header.querySelector('.nav-toggle');
+    if (
+      header.classList.contains('nav-open') &&
+      !nav.contains(e.target) &&
+      !navToggle.contains(e.target)
+    ) {
+      header.classList.remove('nav-open');
+    }
+  }, true);
+});
+
+</script>
 <script>
+
+function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const count = cart.length;
+    const badge = document.getElementById("cartCount");
+    if (badge) badge.textContent = count;
+  }
+
+  const showOnPages = ["shop.html", "cart.html", "checkout.html"];
+  const currentPage = location.pathname.split("/").pop();
+  if (showOnPages.includes(currentPage)) {
+    document.getElementById("cartLinkWrapper").style.display = "inline-block";
+    updateCartCount();
+  }
+
 function addToCart(item, price, inputId) {
     const depositValue = document.getElementById(inputId).value;
     const deposit = Number(depositValue);
@@ -310,44 +357,16 @@ function addToCart(item, price, inputId) {
 
     localStorage.setItem("cart", JSON.stringify(cart));
     alert("Added to cart:\n" + item + "\nDeposit: KES " + deposit.toLocaleString());
-}
-</script>
-<footer>
-<div class="footer-contacts">
-<a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a>
-</div>
-<p>© 2025 WattSun Solar. All rights reserved.</p>
-</footer>
 
-<script>
-  const navToggle = document.querySelector('.nav-toggle');
+    updateCartCount?.();
+}
+
+const navToggle = document.querySelector('.nav-toggle');
   const header = document.querySelector('header');
   navToggle.addEventListener('click', function() {
     header.classList.toggle('nav-open');
   });
   document.querySelectorAll('header nav a').forEach(link => {
     link.addEventListener('click', () => header.classList.remove('nav-open'));
-  });
-</script>
-<script src="main.js">
-
-document.addEventListener('DOMContentLoaded', function() {
-  document.body.addEventListener('click', function(e) {
-    const header = document.querySelector('header');
-    if (!header) return;
-    const nav = header.querySelector('nav');
-    const navToggle = header.querySelector('.nav-toggle');
-    if (
-      header.classList.contains('nav-open') &&
-      !nav.contains(e.target) &&
-      !navToggle.contains(e.target)
-    ) {
-      header.classList.remove('nav-open');
-    }
-  }, true);
-});
-
-</script>
-</body>
+  });</script></body>
 </html>
-
