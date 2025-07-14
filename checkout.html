@@ -303,18 +303,21 @@ td.checkout-desc-tooltip {
 
 
 
+
 <script>
 document.addEventListener("DOMContentLoaded", function () {
+  // If we've just come from calculator.html, stash the selected kit
   const selectedKit = JSON.parse(localStorage.getItem("wattSunSelectedKit"));
   if (selectedKit) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const exists = cart.some(item => item.name === selectedKit.kit);
-    if (!exists) {
+    // only add once
+    if (!cart.some(item => item.name === selectedKit.kit)) {
       cart.push({
         name: selectedKit.kit,
         price: selectedKit.price,
-        quantity: 1,
-        deposit: Math.round(selectedKit.price * 0.5)
+        deposit: Math.round(selectedKit.price * 0.5),
+        // always force qty = 1:
+        quantity: 1
       });
       localStorage.setItem("cart", JSON.stringify(cart));
     }
@@ -333,48 +336,42 @@ document.addEventListener("DOMContentLoaded", function () {
     let totalDeposit = 0;
     let cartSummaryArr = [];
 
-    cart.forEach((item, idx) => {
+    cart.forEach(item => {
+      // ignore any stored quantity—always use 1
+      const qty = 1;
       const desc = item.description || "";
-      const deposit = item.deposit || Math.round(item.price * 0.5);
-      const totalPrice = item.price * item.quantity;
-      const totalItemDeposit = deposit * item.quantity;
+      const deposit = item.deposit;
+      const totalPrice = item.price * qty;
+      const totalItemDeposit = deposit * qty;
       totalDeposit += totalItemDeposit;
 
-      cartSummaryArr.push(`${item.name} (x${item.quantity}): Price ${item.price}, Deposit ${deposit}`);
+      cartSummaryArr.push(
+        `${item.name} (x1): Price ${item.price}, Deposit ${deposit}`
+      );
+
       const row = document.createElement('tr');
       row.innerHTML = `
         <td class="product-col">${item.name}</td>
-        <td class="checkout-desc-tooltip" data-desc="${desc.replace(/"/g, '&quot;')}">${desc}</td>
+        <td class="checkout-desc-tooltip"
+            data-desc="${desc.replace(/"/g, '&quot;')}">${desc}</td>
         <td class="col-unit">${formatNumber(item.price)}</td>
         <td>${formatNumber(deposit)}</td>
-        <td>
-          <div class="qty-control">
-            <button class="qty-btn" onclick="changeQty(${idx}, -1);return false;">-</button>
-            <span>${item.quantity}</span>
-            <button class="qty-btn" onclick="changeQty(${idx}, 1);return false;">+</button>
-          </div>
-        </td>
+        <td>1</td>
         <td class="col-total">${formatNumber(totalPrice)}</td>
         <td class="col-total-deposit">${formatNumber(totalItemDeposit)}</td>
       `;
       tbody.appendChild(row);
     });
 
-    document.getElementById("totalAmount").textContent = "Total Deposit: KES " + totalDeposit.toLocaleString();
+    document.getElementById("totalAmount").textContent =
+      "Total Deposit: KES " + totalDeposit.toLocaleString();
     summary.value = cartSummaryArr.join("\n");
-  }
-
-  window.changeQty = function(idx, delta) {
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    cart[idx].quantity += delta;
-    if (cart[idx].quantity < 1) cart[idx].quantity = 1;
-    localStorage.setItem("cart", JSON.stringify(cart));
-    renderCart();
   }
 
   renderCart();
 });
 </script>
+
 
 </body>
 </html>
