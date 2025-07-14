@@ -158,13 +158,11 @@
 <a aria-current="page" class="active" href="financing.html">Financing</a>
 <a href="projects.html">Projects</a>
 <a href="contact.html">Contact</a>
-
 <span id="cartLinkWrapper" style="display:none;">
 <a href="cart.html">
     🛒 Cart <span id="cartCount" style="font-weight:bold; background:#3E9F50; color:white; padding:2px 6px; border-radius:50%; font-size:0.8em; vertical-align:top;">0</span>
 </a>
 </span>
-
 </nav>
 </header>
 <div class="container">
@@ -252,6 +250,7 @@
           monthly: kit.monthly
         });
         localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartCount?.();
         btn.remove();
         document.getElementById('loanForm').reset();
         resultDiv.textContent = "Loan added to cart!";
@@ -261,7 +260,6 @@
 
   });
 </script>
-
 <script>
   function updateCartCount() {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
