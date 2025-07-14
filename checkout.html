@@ -299,146 +299,82 @@ td.checkout-desc-tooltip {
 <footer>
   © 2025 WattSun Solar Kenya | <div class="footer-contacts"><a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a></div>
 </footer>
+
+
+
+
 <script>
-function toggleNav() {
-  const header = document.querySelector('header');
-  header.classList.toggle('nav-open');
-}
-document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('header nav a').forEach(link => {
-    link.addEventListener('click', () => document.querySelector('header').classList.remove('nav-open'));
-  });
-});
-const productsData = [
-  {name: "1 kW Solar System", price: 150000, description: "Entry-level home or shop system. Runs lighting, TV, phone charging. Suitable for 1–2 rooms or kiosks."},
-  {name: "3 kW Solar System", price: 400000, description: "For homes & offices: lighting, fridge, TV, laptop, phone charging. Runs most standard appliances."},
-  {name: "6 kW Solar System", price: 700000, description: "Medium/large homes, offices or light commercial. Runs fridge, freezer, TV, computer, water pump, lighting, etc."},
-  {name: "9 kW Solar System", price: 1050000, description: "Full home + business or school. Runs high-power appliances, pumps, entertainment, and more."},
-  {name: "450W Monocrystalline Solar Panel", price: 29000, description: "High efficiency solar module for home & industrial use."},
-  {name: "Battery 24V 100Ah", price: 60000, description: "LiFePO₄ Battery 24V 100Ah – Safe lithium storage with long life and fast charge."},
-  {name: "Solar Cleaning Kit", price: 4500, description: "Essential tools for keeping your system at peak efficiency."},
-  {name: "5kW Inverter", price: 85000, description: "Seamlessly manage solar and grid power with hybrid tech."}
-];
-
-function formatNumber(num) {
-  return Number(num).toLocaleString('en-US');
-}
-function renderCart() {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const tbody = document.querySelector("#cartTable tbody");
-  tbody.innerHTML = "";
-  let totalDeposit = 0;
-  let cartSummaryArr = [];
-  cart.forEach((item, idx) => {
-    const product = productsData.find(p => p.name === item.name);
-    const desc = product ? product.description : (item.description || "");
-    const unitDeposit = item.deposit ? item.deposit : Math.round(item.price * 0.5);
-    const totalDepositItem = unitDeposit * item.quantity;
-    const totalPrice = item.price * item.quantity;
-    totalDeposit += totalDepositItem;
-    cartSummaryArr.push(`${item.name} (x${item.quantity}): Price ${item.price}, Deposit ${unitDeposit}`);
-    const row = document.createElement('tr');
-    row.innerHTML = `
-      <td class="product-col">${item.name}</td>
-      <td class="checkout-desc-tooltip" data-desc="${desc.replace(/"/g, '&quot;')}">${desc}</td>
-      <td class="col-unit">${formatNumber(item.price)}</td>
-      <td>${formatNumber(unitDeposit)}</td>
-      <td>
-        <div class="qty-control">
-          <button class="qty-btn" onclick="changeQty(${idx}, -1);return false;">-</button>
-          <span>${item.quantity}</span>
-          <button class="qty-btn" onclick="changeQty(${idx}, 1);return false;">+</button>
-        </div>
-      </td>
-      <td class="col-total">${formatNumber(totalPrice)}</td>
-      <td class="col-total-deposit">${formatNumber(totalDepositItem)}</td>
-    `;
-    tbody.appendChild(row);
-  });
-  document.getElementById("totalAmount").textContent = `Total Deposit: KES ${formatNumber(totalDeposit)}`;
-  document.getElementById("cart_summary").value = cartSummaryArr.join('\n');
-}
-function changeQty(idx, delta) {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  cart[idx].quantity += delta;
-  if (cart[idx].quantity < 1) cart[idx].quantity = 1;
-  localStorage.setItem("cart", JSON.stringify(cart));
-  renderCart();
-}
-
-// If kit was passed from calculator, convert it to cart format
-const selectedKit = JSON.parse(localStorage.getItem("wattSunSelectedKit"));
-if (selectedKit) {
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const exists = cart.some(item => item.name === selectedKit.kit);
-  if (!exists) {
-    cart.push({
-      name: selectedKit.kit,
-      price: selectedKit.price,
-      quantity: 1
-    });
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }
-  localStorage.removeItem("wattSunSelectedKit"); // Prevent duplicate on refresh
-}
-
-window.addEventListener("DOMContentLoaded", renderCart);
-
-
-document.addEventListener('DOMContentLoaded', function() {
-  document.body.addEventListener('click', function(e) {
-    const header = document.querySelector('header');
-    if (!header) return;
-    const nav = header.querySelector('nav');
-    const navToggle = header.querySelector('.nav-toggle');
-    if (
-      header.classList.contains('nav-open') &&
-      !nav.contains(e.target) &&
-      !navToggle.contains(e.target)
-    ) {
-      header.classList.remove('nav-open');
+document.addEventListener("DOMContentLoaded", function () {
+  const selectedKit = JSON.parse(localStorage.getItem("wattSunSelectedKit"));
+  if (selectedKit) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const exists = cart.some(item => item.name === selectedKit.kit);
+    if (!exists) {
+      cart.push({
+        name: selectedKit.kit,
+        price: selectedKit.price,
+        quantity: 1,
+        deposit: Math.round(selectedKit.price * 0.5)
+      });
+      localStorage.setItem("cart", JSON.stringify(cart));
     }
-  }, true);
-});
+    localStorage.removeItem("wattSunSelectedKit");
+  }
 
-</script>
-<script>
-  function updateCartCount() {
+  function formatNumber(num) {
+    return Number(num).toLocaleString('en-US');
+  }
+
+  function renderCart() {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const count = cart.length;
-    const badge = document.getElementById("cartCount");
-    if (badge) badge.textContent = count;
+    const tbody = document.querySelector("#cartTable tbody");
+    const summary = document.getElementById("cart_summary");
+    tbody.innerHTML = "";
+    let totalDeposit = 0;
+    let cartSummaryArr = [];
+
+    cart.forEach((item, idx) => {
+      const desc = item.description || "";
+      const deposit = item.deposit || Math.round(item.price * 0.5);
+      const totalPrice = item.price * item.quantity;
+      const totalItemDeposit = deposit * item.quantity;
+      totalDeposit += totalItemDeposit;
+
+      cartSummaryArr.push(`${item.name} (x${item.quantity}): Price ${item.price}, Deposit ${deposit}`);
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td class="product-col">${item.name}</td>
+        <td class="checkout-desc-tooltip" data-desc="${desc.replace(/"/g, '&quot;')}">${desc}</td>
+        <td class="col-unit">${formatNumber(item.price)}</td>
+        <td>${formatNumber(deposit)}</td>
+        <td>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty(${idx}, -1);return false;">-</button>
+            <span>${item.quantity}</span>
+            <button class="qty-btn" onclick="changeQty(${idx}, 1);return false;">+</button>
+          </div>
+        </td>
+        <td class="col-total">${formatNumber(totalPrice)}</td>
+        <td class="col-total-deposit">${formatNumber(totalItemDeposit)}</td>
+      `;
+      tbody.appendChild(row);
+    });
+
+    document.getElementById("totalAmount").textContent = "Total Deposit: KES " + totalDeposit.toLocaleString();
+    summary.value = cartSummaryArr.join("\n");
   }
 
-  document.addEventListener("DOMContentLoaded", function () {
-    const page = window.location.pathname.toLowerCase();
-    if (page.includes("shop") || page.includes("cart") || page.includes("checkout") || page.includes("financing")) {
-      const wrapper = document.getElementById("cartLinkWrapper");
-      if (wrapper) {
-        wrapper.style.display = "inline-block";
-        updateCartCount();
-      }
-    }
-  });
-</script>
-
-<script>
-  if (window.location.pathname.includes("thankyou")) {
-    localStorage.removeItem("cart");
+  window.changeQty = function(idx, delta) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart[idx].quantity += delta;
+    if (cart[idx].quantity < 1) cart[idx].quantity = 1;
+    localStorage.setItem("cart", JSON.stringify(cart));
+    renderCart();
   }
 
-  document.addEventListener("submit", function(event) {
-    if (event.target && event.target.matches("form")) {
-      sessionStorage.setItem("clearCartOnThankYou", "yes");
-    }
-  });
-
-  document.addEventListener("DOMContentLoaded", function () {
-    if (window.location.pathname.includes("thankyou") && sessionStorage.getItem("clearCartOnThankYou")) {
-      localStorage.removeItem("cart");
-      sessionStorage.removeItem("clearCartOnThankYou");
-    }
-  });
+  renderCart();
+});
 </script>
+
 </body>
 </html>
