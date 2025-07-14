@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <html lang="en">
-<head>
+<head><meta content="width=device-width, initial-scale=1" name="viewport"/>
 <meta charset="utf-8"/>
 <title>Solar Kit Calculator - WattSun Solar</title>
 <link href="main.css" rel="stylesheet"/>
@@ -183,6 +183,26 @@ input[type="number"] {
   border: 1px solid #ccc;
   box-sizing: border-box;
 }
+</style><style>
+@media (max-width: 768px) {
+  .nav-toggle {
+    display: block;
+    font-size: 1.8em;
+    background: none;
+    border: none;
+    color: white;
+  }
+  header nav {
+    display: none;
+    flex-direction: column;
+    background-color: #ffb347;
+    width: 100%;
+    text-align: center;
+  }
+  header.nav-open nav {
+    display: flex;
+  }
+}
 </style></head>
 <body>
 <header>
@@ -286,7 +306,7 @@ input[type="number"] {
       * This is an indicative estimate. Actual system sizing may vary.
     </div>
 </div>
-<footer></footer>
+
 <!-- Sizing Table Side Panel -->
 <div id="sizingPanel" style="
   position:fixed; top:0; right:-420px; width:390px; height:100vh; z-index:2001;
@@ -473,11 +493,10 @@ function toggleNav() {
 }
 </script>
 <footer>
-    © 2025 WattSun Solar Kenya | <div class="footer-contacts"><a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a></div>
+  © 2025 WattSun Solar Kenya | 
+  <div class="footer-contacts">
+<a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a>
+</div>
 </footer>
-<script>
-    function toggleNav() {
-      document.querySelector('header').classList.toggle('nav-open');
-    }
-    </script></body>
+<script>function toggleNav() { document.querySelector('header').classList.toggle('nav-open'); }</script></body>
 </html>
