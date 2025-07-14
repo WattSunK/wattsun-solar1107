@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <title>Flexible Solar Financing Options</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <link rel="stylesheet" href="main.css"/>
-  <style>
+<meta charset="utf-8"/>
+<title>Flexible Solar Financing Options</title>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<link href="main.css" rel="stylesheet"/>
+<style>
     /* Fix hamburger alignment */
     .header-bar {
       position: relative;
@@ -141,48 +142,52 @@
         padding: 22px 5vw;
       }
     }
-  </style>
+  
+    .cart-btn { background: #ffc043; color: white; font-weight: bold; border: none; border-radius: 6px; cursor: pointer; box-shadow: 0 3px 12px rgba(0,0,0,0.06); }</style>
 </head>
 <body>
 <header>
-  <div class="header-bar">
-    <h1>WattSun Solar</h1>
-    <button class="nav-toggle" aria-label="Open menu" onclick="toggleNav()">&#9776;</button>
-  </div>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="solutions.html">Solutions</a>
-    <a href="shop.html">Shop</a>
-    <a href="financing.html" class="active" aria-current="page">Financing</a>
-    <a href="projects.html">Projects</a>
-    <a href="contact.html">Contact</a>
-    <a href="cart.html">🛒 Cart</a>
-  </nav>
+<div class="header-bar">
+<h1>WattSun Solar</h1>
+<button aria-label="Open menu" class="nav-toggle" onclick="toggleNav()">☰</button>
+</div>
+<nav>
+<a href="index.html">Home</a>
+<a href="solutions.html">Solutions</a>
+<a href="shop.html">Shop</a>
+<a aria-current="page" class="active" href="financing.html">Financing</a>
+<a href="projects.html">Projects</a>
+<a href="contact.html">Contact</a>
+<span id="cartLinkWrapper" style="display:none;">
+<a href="cart.html">
+    🛒 Cart <span id="cartCount" style="font-weight:bold; background:#3E9F50; color:white; padding:2px 6px; border-radius:50%; font-size:0.8em; vertical-align:top;">0</span>
+</a>
+</span>
+</nav>
 </header>
-
 <div class="container">
-  <h2>Flexible Solar Financing Options</h2>
-  <p>
+<h2>Flexible Solar Financing Options</h2>
+<p>
     WattSun Solar offers tailored financing plans to help you transition to clean, renewable energy without the burden of large upfront costs. Use the estimator below to calculate your expected monthly repayment based on system size and interest terms.
   </p>
-  <form id="loanForm">
-    <label for="system">Select System Size:</label>
-    <select id="system" required="">
-      <option value="">-- Select --</option>
-      <option value="150000">1 kW – KES 150,000</option>
-      <option value="400000">3 kW – KES 400,000</option>
-      <option value="700000">6 kW – KES 700,000</option>
-      <option value="1050000">9 kW – KES 1,050,000</option>
-      <option value="1420000">12 kW – KES 1,420,000</option>
-    </select>
-    <label for="deposit">Your Deposit (KES):</label>
-    <input id="deposit" required="" type="number" min="0"/>
-    <label for="term">Loan Term (Months):</label>
-    <input id="term" max="36" min="6" required="" type="number" value="36"/>
-    <button type="submit">Calculate Loan</button>
-  </form>
-  <div class="result" id="result"></div>
-  <div class="disclaimer">* This is an indicative estimate. Actual loan terms may vary.</div>
+<form id="loanForm">
+<label for="system">Select System Size:</label>
+<select id="system" required="">
+<option value="">-- Select --</option>
+<option value="150000">1 kW – KES 150,000</option>
+<option value="400000">3 kW – KES 400,000</option>
+<option value="700000">6 kW – KES 700,000</option>
+<option value="1050000">9 kW – KES 1,050,000</option>
+<option value="1420000">12 kW – KES 1,420,000</option>
+</select>
+<label for="deposit">Your Deposit (KES):</label>
+<input id="deposit" min="0" required="" type="number"/>
+<label for="term">Loan Term (Months):</label>
+<input id="term" max="36" min="6" required="" type="number" value="36"/>
+<button type="submit">Calculate Loan</button>
+</form>
+<div class="result" id="result"></div>
+<div class="disclaimer">* This is an indicative estimate. Actual loan terms may vary.</div>
 </div>
 <footer>
   © 2025 WattSun Solar Kenya | <div class="footer-contacts"><a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a></div>
@@ -217,6 +222,61 @@
     resultDiv.textContent =
       "Loan Amount: KES " + loanAmount.toLocaleString("en-KE") +
       " | Monthly Repayment: KES " + monthlyRepayment.toFixed(0).toLocaleString("en-KE");
+    localStorage.setItem('loanKit', JSON.stringify({
+      system: document.getElementById('system').selectedOptions[0].text,
+      price: price,
+      deposit: deposit,
+      loanAmount: loanAmount,
+      term: term,
+      monthly: monthlyRepayment.toFixed(0)
+    }));
+
+    if (!document.getElementById('addToCartBtn')) {
+      const btn = document.createElement('button');
+      btn.textContent = "Add to Cart";
+      btn.id = "addToCartBtn";
+      btn.className = "cart-btn"; // use site formatting
+      btn.style.margin = '14px auto 0';
+      btn.style.display = 'block';
+      btn.style.padding = '12px 28px';
+      btn.onclick = function() {
+        const kit = JSON.parse(localStorage.getItem('loanKit'));
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart.push({
+          name: "Loan Kit – " + kit.system,
+          price: kit.price,
+          deposit: kit.deposit,
+          term: kit.term,
+          monthly: kit.monthly
+        });
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartCount?.();
+        btn.remove();
+        document.getElementById('loanForm').reset();
+        resultDiv.textContent = "Loan added to cart!";
+      };
+      document.querySelector('.disclaimer').after(btn);
+    }
+
+  });
+</script>
+<script>
+  function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const count = cart.length;
+    const badge = document.getElementById("cartCount");
+    if (badge) badge.textContent = count;
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const page = window.location.pathname.toLowerCase();
+    if (page.includes("shop") || page.includes("cart") || page.includes("checkout") || page.includes("financing")) {
+      const wrapper = document.getElementById("cartLinkWrapper");
+      if (wrapper) {
+        wrapper.style.display = "inline-block";
+        updateCartCount();
+      }
+    }
   });
 </script>
 </body>

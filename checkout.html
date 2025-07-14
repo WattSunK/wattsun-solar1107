@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <title>Checkout - WattSun Solar</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <link rel="stylesheet" href="main.css"/>
-  <style>
+<meta charset="utf-8"/>
+<title>Checkout - WattSun Solar</title>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<link href="main.css" rel="stylesheet"/>
+<style>
 /* --- Checkout page only styling --- */
 .container {
   max-width: 900px;
@@ -151,10 +152,10 @@ td.checkout-desc-tooltip {
 .checkout-form input,
 .checkout-form textarea {
   width: 100%;
-  padding: 12px 10px;
-  margin-bottom: 12px;
-  border: 1.1px solid #ccc;
-  border-radius: 6px;
+  padding: 14px 12px;
+  margin-bottom: 16px;
+  border: 1.2px solid #ccc;
+  border-radius: 12px;
   font-size: 1em;
   background: #faf9f7;
   transition: border-color 0.2s;
@@ -168,7 +169,13 @@ td.checkout-desc-tooltip {
   border-color: #f7b733;
   outline: none;
 }
-/* ---- BUTTON GROUP CENTERED ---- */
+@media (max-width: 700px) {
+  .checkout-form input,
+  .checkout-form textarea {
+    padding: 18px 14px;
+    margin-bottom: 20px;
+  }
+}
 .checkout-actions {
   display: flex;
   justify-content: center;
@@ -241,145 +248,141 @@ td.checkout-desc-tooltip {
 <body>
 <!-- HEADER: exactly as your index.html, styled by main.css -->
 <header>
-  <div class="header-bar">
-    <h1>WattSun Solar</h1>
-    <button class="nav-toggle" aria-label="Open menu" onclick="toggleNav()">&#9776;</button>
-  </div>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="solutions.html">Solutions</a>
-    <a href="shop.html">Shop</a>
-    <a href="financing.html">Financing</a>
-    <a href="projects.html">Projects</a>
-    <a href="contact.html">Contact</a>
-    <a href="cart.html">Cart</a>
-  </nav>
+<div class="header-bar">
+<h1>WattSun Solar</h1>
+<button aria-label="Open menu" class="nav-toggle" onclick="toggleNav()">☰</button>
+</div>
+<nav>
+<a href="index.html">Home</a>
+<a href="solutions.html">Solutions</a>
+<a href="shop.html">Shop</a>
+<a href="financing.html">Financing</a>
+<a href="projects.html">Projects</a>
+<a href="contact.html">Contact</a>
+<span id="cartLinkWrapper" style="display:none;">
+<a href="cart.html">
+    🛒 Cart <span id="cartCount" style="font-weight:bold; background:#3E9F50; color:white; padding:2px 6px; border-radius:50%; font-size:0.8em; vertical-align:top;">0</span>
+</a>
+</span>
+</nav>
 </header>
 <div class="container">
-  <h2>Checkout</h2>
-  <div class="table-wrapper">
-    <table id="cartTable">
-      <thead>
-        <tr>
-          <th class="product-col">Product</th>
-          <th class="checkout-desc-tooltip">Description</th>
-          <th class="col-unit">Unit Price (KES)</th>
-          <th>Deposit/Unit (KES)</th>
-          <th>Quantity</th>
-          <th class="col-total">Total Price (KES)</th>
-          <th class="col-total-deposit">Total Deposit (KES)</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </div>
-  <div class="total" id="totalAmount">Total Deposit: KES 0</div>
-  <form class="checkout-form" id="checkoutForm"
-        name="order" method="POST" data-netlify="true" action="/thankyou.html">
-    <input type="hidden" name="form-name" value="order" />
-    <input id="cart_summary" name="cart_summary" type="hidden"/>
-    <label for="fullName">Full Name</label>
-    <input id="fullName" name="fullName" type="text" required placeholder="Your full name"/>
-    <label for="email">Email Address</label>
-    <input id="email" name="email" type="email" required placeholder="you@example.com"/>
-    <label for="phone">Phone Number</label>
-    <input id="phone" name="phone" type="tel" required placeholder="+254 7XX XXX XXX"/>
-    <label for="address">Delivery Address</label>
-    <textarea id="address" name="address" rows="3" required placeholder="Enter delivery location"></textarea>
-    <div class="checkout-actions">
-      <a href="shop.html" class="loan-btn secondary">&#8592; Back to Shop</a>
-      <button type="submit" class="btn">Place Order &rarr;</button>
-    </div>
-  </form>
+<h2>Checkout</h2>
+<div class="table-wrapper">
+<table id="cartTable">
+<thead>
+<tr>
+<th class="product-col">Product</th>
+<th class="checkout-desc-tooltip">Description</th>
+<th class="col-unit">Unit Price (KES)</th>
+<th>Deposit/Unit (KES)</th>
+<th>Quantity</th>
+<th class="col-total">Total Price (KES)</th>
+<th class="col-total-deposit">Total Deposit (KES)</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+</div>
+<div class="total" id="totalAmount">Total Deposit: KES 0</div>
+<form action="/thankyou.html" class="checkout-form" data-netlify="true" id="checkoutForm" method="POST" name="order">
+<input name="form-name" type="hidden" value="order"/>
+<input id="cart_summary" name="cart_summary" type="hidden"/>
+<label for="fullName">Full Name</label>
+<input id="fullName" name="fullName" placeholder="Your full name" required="" type="text"/>
+<label for="email">Email Address</label>
+<input id="email" name="email" placeholder="you@example.com" required="" type="email"/>
+<label for="phone">Phone Number</label>
+<input id="phone" name="phone" placeholder="+254 7XX XXX XXX" required="" type="tel"/>
+<label for="address">Delivery Address</label>
+<textarea id="address" name="address" placeholder="Enter delivery location" required="" rows="3"></textarea>
+<div class="checkout-actions">
+<a class="loan-btn secondary" href="shop.html">← Back to Shop</a>
+<button class="btn" type="submit">Place Order →</button>
+</div>
+</form>
 </div>
 <footer>
-  &copy; 2025 WattSun Solar Kenya | <div class="footer-contacts"><a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a></div>
+  © 2025 WattSun Solar Kenya | <div class="footer-contacts"><a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a></div>
 </footer>
+
+
+
+
+
 <script>
-function toggleNav() {
-  const header = document.querySelector('header');
-  header.classList.toggle('nav-open');
-}
-document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('header nav a').forEach(link => {
-    link.addEventListener('click', () => document.querySelector('header').classList.remove('nav-open'));
-  });
-});
-const productsData = [
-  {name: "1 kW Solar System", price: 150000, description: "Entry-level home or shop system. Runs lighting, TV, phone charging. Suitable for 1–2 rooms or kiosks."},
-  {name: "3 kW Solar System", price: 400000, description: "For homes & offices: lighting, fridge, TV, laptop, phone charging. Runs most standard appliances."},
-  {name: "6 kW Solar System", price: 700000, description: "Medium/large homes, offices or light commercial. Runs fridge, freezer, TV, computer, water pump, lighting, etc."},
-  {name: "9 kW Solar System", price: 1050000, description: "Full home + business or school. Runs high-power appliances, pumps, entertainment, and more."},
-  {name: "450W Monocrystalline Solar Panel", price: 29000, description: "High efficiency solar module for home & industrial use."},
-  {name: "Battery 24V 100Ah", price: 60000, description: "LiFePO₄ Battery 24V 100Ah – Safe lithium storage with long life and fast charge."},
-  {name: "Solar Cleaning Kit", price: 4500, description: "Essential tools for keeping your system at peak efficiency."},
-  {name: "5kW Inverter", price: 85000, description: "Seamlessly manage solar and grid power with hybrid tech."}
-];
-
-function formatNumber(num) {
-  return Number(num).toLocaleString('en-US');
-}
-function renderCart() {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const tbody = document.querySelector("#cartTable tbody");
-  tbody.innerHTML = "";
-  let totalDeposit = 0;
-  let cartSummaryArr = [];
-  cart.forEach((item, idx) => {
-    const product = productsData.find(p => p.name === item.name);
-    const desc = product ? product.description : (item.description || "");
-    const unitDeposit = item.deposit ? item.deposit : Math.round(item.price * 0.5);
-    const totalDepositItem = unitDeposit * item.quantity;
-    const totalPrice = item.price * item.quantity;
-    totalDeposit += totalDepositItem;
-    cartSummaryArr.push(`${item.name} (x${item.quantity}): Price ${item.price}, Deposit ${unitDeposit}`);
-    const row = document.createElement('tr');
-    row.innerHTML = `
-      <td class="product-col">${item.name}</td>
-      <td class="checkout-desc-tooltip" data-desc="${desc.replace(/"/g, '&quot;')}">${desc}</td>
-      <td class="col-unit">${formatNumber(item.price)}</td>
-      <td>${formatNumber(unitDeposit)}</td>
-      <td>
-        <div class="qty-control">
-          <button class="qty-btn" onclick="changeQty(${idx}, -1);return false;">-</button>
-          <span>${item.quantity}</span>
-          <button class="qty-btn" onclick="changeQty(${idx}, 1);return false;">+</button>
-        </div>
-      </td>
-      <td class="col-total">${formatNumber(totalPrice)}</td>
-      <td class="col-total-deposit">${formatNumber(totalDepositItem)}</td>
-    `;
-    tbody.appendChild(row);
-  });
-  document.getElementById("totalAmount").textContent = `Total Deposit: KES ${formatNumber(totalDeposit)}`;
-  document.getElementById("cart_summary").value = cartSummaryArr.join('\n');
-}
-function changeQty(idx, delta) {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  cart[idx].quantity += delta;
-  if (cart[idx].quantity < 1) cart[idx].quantity = 1;
-  localStorage.setItem("cart", JSON.stringify(cart));
-  renderCart();
-}
-window.addEventListener("DOMContentLoaded", renderCart);
-
-
-document.addEventListener('DOMContentLoaded', function() {
-  document.body.addEventListener('click', function(e) {
-    const header = document.querySelector('header');
-    if (!header) return;
-    const nav = header.querySelector('nav');
-    const navToggle = header.querySelector('.nav-toggle');
-    if (
-      header.classList.contains('nav-open') &&
-      !nav.contains(e.target) &&
-      !navToggle.contains(e.target)
-    ) {
-      header.classList.remove('nav-open');
+document.addEventListener("DOMContentLoaded", function () {
+  // If we've just come from calculator.html, stash the selected kit
+  const selectedKit = JSON.parse(localStorage.getItem("wattSunSelectedKit"));
+  if (selectedKit) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    // only add once
+    if (!cart.some(item => item.name === selectedKit.kit)) {
+      cart.push({
+        name: selectedKit.kit,
+        price: selectedKit.price,
+        deposit: Math.round(selectedKit.price * 0.5),
+        // always force qty = 1:
+        quantity: 1
+      });
+      localStorage.setItem("cart", JSON.stringify(cart));
     }
-  }, true);
-});
+    localStorage.removeItem("wattSunSelectedKit");
+  }
 
+  function formatNumber(num) {
+    return Number(num).toLocaleString('en-US');
+  }
+
+  function renderCart() {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const tbody = document.querySelector("#cartTable tbody");
+    const summary = document.getElementById("cart_summary");
+    tbody.innerHTML = "";
+    let totalDeposit = 0;
+    let cartSummaryArr = [];
+
+    cart.forEach(item => {
+      // ignore any stored quantity—always use 1
+      const qty = 1;
+      const desc = item.description || "";
+      const deposit = item.deposit;
+      const totalPrice = item.price * qty;
+      const totalItemDeposit = deposit * qty;
+      totalDeposit += totalItemDeposit;
+
+      cartSummaryArr.push(
+        `${item.name} (x1): Price ${item.price}, Deposit ${deposit}`
+      );
+
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td class="product-col">${item.name}</td>
+        <td class="checkout-desc-tooltip"
+            data-desc="${desc.replace(/"/g, '&quot;')}">${desc}</td>
+        <td class="col-unit">${formatNumber(item.price)}</td>
+        <td>${formatNumber(deposit)}</td>
+        <td>1</td>
+        <td class="col-total">${formatNumber(totalPrice)}</td>
+        <td class="col-total-deposit">${formatNumber(totalItemDeposit)}</td>
+      `;
+      tbody.appendChild(row);
+    });
+
+    document.getElementById("totalAmount").textContent =
+      "Total Deposit: KES " + totalDeposit.toLocaleString();
+    summary.value = cartSummaryArr.join("\n");
+  }
+
+  renderCart();
+
+    // set flag to clear cart on thank you page
+    document.getElementById("checkoutForm").addEventListener("submit", function() {
+      sessionStorage.setItem("clearCartOnThankYou", "true");
+    });
+});
 </script>
+
+
 </body>
 </html>

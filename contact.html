@@ -79,7 +79,106 @@
       .map { height: 200px; }
     }
   </style>
-</head>
+<style>
+/* Fully responsive and rounded input rows */
+.contact-form input,
+.contact-form textarea {
+  width: 94%;
+  max-width: 350px;
+  margin: 0 auto 18px auto;
+  display: block;
+  border-radius: 12px;
+  padding: 13px 10px;
+  font-size: 1em;
+  background: #faf9f7;
+  box-sizing: border-box;
+}
+
+/* Match the "Calculate" button style from calculator.html */
+.contact-form button {
+  width: 94%;
+  max-width: 350px;
+  margin: 0 auto;
+  padding: 14px 0;
+  font-size: 1.1em;
+  font-weight: 600;
+  border: none;
+  border-radius: 24px;
+  color: #184211;
+  background: linear-gradient(90deg, #f7b733 0%, #fcf6ba 100%);
+  box-shadow: 0 2px 14px rgba(247,183,51,0.11);
+  transition: background 0.15s, color 0.12s, transform 0.1s;
+  cursor: pointer;
+  display: block;
+  text-align: center;
+}
+
+.contact-form button:hover {
+  background: linear-gradient(90deg, #fcf6ba 0%, #f7b733 100%);
+  color: #b37900 !important;
+  transform: translateY(-1px) scale(1.02);
+}
+
+/* Ensure mobile layout spacing */
+@media (max-width: 768px) {
+  .contact-form label {
+    text-align: left;
+    padding-left: 5%;
+  }
+}
+</style><style>
+/* Left-aligned inputs and textarea */
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  margin: 0 0 18px 0;
+  display: block;
+  border-radius: 12px;
+  padding: 13px 10px;
+  font-size: 1em;
+  background: #faf9f7;
+  box-sizing: border-box;
+}
+
+/* Centered Send Inquiry button only */
+.contact-form button {
+  width: 94%;
+  max-width: 350px;
+  margin: 0 auto;
+  padding: 14px 0;
+  font-size: 1.1em;
+  font-weight: 600;
+  border: none;
+  border-radius: 24px;
+  color: #184211;
+  background: linear-gradient(90deg, #f7b733 0%, #fcf6ba 100%);
+  box-shadow: 0 2px 14px rgba(247,183,51,0.11);
+  transition: background 0.15s, color 0.12s, transform 0.1s;
+  cursor: pointer;
+  display: block;
+  text-align: center;
+}
+
+.contact-form button:hover {
+  background: linear-gradient(90deg, #fcf6ba 0%, #f7b733 100%);
+  color: #b37900 !important;
+  transform: translateY(-1px) scale(1.02);
+}
+</style><style>
+.contact-info {
+  text-align: left;
+}
+</style><style>
+/* Stretch form inputs to full width in the container on desktop */
+@media (min-width: 901px) {
+  .contact-form input,
+  .contact-form textarea {
+    width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 12px;
+  }
+}
+</style></head>
 <body>
 <!-- Header: Unchanged -->
 <header>
@@ -104,7 +203,7 @@
 <form data-netlify="true" method="POST" name="contact">
 <input name="form-name" type="hidden" value="contact"/>
 <label for="name">Full Name</label>
-<input id="name" name="name" placeholder="Your name" required="" type="text">
+<input id="name" name="name" placeholder="Your name" required="" type="text"/>
 <label for="email">Email Address</label>
 <input id="email" name="email" placeholder="you@example.com" required="" type="email"/>
 <label for="phone">Phone Number</label>
@@ -112,7 +211,7 @@
 <label for="message">Your Message</label>
 <textarea id="message" name="message" placeholder="Tell us about your project..." required="" rows="6"></textarea>
 <button type="submit">Send Inquiry</button>
-</input></form>
+</form>
 </div>
 <div class="contact-info">
 <h3>Our Office</h3>
@@ -135,7 +234,6 @@
 <footer>
     © 2025 WattSun Solar Kenya | <div class="footer-contacts"><a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a></div>
 </footer>
-
 <script>
   const navToggle = document.querySelector('.nav-toggle');
   const header = document.querySelector('header');

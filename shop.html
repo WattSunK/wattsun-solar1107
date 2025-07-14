@@ -181,6 +181,24 @@
 </style>
 </head>
 <body>
+<div id="toast" style="
+  display:none;
+  position:fixed;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#3E9F50;
+  color:white;
+  padding:12px 20px;
+  border-radius:8px;
+  font-size:0.95em;
+  box-shadow:0 4px 12px rgba(0,0,0,0.2);
+  z-index:9999;
+  transition:opacity 0.3s ease;
+">
+  Added to cart!
+</div>
+
 <header>
 <div class="header-bar">
 <h1>WattSun Solar</h1>
@@ -193,7 +211,13 @@
 <a href="financing.html">Financing</a>
 <a href="projects.html">Projects</a>
 <a href="contact.html">Contact</a>
-<a href="cart.html">🛒 Cart</a>
+
+<span id="cartLinkWrapper" style="display:none;">
+<a href="cart.html">
+    🛒 Cart <span id="cartCount" style="font-weight:bold; background:#3E9F50; color:white; padding:2px 6px; border-radius:50%; font-size:0.8em; vertical-align:top;">0</span>
+</a>
+</span>
+
 </nav>
 </header>
 <div class="container">
@@ -280,45 +304,13 @@
 </div>
 </div>
 </div>
-<script>
-function addToCart(item, price, inputId) {
-    const depositValue = document.getElementById(inputId).value;
-    const deposit = Number(depositValue);
-    if (!deposit || isNaN(deposit) || deposit <= 0) {
-        alert("Please enter a valid deposit amount.");
-        return;
-    }
 
-    // Load cart or initialize empty array
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-    // Check if item already in cart (by name)
-    const index = cart.findIndex(prod => prod.name === item);
-    if (index !== -1) {
-        // Increment quantity and update deposit to latest entered value
-        cart[index].quantity = (cart[index].quantity || 1) + 1;
-        cart[index].deposit = deposit;
-    } else {
-        // Add new product
-        cart.push({
-            name: item,
-            price: price,
-            deposit: deposit,
-            quantity: 1
-        });
-    }
-
-    localStorage.setItem("cart", JSON.stringify(cart));
-    alert("Added to cart:\n" + item + "\nDeposit: KES " + deposit.toLocaleString());
-}
-</script>
 <footer>
 <div class="footer-contacts">
 <a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a>
 </div>
 <p>© 2025 WattSun Solar. All rights reserved.</p>
 </footer>
-
 <script>
   const navToggle = document.querySelector('.nav-toggle');
   const header = document.querySelector('header');
@@ -348,6 +340,122 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 </script>
+
+<script>
+  function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const count = cart.length;
+    const badge = document.getElementById("cartCount");
+    if (badge) badge.textContent = count;
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const page = window.location.pathname.toLowerCase();
+    if (page.includes("shop") || page.includes("cart") || page.includes("checkout") || page.includes("financing")) {
+      const wrapper = document.getElementById("cartLinkWrapper");
+      if (wrapper) {
+        wrapper.style.display = "inline-block";
+        updateCartCount();
+      }
+    }
+  });
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  function addToCart(item, price, inputId) {
+      const depositValue = document.getElementById(inputId).value;
+      const deposit = Number(depositValue);
+      if (!deposit || isNaN(deposit) || deposit <= 0) {
+          alert("Please enter a valid deposit amount.");
+          return;
+      }
+
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const index = cart.findIndex(prod => prod.name === item);
+      if (index !== -1) {
+          cart[index].quantity = (cart[index].quantity || 1) + 1;
+          cart[index].deposit = deposit;
+      } else {
+          cart.push({
+              name: item,
+              price: price,
+              deposit: deposit,
+              quantity: 1
+          });
+      }
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+      showToast(item + " added to cart!");
+      updateCartCount();
+  }
+
+  function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.style.display = "block";
+    toast.style.opacity = "1";
+    setTimeout(() => {
+      toast.style.opacity = "0";
+      setTimeout(() => toast.style.display = "none", 300);
+    }, 2500);
+  }
+
+  window.addToCart = addToCart; // expose globally
+});
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  function addToCart(item, price, inputId) {
+    const depositValue = document.getElementById(inputId).value;
+    const deposit = Number(depositValue);
+    if (!deposit || isNaN(deposit) || deposit <= 0) {
+      alert("Please enter a valid deposit amount.");
+      return;
+    }
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const index = cart.findIndex(prod => prod.name === item);
+    if (index !== -1) {
+      cart[index].quantity = (cart[index].quantity || 1) + 1;
+      cart[index].deposit = deposit;
+    } else {
+      cart.push({
+        name: item,
+        price: price,
+        deposit: deposit,
+        quantity: 1
+      });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    showToast(item + " added to cart!");
+    updateCartCount();
+  }
+
+  function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.style.display = "block";
+    toast.style.opacity = "1";
+    setTimeout(() => {
+      toast.style.opacity = "0";
+      setTimeout(() => toast.style.display = "none", 300);
+    }, 2500);
+  }
+
+  function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const badge = document.getElementById("cartCount");
+    if (badge) badge.textContent = cart.length;
+  }
+
+  window.addToCart = addToCart;
+  updateCartCount();
+});
+</script>
+
 </body>
 </html>
-

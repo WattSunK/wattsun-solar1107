@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <title>Cart - WattSun Solar</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <link rel="stylesheet" href="main.css"/>
-  <style>
+<meta charset="utf-8"/>
+<title>Cart - WattSun Solar</title>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<link href="main.css" rel="stylesheet"/>
+<style>
     html, body {
       width: 100vw;
       max-width: 100vw;
@@ -217,103 +218,117 @@
   </style>
 </head>
 <body>
-  <header>
-    <div class="header-bar">
-      <h1>WattSun Solar</h1>
-      <button class="nav-toggle" aria-label="Menu" onclick="toggleNav()">&#9776;</button>
-    </div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="solutions.html">Solutions</a>
-      <a href="shop.html">Shop</a>
-      <a href="calculator.html">Calculator</a>
-      <a href="financing.html">Financing</a>
-      <a href="projects.html">Projects</a>
-      <a href="contact.html">Contact</a>
-      <a href="cart.html">🛒 Cart</a>
-    </nav>
-  </header>
-  <div class="container">
-    <h2>Your Cart</h2>
-    <div class="table-wrapper">
-      <table id="cartTable">
-        <thead>
-          <tr>
-            <th>Product</th>
-            <th class="col-unit">Unit Price (KES)</th>
-            <th>Deposit/Unit (KES)</th>
-            <th>Quantity</th>
-            <th>Total Price (KES)</th>
-            <th class="col-total-deposit">Total Deposit (KES)</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
-    <div class="total" id="totalAmount">Total Deposit: KES 0</div>
-    <div class="actions">
-      <a class="btn" href="checkout.html">Proceed to Checkout</a>
-      <button class="btn btn-clear" id="clearCartBtn" type="button" style="display:none;">Clear Cart</button>
-    </div>
-  </div>
-  <script>
-    function toggleNav() {
-      document.querySelector('header').classList.toggle('nav-open');
-    }
-    const cartTable = document.querySelector("#cartTable tbody");
-    const totalDisplay = document.getElementById("totalAmount");
-    const clearCartBtn = document.getElementById("clearCartBtn");
+<header>
+<div class="header-bar">
+<h1>WattSun Solar</h1>
+<button aria-label="Menu" class="nav-toggle" onclick="toggleNav()">☰</button>
+</div>
+<nav>
+<a href="index.html">Home</a>
+<a href="solutions.html">Solutions</a>
+<a href="shop.html">Shop</a>
+<a href="calculator.html">Calculator</a>
+<a href="financing.html">Financing</a>
+<a href="projects.html">Projects</a>
+<a href="contact.html">Contact</a>
 
-    function loadCart() {
-      let items = JSON.parse(localStorage.getItem("cart")) || [];
-      let totalDeposit = 0;
-      cartTable.innerHTML = "";
-      items.forEach(item => {
-        const quantity = item.quantity || 1;
-        const row = document.createElement("tr");
-        const totalPrice = item.price * quantity;
-        const totalItemDeposit = item.deposit * quantity;
-        row.innerHTML = `
-          <td class="product-col">${item.name}</td>
-          <td class="col-unit">${item.price.toLocaleString()}</td>
-          <td>${item.deposit.toLocaleString()}</td>
-          <td>${quantity}</td>
-          <td>${totalPrice.toLocaleString()}</td>
-          <td class="col-total-deposit">${totalItemDeposit.toLocaleString()}</td>
-        `;
-        totalDeposit += totalItemDeposit;
-        cartTable.appendChild(row);
-      });
-      totalDisplay.innerText = "Total Deposit: KES " + totalDeposit.toLocaleString();
-      clearCartBtn.style.display = items.length > 0 ? "inline-block" : "none";
-    }
+<span id="cartLinkWrapper" style="display:none;">
+<a href="cart.html">
+    🛒 Cart <span id="cartCount" style="font-weight:bold; background:#3E9F50; color:white; padding:2px 6px; border-radius:50%; font-size:0.8em; vertical-align:top;">0</span>
+</a>
+</span>
 
-    function clearCart() {
-      localStorage.removeItem("cart");
-      loadCart();
-    }
+</nav>
+</header>
+<div class="container">
+<h2>Your Cart</h2>
+<div class="table-wrapper">
+<table id="cartTable">
+<thead>
+<tr>
+<th>Product</th>
+<th class="col-unit">Unit Price (KES)</th>
+<th>Deposit/Unit (KES)</th>
+<th>Quantity</th>
+<th>Total Price (KES)</th>
+<th class="col-total-deposit">Total Deposit (KES)</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+</div>
+<div class="total" id="totalAmount">Total Deposit: KES 0</div>
+<div class="actions">
+<a class="btn" href="checkout.html">Proceed to Checkout</a>
+<button class="btn btn-clear" id="clearCartBtn" style="display:none;" type="button">Clear Cart</button>
+</div>
+</div>
 
-    window.onload = loadCart;
-    clearCartBtn.addEventListener("click", clearCart);
+<footer>
+    © 2025 WattSun Solar Kenya | <div class="footer-contacts"><a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a></div>
+</footer>
 
-    document.addEventListener('DOMContentLoaded', function() {
-      document.body.addEventListener('click', function(e) {
-        const header = document.querySelector('header');
-        if (!header) return;
-        const nav = header.querySelector('nav');
-        const navToggle = header.querySelector('.nav-toggle');
-        if (
-          header.classList.contains('nav-open') &&
-          !nav.contains(e.target) &&
-          !navToggle.contains(e.target)
-        ) {
-          header.classList.remove('nav-open');
-        }
-      }, true);
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const cartTable = document.querySelector("#cartTable tbody");
+  const totalDisplay = document.getElementById("totalAmount");
+  const clearCartBtn = document.getElementById("clearCartBtn");
+
+  function loadCart() {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cartTable.innerHTML = "";
+    let totalDeposit = 0;
+
+    cart.forEach(item => {
+      // force quantity of 1 for every financed kit
+      const qty = 1;
+      const deposit = item.deposit;
+      const totalPrice = item.price * qty;
+      const totalItemDeposit = deposit * qty;
+      totalDeposit += totalItemDeposit;
+
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td class="product-col">${item.name}</td>
+        <td class="col-unit">${item.price.toLocaleString()}</td>
+        <td>${deposit.toLocaleString()}</td>
+        <td>${qty}</td>
+        <td>${totalPrice.toLocaleString()}</td>
+        <td class="col-total-deposit">${totalItemDeposit.toLocaleString()}</td>
+      `;
+      cartTable.appendChild(row);
     });
-  </script>
-  <footer>
-    &copy; 2025 WattSun Solar Kenya | <div class="footer-contacts"><a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a></div>
-  </footer>
+
+    totalDisplay.innerText =
+      "Total Deposit: KES " + totalDeposit.toLocaleString();
+    clearCartBtn.style.display = cart.length > 0 ? "inline-block" : "none";
+  }
+
+  function clearCart() {
+    localStorage.removeItem("cart");
+    loadCart();
+  }
+
+  clearCartBtn.addEventListener("click", clearCart);
+  loadCart();
+
+  // Show cart badge on eligible pages
+  const page = window.location.pathname.toLowerCase();
+  if (
+    page.includes("shop") ||
+    page.includes("cart") ||
+    page.includes("checkout") ||
+    page.includes("financing")
+  ) {
+    const wrapper = document.getElementById("cartLinkWrapper");
+    if (wrapper) wrapper.style.display = "inline-block";
+  }
+});
+</script>
+
+
 </body>
 </html>
