@@ -158,7 +158,13 @@
 <a aria-current="page" class="active" href="financing.html">Financing</a>
 <a href="projects.html">Projects</a>
 <a href="contact.html">Contact</a>
-<a href="cart.html">🛒 Cart</a>
+
+<span id="cartLinkWrapper" style="display:none;">
+<a href="cart.html">
+    🛒 Cart <span id="cartCount" style="font-weight:bold; background:#3E9F50; color:white; padding:2px 6px; border-radius:50%; font-size:0.8em; vertical-align:top;">0</span>
+</a>
+</span>
+
 </nav>
 </header>
 <div class="container">
@@ -253,6 +259,26 @@
       document.querySelector('.disclaimer').after(btn);
     }
 
+  });
+</script>
+
+<script>
+  function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const count = cart.length;
+    const badge = document.getElementById("cartCount");
+    if (badge) badge.textContent = count;
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const page = window.location.pathname.toLowerCase();
+    if (page.includes("shop") || page.includes("cart") || page.includes("checkout") || page.includes("financing")) {
+      const wrapper = document.getElementById("cartLinkWrapper");
+      if (wrapper) {
+        wrapper.style.display = "inline-block";
+        updateCartCount();
+      }
+    }
   });
 </script>
 </body>
