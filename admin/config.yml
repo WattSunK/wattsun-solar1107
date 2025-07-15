@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: yourusername/your-repo-name  # CHANGE THIS to your GitHub repo
+  repo: WattSunK/wattsun-solar1107  # CHANGE THIS to your GitHub repo
   branch: main
 
 media_folder: "blog/uploads"
