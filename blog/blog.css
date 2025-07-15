@@ -1,0 +1,87 @@
+
+/* Blog-specific styles for WattSun Solar */
+body {
+  background: #fffdf7;
+  font-family: var(--main-font, Arial, sans-serif);
+  color: #222;
+  margin: 0;
+  padding: 0;
+}
+main {
+  max-width: 700px;
+  margin: 2rem auto 3rem auto;
+  padding: 1.5rem;
+  background: #fafaf4;
+  border-radius: 18px;
+  box-shadow: 0 2px 24px #e0ffe0a0;
+}
+article {
+  background: #f6f6ed;
+  border-radius: 16px;
+  margin-bottom: 2rem;
+  padding: 1.5rem 1.25rem;
+  box-shadow: 0 2px 12px #d6eed6;
+  transition: box-shadow 0.2s;
+}
+article:hover {
+  box-shadow: 0 6px 20px #bae4ba;
+}
+h1, h2, h3 {
+  color: var(--main-green, #0a9441);
+  margin-top: 0.5em;
+}
+a {
+  color: var(--main-green, #0a9441);
+  text-decoration: none;
+  font-weight: 600;
+}
+a:hover {
+  text-decoration: underline;
+}
+header, footer {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 1rem 1rem;
+  background: #fff;
+  border-radius: 0 0 18px 18px;
+  box-shadow: 0 4px 24px #e6ffe6b0;
+}
+nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  font-size: 1.08rem;
+}
+nav .logo {
+  font-size: 1.25em;
+  font-weight: bold;
+  letter-spacing: 0.03em;
+  color: var(--main-green, #0a9441);
+}
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 1.2em;
+}
+nav li {
+  display: inline;
+}
+@media (max-width: 600px) {
+  main {
+    padding: 1rem;
+  }
+  nav {
+    flex-direction: column;
+    gap: 0.7em;
+  }
+}
+footer {
+  text-align: center;
+  font-size: 0.97em;
+  background: #fafaf4;
+  border-radius: 18px 18px 0 0;
+  box-shadow: 0 -2px 18px #d4ffd4b0;
+  margin-top: 2rem;
+}

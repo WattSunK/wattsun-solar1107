@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Blog - WattSun Solar</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="blog.css">
+</head>
+<body>
+<header>
+  <nav>
+    <div class="logo">
+      <!-- TODO: Replace with your logo image below when ready -->
+      <span>WattSun Solar Logo</span>
+    </div>
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../shop.html">Shop</a></li>
+      <li><a href="../solutions.html">Solutions</a></li>
+      <li><a href="../financing.html">Financing</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+      <li><a href="index.html">Blog</a></li>
+    </ul>
+  </nav>
+</header>
+<main>
+  <h1>WattSun Solar Blog</h1>
+  <div id="blog-posts-list">
+    <p>Loading blog posts…</p>
+  </div>
+</main>
+<footer>
+  &copy; 2025 WattSun Solar. All rights reserved. | <a href="index.html">Blog Home</a>
+</footer>
+<script>
+// Demo only: List static sample posts (update if using real SSG or CMS)
+const posts = [
+  {
+    file: 'post-1.md',
+    title: "Solar Buyer’s Guide 2025",
+    date: "2025-07-15",
+    summary: "Learn how to choose a solar kit, what to ask vendors, and financing tips for Kenyan homes and businesses."
+  },
+  {
+    file: 'post-2.md',
+    title: "How to Size Your Solar Kit",
+    date: "2025-07-15",
+    summary: "A step-by-step guide to estimate your solar needs and pick the right system size for your lifestyle or business."
+  }
+];
+let html = "";
+for (const post of posts) {
+  html += `<article>
+      <h2><a href="posts/${post.file}">${post.title}</a></h2>
+      <p><b>${post.date}</b></p>
+      <p>${post.summary}</p>
+      <p><a href="posts/${post.file}">Read more &rarr;</a></p>
+    </article>`;
+}
+document.getElementById('blog-posts-list').innerHTML = html;
+</script>
+</body>
+</html>
