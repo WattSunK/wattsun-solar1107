@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
@@ -295,13 +296,6 @@ h2 {
   z-index: 1;
   display: none;
 }
-
-@media (max-width: 700px) {
-  .checkout-table th.desc-col,
-  .checkout-table td.desc-col {
-    display: none;
-  }
-}
 </style>
 </head>
 <body>
@@ -318,11 +312,11 @@ h2 {
 <a href="projects.html">Projects</a>
 <a href="contact.html">Contact</a>
 <!-- Cart Icon START -->
-<a href="cart.html" class="cart-icon-link" aria-label="View shopping cart" title="View cart">
-  <span class="cart-icon">
+<a aria-label="View shopping cart" class="cart-icon-link" href="cart.html" title="View cart">
+<span class="cart-icon">
     🛒
-    <span id="cart-count-badge" class="cart-count-badge">0</span>
-  </span>
+    <span class="cart-count-badge" id="cart-count-badge">0</span>
+</span>
 </a>
 <!-- Cart Icon END -->
 </nav>
@@ -330,23 +324,23 @@ h2 {
 <div class="container">
 <h2>Checkout</h2>
 <div class="table-wrapper">
-  <table id="cartTable" class="checkout-table">
-    <thead>
-      <tr>
-        <th class="product-col">Product</th>
-        <th class="desc-col">Description</th>
-        <th class="compact-col">Price<br>(KES)</th>
-        <th class="compact-col">Deposit<br>(KES)</th>
-        <th class="compact-col">Qty</th>
-        <th class="compact-col">Total<br>(KES)</th>
-        <th class="compact-col">Deposit<br>(KES)</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
+<table class="checkout-table" id="cartTable">
+<thead>
+<tr>
+<th class="product-col">Product</th>
+<th class="desc-col">Description</th>
+<th class="compact-col">Price<br/>(KES)</th>
+<th class="compact-col">Deposit<br/>(KES)</th>
+<th class="compact-col">Qty</th>
+<th class="compact-col">Total<br/>(KES)</th>
+
+</tr>
+</thead>
+<tbody></tbody>
+</table>
 </div>
 <div class="total" id="totalAmount">Total Deposit: KES 0</div>
-<form action="/thankyou.html" class="checkout-form" data-netlify="true" id="checkoutForm" method="POST" name="order" autocomplete="on">
+<form action="/thankyou.html" autocomplete="on" class="checkout-form" data-netlify="true" id="checkoutForm" method="POST" name="order">
 <input name="form-name" type="hidden" value="order"/>
 <input id="cart_summary" name="cart_summary" type="hidden"/>
 <label for="fullName">Full Name</label>
@@ -432,7 +426,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <td class="compact-col">${formatNumber(deposit)}</td>
         <td class="compact-col">${qty}</td>
         <td class="compact-col">${formatNumber(totalPrice)}</td>
-        <td class="compact-col">${formatNumber(totalItemDeposit)}</td>
+        
       `;
       tbody.appendChild(row);
     });
