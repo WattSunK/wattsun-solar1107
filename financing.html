@@ -19,7 +19,7 @@
       right: 20px;
       top: 50%;
       transform: translateY(-50%);
-      display: flex !important;
+      display: none;
       cursor: pointer;
       background: none;
       border: none;
@@ -29,6 +29,11 @@
       width: 44px;
       align-items: center;
       justify-content: center;
+    }
+    @media (max-width: 700px) {
+      .nav-toggle {
+        display: flex !important;
+      }
     }
 
     /* Mobile nav toggle */
