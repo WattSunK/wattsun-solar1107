@@ -260,6 +260,41 @@ h2 {
   max-width: 100%;
   overflow-x: auto;
 }
+/* Cart Icon in NavBar */
+.cart-icon-link {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  color: inherit;
+  vertical-align: middle;
+  margin-left: 10px;
+}
+.cart-icon {
+  font-size: 1.24em;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.cart-count-badge {
+  position: absolute;
+  top: -0.7em;
+  right: -0.7em;
+  background: #19c37d;
+  color: #fff;
+  font-size: 0.8em;
+  min-width: 1.15em;
+  height: 1.15em;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  box-shadow: 0 0 0.13em #0001;
+  transition: background 0.2s;
+  pointer-events: none;
+  z-index: 1;
+  display: none;
+}
 </style>
 </head>
 <body>
@@ -275,11 +310,14 @@ h2 {
 <a href="financing.html">Financing</a>
 <a href="projects.html">Projects</a>
 <a href="contact.html">Contact</a>
-<span id="cartLinkWrapper" style="display:none;">
-<a href="cart.html">
-    🛒 Cart <span id="cartCount" style="font-weight:bold; background:#3E9F50; color:white; padding:2px 6px; border-radius:50%; font-size:0.8em; vertical-align:top;">0</span>
+<!-- Cart Icon START -->
+<a href="cart.html" class="cart-icon-link" aria-label="View shopping cart" title="View cart">
+  <span class="cart-icon">
+    🛒
+    <span id="cart-count-badge" class="cart-count-badge">0</span>
+  </span>
 </a>
-</span>
+<!-- Cart Icon END -->
 </nav>
 </header>
 <div class="container">
@@ -421,6 +459,25 @@ document.addEventListener("DOMContentLoaded", function () {
       sessionStorage.setItem("clearCartOnThankYou", "true");
   });
 });
+
+// --- CART BADGE LOGIC ---
+function updateCartCountBadge() {
+  let count = 0;
+  try {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    count = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+  } catch(e){}
+  const badge = document.getElementById('cart-count-badge');
+  if (!badge) return;
+  if (count > 0) {
+    badge.textContent = count;
+    badge.style.display = 'flex';
+  } else {
+    badge.style.display = 'none';
+  }
+}
+document.addEventListener('DOMContentLoaded', updateCartCountBadge);
+window.addEventListener('storage', updateCartCountBadge);
 
 if (window.location.pathname.endsWith("thankyou.html") && sessionStorage.getItem("clearCartOnThankYou")) {
     localStorage.removeItem("cart");

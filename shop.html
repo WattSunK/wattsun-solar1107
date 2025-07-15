@@ -28,6 +28,41 @@ h2 { text-align: center; margin-bottom: 12px; }
 .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 36px 20px; }
 @media (max-width: 1000px) { .grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 600px) { .grid { grid-template-columns: 1fr; gap: 16px 0; } }
+/* Cart Icon in NavBar */
+.cart-icon-link {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  color: inherit;
+  vertical-align: middle;
+  margin-left: 10px;
+}
+.cart-icon {
+  font-size: 1.24em;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.cart-count-badge {
+  position: absolute;
+  top: -0.7em;
+  right: -0.7em;
+  background: #19c37d;
+  color: #fff;
+  font-size: 0.8em;
+  min-width: 1.15em;
+  height: 1.15em;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  box-shadow: 0 0 0.13em #0001;
+  transition: background 0.2s;
+  pointer-events: none;
+  z-index: 1;
+  display: none;
+}
 </style>
 </head>
 <body>
@@ -46,11 +81,14 @@ h2 { text-align: center; margin-bottom: 12px; }
 <a href="financing.html">Financing</a>
 <a href="projects.html">Projects</a>
 <a href="contact.html">Contact</a>
-<span id="cartLinkWrapper" style="display:none;">
-<a href="cart.html">
-    🛒 Cart <span id="cartCount" style="font-weight:bold; background:#3E9F50; color:white; padding:2px 6px; border-radius:50%; font-size:0.8em; vertical-align:top;">0</span>
+<!-- Cart Icon START -->
+<a href="cart.html" class="cart-icon-link" aria-label="View shopping cart" title="View cart">
+  <span class="cart-icon">
+    🛒
+    <span id="cart-count-badge" class="cart-count-badge">0</span>
+  </span>
 </a>
-</span>
+<!-- Cart Icon END -->
 </nav>
 </header>
 <div class="container">
@@ -59,6 +97,7 @@ h2 { text-align: center; margin-bottom: 12px; }
         Note: A minimum deposit of 50% is required for installation to commence.
 </p>
 <div class="grid">
+  <!-- ... all product-cards unchanged ... -->
   <div class="product-card">
     <img alt="1kW Solar System" src="images/solar1kw.jpg"/>
     <div class="product-info">
@@ -75,6 +114,7 @@ h2 { text-align: center; margin-bottom: 12px; }
         'Best for small homes, bedsitters, or shops. Runs lights, TV, phone/laptop, and a small fridge for backup.'
       )">Add to Cart</button>
   </div>
+  <!-- ... rest of product-cards unchanged ... -->
   <div class="product-card">
     <img alt="3kW Solar System" src="images/solar3kw.jpg"/>
     <div class="product-info">
@@ -206,30 +246,26 @@ h2 { text-align: center; margin-bottom: 12px; }
     link.addEventListener('click', () => header.classList.remove('nav-open'));
   });
 </script>
-
 <script>
-  function updateCartCount() {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    let totalCount = 0;
-    for (let i = 0; i < cart.length; i++) {
-      totalCount += cart[i].quantity || 1;
+  // --- CART BADGE LOGIC ---
+  function updateCartCountBadge() {
+    let count = 0;
+    try {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      count = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+    } catch(e){}
+    const badge = document.getElementById('cart-count-badge');
+    if (!badge) return;
+    if (count > 0) {
+      badge.textContent = count;
+      badge.style.display = 'flex';
+    } else {
+      badge.style.display = 'none';
     }
-    const badge = document.getElementById("cartCount");
-    if (badge) badge.textContent = totalCount;
   }
-
-  document.addEventListener("DOMContentLoaded", function () {
-    const page = window.location.pathname.toLowerCase();
-    if (page.includes("shop") || page.includes("cart") || page.includes("checkout") || page.includes("financing")) {
-      const wrapper = document.getElementById("cartLinkWrapper");
-      if (wrapper) {
-        wrapper.style.display = "inline-block";
-        updateCartCount();
-      }
-    }
-  });
+  document.addEventListener('DOMContentLoaded', updateCartCountBadge);
+  window.addEventListener('storage', updateCartCountBadge);
 </script>
-
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   window.addToCart = function(item, price, inputId, description) {
@@ -256,7 +292,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     localStorage.setItem("cart", JSON.stringify(cart));
     showToast(item + " added to cart!");
-    updateCartCount();
+    updateCartCountBadge();
   };
 
   function showToast(message) {
@@ -270,7 +306,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 2500);
   }
 
-  updateCartCount();
+  updateCartCountBadge();
 });
 </script>
 </body>
