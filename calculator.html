@@ -94,7 +94,7 @@
     }
     @media (max-width: 700px) {
       .container { max-width:97vw; }
-      .calc-grid { grid-template-columns: 1fr; }
+      .calc-grid { grid-template-columns: 1fr !important; }
       #sizingPanel {
         width: 98vw !important;
         min-width: 0 !important;
@@ -499,21 +499,31 @@ button.loan-btn {
       <b>Total Estimated Power:</b> ${totalWatt} W<br>
       <b>Estimated Price:</b> KES ${kit.price.toLocaleString()}<br><br>
       <div class="calc-btn-row">
-        <button type="button" onclick="goToCheckout('${kit.name}', ${totalWatt}, ${kit.price})">Buy Now</button>
+        <button type="button" onclick="addToCartFromCalculator('${kit.name}', ${kit.price})">Buy Now</button>
         <a href="solutions.html" class="secondary">Back to Solutions</a>
       </div>
       </div>
     `;
   }
-  // Save selection to localStorage and go to checkout
-  function goToCheckout(kitName, totalWatt, price) {
-    localStorage.setItem('wattSunSelectedKit', JSON.stringify({
-      kit: kitName,
-      power: totalWatt,
-      price: price
-    }));
-    window.location.href = 'checkout.html';
+
+  // ---- NEW LOGIC: Buy Now adds to cart (line-perfect insertion) ----
+  function addToCartFromCalculator(itemName, price) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const index = cart.findIndex(prod => prod.name === itemName);
+    if (index !== -1) {
+      cart[index].quantity = (cart[index].quantity || 1) + 1;
+    } else {
+      cart.push({
+        name: itemName,
+        price: price,
+        deposit: 0,
+        quantity: 1
+      });
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert(itemName + " added to cart!");
   }
+  // ---- END NEW LOGIC ----
 
   // Sizing Table Side Panel Logic
   const showBtn = document.getElementById('showSizingBtn');

@@ -336,9 +336,13 @@ document.addEventListener("DOMContentLoaded", function () {
     cartTable.innerHTML = "";
     let totalDeposit = 0;
 
+    // Compute total count for badge
+    let totalCount = 0;
+
     cart.forEach(item => {
-      // force quantity of 1 for every financed kit
-      const qty = 1;
+      // Use actual item quantity
+      const qty = item.quantity || 1;
+      totalCount += qty;
       const deposit = item.deposit;
       const totalPrice = item.price * qty;
       const totalItemDeposit = deposit * qty;
@@ -359,9 +363,9 @@ document.addEventListener("DOMContentLoaded", function () {
     totalDisplay.innerText =
       "Total Deposit: KES " + totalDeposit.toLocaleString();
     clearCartBtn.style.display = cart.length > 0 ? "inline-block" : "none";
-    // Update dynamic cart quantity badge
+    // Update dynamic cart quantity badge (sum of all quantities)
     if (cartCount) {
-      cartCount.textContent = cart.length;
+      cartCount.textContent = totalCount;
     }
   }
 

@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta content="width=device-width, initial-scale=1" name="viewport"/><meta charset="utf-8"/>
@@ -30,7 +29,6 @@
             text-align: center;
             margin-bottom: 12px;
         }
-        
         .product-card {
             background: #fff;
             border-radius: 16px;
@@ -59,7 +57,7 @@
             display: block;
         }
         .product-info {
-            min-height: 102px; /* Adjust to match tallest card content for perfect alignment */
+            min-height: 102px;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
@@ -117,17 +115,12 @@
             transform: translateY(-2px) scale(1.03);
             box-shadow: 0 6px 22px #f7b73333;
         }
-        @media (max-width: 1100px) {
-            
-        }
-        @media (max-width: 800px) {
-            
-        }
+        @media (max-width: 1100px) { }
+        @media (max-width: 800px) { }
         @media (max-width: 600px) {
             .container {
                 padding: 0.5em;
             }
-            
             .product-card img, .product-img-placeholder {
                 height: 55px;
             }
@@ -135,49 +128,47 @@
                 min-height: 120px;
             }
         }
-    
-.grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 36px 20px;
-}
-@media (max-width: 1000px) {
-  .grid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-@media (max-width: 600px) {
-  .grid {
-    grid-template-columns: 1fr;
-    gap: 16px 0;
-  }
-  .product-card img, .product-img-placeholder {
-    height: 48px !important;
-    max-height: 48px !important;
-  }
-  .product-info {
-    min-height: 50px !important;
-    margin-bottom: 0 !important;
-    padding-bottom: 0 !important;
-  }
-  .product-row {
-    margin-bottom: 2px !important;
-    padding-bottom: 0 !important;
-  }
-  .deposit-form {
-    margin-top: 4px !important;
-    margin-bottom: 0 !important;
-    padding-bottom: 0 !important;
-  }
-  .deposit-form label,
-  .deposit-form input {
-    margin-top: 0 !important;
-    margin-bottom: 4px !important;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-  }
-}
-
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 36px 20px;
+        }
+        @media (max-width: 1000px) {
+            .grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        @media (max-width: 600px) {
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 16px 0;
+            }
+            .product-card img, .product-img-placeholder {
+                height: 48px !important;
+                max-height: 48px !important;
+            }
+            .product-info {
+                min-height: 50px !important;
+                margin-bottom: 0 !important;
+                padding-bottom: 0 !important;
+            }
+            .product-row {
+                margin-bottom: 2px !important;
+                padding-bottom: 0 !important;
+            }
+            .deposit-form {
+                margin-top: 4px !important;
+                margin-bottom: 0 !important;
+                padding-bottom: 0 !important;
+            }
+            .deposit-form label,
+            .deposit-form input {
+                margin-top: 0 !important;
+                margin-bottom: 4px !important;
+                padding-top: 0 !important;
+                padding-bottom: 0 !important;
+            }
+        }
 </style>
 </head>
 <body>
@@ -211,13 +202,11 @@
 <a href="financing.html">Financing</a>
 <a href="projects.html">Projects</a>
 <a href="contact.html">Contact</a>
-
 <span id="cartLinkWrapper" style="display:none;">
 <a href="cart.html">
     🛒 Cart <span id="cartCount" style="font-weight:bold; background:#3E9F50; color:white; padding:2px 6px; border-radius:50%; font-size:0.8em; vertical-align:top;">0</span>
 </a>
 </span>
-
 </nav>
 </header>
 <div class="container">
@@ -304,13 +293,13 @@
 </div>
 </div>
 </div>
-
 <footer>
 <div class="footer-contacts">
 <a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a>
 </div>
 <p>© 2025 WattSun Solar. All rights reserved.</p>
 </footer>
+
 <script>
   const navToggle = document.querySelector('.nav-toggle');
   const header = document.querySelector('header');
@@ -321,32 +310,16 @@
     link.addEventListener('click', () => header.classList.remove('nav-open'));
   });
 </script>
-<script src="main.js">
-
-document.addEventListener('DOMContentLoaded', function() {
-  document.body.addEventListener('click', function(e) {
-    const header = document.querySelector('header');
-    if (!header) return;
-    const nav = header.querySelector('nav');
-    const navToggle = header.querySelector('.nav-toggle');
-    if (
-      header.classList.contains('nav-open') &&
-      !nav.contains(e.target) &&
-      !navToggle.contains(e.target)
-    ) {
-      header.classList.remove('nav-open');
-    }
-  }, true);
-});
-
-</script>
 
 <script>
   function updateCartCount() {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const count = cart.length;
+    let totalCount = 0;
+    for (let i = 0; i < cart.length; i++) {
+      totalCount += cart[i].quantity || 1;
+    }
     const badge = document.getElementById("cartCount");
-    if (badge) badge.textContent = count;
+    if (badge) badge.textContent = totalCount;
   }
 
   document.addEventListener("DOMContentLoaded", function () {
@@ -363,59 +336,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  function addToCart(item, price, inputId) {
-      const depositValue = document.getElementById(inputId).value;
-      const deposit = Number(depositValue);
-      if (!deposit || isNaN(deposit) || deposit <= 0) {
-          alert("Please enter a valid deposit amount.");
-          return;
-      }
-
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      const index = cart.findIndex(prod => prod.name === item);
-      if (index !== -1) {
-          cart[index].quantity = (cart[index].quantity || 1) + 1;
-          cart[index].deposit = deposit;
-      } else {
-          cart.push({
-              name: item,
-              price: price,
-              deposit: deposit,
-              quantity: 1
-          });
-      }
-
-      localStorage.setItem("cart", JSON.stringify(cart));
-      showToast(item + " added to cart!");
-      updateCartCount();
-  }
-
-  function showToast(message) {
-    const toast = document.getElementById("toast");
-    toast.textContent = message;
-    toast.style.display = "block";
-    toast.style.opacity = "1";
-    setTimeout(() => {
-      toast.style.opacity = "0";
-      setTimeout(() => toast.style.display = "none", 300);
-    }, 2500);
-  }
-
-  window.addToCart = addToCart; // expose globally
-});
-</script>
-
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  function addToCart(item, price, inputId) {
+  window.addToCart = function(item, price, inputId) {
     const depositValue = document.getElementById(inputId).value;
     const deposit = Number(depositValue);
     if (!deposit || isNaN(deposit) || deposit <= 0) {
       alert("Please enter a valid deposit amount.");
       return;
     }
-
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     const index = cart.findIndex(prod => prod.name === item);
     if (index !== -1) {
@@ -429,11 +356,10 @@ document.addEventListener("DOMContentLoaded", function () {
         quantity: 1
       });
     }
-
     localStorage.setItem("cart", JSON.stringify(cart));
     showToast(item + " added to cart!");
     updateCartCount();
-  }
+  };
 
   function showToast(message) {
     const toast = document.getElementById("toast");
@@ -446,16 +372,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 2500);
   }
 
-  function updateCartCount() {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const badge = document.getElementById("cartCount");
-    if (badge) badge.textContent = cart.length;
-  }
-
-  window.addToCart = addToCart;
   updateCartCount();
 });
 </script>
-
 </body>
 </html>
