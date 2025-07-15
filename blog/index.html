@@ -1,29 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Blog - WattSun Solar</title>
-  <link rel="stylesheet" href="../css/main.css">
+  <meta charset="utf-8"/>
+  <title>WattSun Solar Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../main.css">
   <link rel="stylesheet" href="blog.css">
 </head>
 <body>
 <header>
+  <div class="header-bar">
+    <h1>WattSun Solar</h1>
+    <button class="nav-toggle" aria-label="Open menu">&#9776;</button>
+  </div>
   <nav>
-    <span class="logo">WattSun Solar Logo</span>
-    <ul>
-      <li><a href="/index.html">Home</a></li>
-      <li><a href="/shop.html">Shop</a></li>
-      <li><a href="/solutions.html">Solutions</a></li>
-      <li><a href="/financing.html">Financing</a></li>
-      <li><a href="/projects.html">Projects</a></li>
-      <li><a href="/contact.html">Contact</a></li>
-      <li><a href="/blog/">Blog</a></li>
-    </ul>
+    <a href="../index.html">Home</a>
+    <a href="../solutions.html">Solutions</a>
+    <a href="../shop.html">Shop</a>
+    <a href="../financing.html">Financing</a>
+    <a href="../projects.html">Projects</a>
+    <a href="../contact.html">Contact</a>
+    <a href="index.html">Blog</a>
   </nav>
 </header>
+
 <main class="blog-main">
   <h1>WattSun Solar Blog</h1>
-
   <section class="blog-card">
     <h2><a href="posts/post-1.md">Solar Buyer’s Guide 2025</a></h2>
     <p><b>2025-07-15</b></p>
@@ -37,8 +39,24 @@
     <p><a href="posts/post-2.md">Read more &rarr;</a></p>
   </section>
 </main>
+
 <footer>
-  &copy; 2025 WattSun Solar. All rights reserved.
+  <div class="footer-contacts">
+    <a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a>
+  </div>
+  <p>© 2025 WattSun Solar. All rights reserved.</p>
 </footer>
+
+<script>
+  const navToggle = document.querySelector('.nav-toggle');
+  const header = document.querySelector('header');
+  navToggle.addEventListener('click', function() {
+    header.classList.toggle('nav-open');
+  });
+  document.querySelectorAll('header nav a').forEach(link => {
+    link.addEventListener('click', () => header.classList.remove('nav-open'));
+  });
+</script>
+<script src="../main.js"></script>
 </body>
 </html>
