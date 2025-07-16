@@ -599,6 +599,30 @@ nav a:focus {
   }
 }
   </style>
+  <style>
+   /* Ensure fully rounded input fields on all screens */
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  border-radius: 12px;
+  padding: 13px 10px;
+  font-size: 1em;
+  background: #faf9f7;
+  box-sizing: border-box;
+  display: block;
+  margin-bottom: 18px;
+}
+
+/* On mobile: force full width inside container */
+@media (max-width: 768px) {
+  .contact-form input,
+  .contact-form textarea {
+    width: 94vw !important;
+    max-width: 94vw !important;
+    margin: 0 auto 18px auto;
+  }
+}
+  </style>
  </head>
  <body>
   <!-- Header: Unchanged -->
