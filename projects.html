@@ -1,24 +1,23 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta content="width=device-width, initial-scale=1" name="viewport"/><meta charset="utf-8"/>
-<title>Our Projects | WattSun Solar</title>
-<link href="main.css" rel="stylesheet"/>
-<style>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Our Projects | WattSun Solar</title>
+  <link href="main.css" rel="stylesheet"/>
+  <style>
+    /* Project grid */
     .grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 28px;
-      margin-top: 36px;
-      margin-bottom: 24px;
+      margin: 36px 0 24px;
     }
     .project {
       background: #fff;
       border-radius: 15px;
       box-shadow: 0 4px 16px rgba(247,183,51,0.11), 0 1.5px 9px rgba(0,0,0,0.04);
       overflow: hidden;
-      text-align: left;
       display: flex;
       flex-direction: column;
       height: 100%;
@@ -30,16 +29,16 @@
       background: #f9eabb;
     }
     .project-info {
-      padding: 22px 18px 15px 18px;
-      flex: 1 1 auto;
+      padding: 22px 18px 15px;
+      flex: 1;
     }
     .project-info h3 {
-      margin: 0 0 10px 0;
+      margin: 0 0 10px;
       font-size: 1.18em;
       color: #3E9F50;
     }
     .project-info p {
-      margin: 6px 0 0 0;
+      margin: 6px 0 0;
       font-size: 1em;
     }
     @media (max-width: 1000px) {
@@ -49,503 +48,253 @@
       .grid { grid-template-columns: 1fr; }
       .project img { height: 140px; }
     }
-  
-html, body {
-  width: 100vw;
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-body { background: #fafafa; }
-.container {
-  max-width: 950px;
-  width: 95vw;
-  margin: 44px auto;
-  padding: 38px 12px 30px 12px;
-  background: #fff;
-  border-radius: 13px;
-  box-shadow: 0 4px 20px rgba(247,183,51,0.10), 0 1.5px 9px rgba(0,0,0,0.04);
-  box-sizing: border-box;
-}
-h2 {
-  text-align: center;
-  margin-bottom: 30px;
-  font-size: 2em;
-  font-weight: bold;
-  color: #b47d08;
-}
-.table-wrapper {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: auto;
-  box-sizing: border-box;
-  background: #fff;
-  border-radius: 10px;
-}
-table {
-  width: 100%;
-  min-width: 0;
-  border-collapse: separate;
-  border-spacing: 0;
-  background: #fff;
-  margin-bottom: 22px;
-  border-radius: 10px;
-  box-shadow: 0 1px 8px rgba(0,0,0,0.07);
-  overflow: hidden;
-  table-layout: auto;
-  font-size: 0.97em;
-  box-sizing: border-box;
-}
-th, td {
-  text-align: left;
-  padding: 14px 8px;
-  border-bottom: 1px solid #f2e2b6;
-  font-size: 1em;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-th {
-  background-color: #f9eabb;
-  color: #444;
-  font-weight: bold;
-  text-align: center;
-}
-/* Compact numeric columns */
-th.compact-col, td.compact-col {
-  width: 68px;
-  min-width: 48px;
-  max-width: 80px;
-  text-align: right;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-variant-numeric: tabular-nums;
-  padding-left: 0;
-  padding-right: 0;
-}
-/* Product column - widest */
-td.product-col {
-  text-align: left;
-  font-weight: 500;
-  min-width: 180px;
-  max-width: 320px;
-  width: 38%;
-  word-break: break-word;
-  white-space: normal;
-}
-.total {
-  text-align: right;
-  margin-top: 15px;
-  font-size: 1.15em;
-  font-weight: bold;
-  color: #3E9F50;
-}
-/* --- Actions (Buttons) --- */
-.actions {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
-  margin-top: 30px;
-  margin-bottom: 36px;
-  width: 100%;
-}
-.actions .btn,
-.actions .btn-clear {
-  min-width: 120px;
-  max-width: 170px;
-  width: auto !important;
-  font-size: 1em;
-  padding: 9px 18px;
-  margin: 0;
-  display: inline-block;
-  box-sizing: border-box;
-}
-.btn {
-  border: none;
-  border-radius: 8px;
-  color: #fff;
-  background: linear-gradient(90deg, #f7b733 0%, #fcf6ba 100%);
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 4px 16px rgba(247,183,51, 0.14);
-  letter-spacing: 0.5px;
-  text-decoration: none;
-  transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
-}
-.btn:hover {
-  background: linear-gradient(90deg, #fcf6ba 0%, #f7b733 100%);
-  color: #b37900 !important;
-  transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 6px 20px rgba(247,183,51, 0.20);
-}
-/* Hamburger & mobile nav styles */
-.nav-toggle {
-  display: none;
-  font-size: 2rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  margin-left: auto;
-}
-@media (max-width: 800px) {
-  .nav-toggle {
-    display: inline-block;
-    z-index: 1001;
-    position: absolute;
-    top: 18px;
-    right: 20px;
-  }
-  nav {
-    display: none;
-    flex-direction: column;
-    background: #fff;
-    position: absolute;
-    right: 0;
-    top: 60px;
-    width: 80vw;
-    border-radius: 0 0 0 20px;
-    box-shadow: 0 10px 32px #ccc;
-    padding: 30px 0 30px 0;
-    z-index: 1000;
-  }
-  nav.active {
-    display: flex !important;
-  }
-  nav a {
-    margin: 12px 0;
-    font-size: 1.3em;
-    padding-left: 28px;
-    color: #333;
-    border-bottom: 1px solid #eee;
-    width: 100%;
-    display: block;
-    text-align: left;
-  }
-  nav span {
-    display: block;
-    padding-left: 28px;
-    margin: 12px 0 0 0;
-  }
-}
-@media (max-width: 700px) {
-  .container {
-    width: 100vw !important;
-    max-width: 100vw !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    box-sizing: border-box !important;
-  }
-  .table-wrapper {
-    width: 100vw !important;
-    max-width: 100vw !important;
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch;
-    margin-left: 0 !important;
-  }
-  table {
-    width: 100vw !important;
-    max-width: 100vw !important;
-    min-width: 0 !important;
-    box-sizing: border-box !important;
-    table-layout: fixed !important;
-  }
-  .col-unit, .col-total-deposit {
-    display: none;
-  }
-  th, td {
-    font-size: 0.96em;
-    padding: 8px 3px;
-    min-width: 36px;
-    max-width: 90px;
-  }
-  td.product-col {
-    width: 35% !important;
-    min-width: 100px !important;
-    max-width: 180px !important;
-    white-space: nowrap !important;
-  }
-  .actions {
-    flex-direction: column !important;
-    align-items: center !important;
-    gap: 12px !important;
-  }
-  .actions .btn,
-  .actions .btn-clear {
-    width: 80vw !important;
-    max-width: 96vw !important;
-    min-width: 0 !important;
-    font-size: 1em;
-  }
-}
-@media (max-width: 900px) {
-  .container { padding: 18px 5vw; }
-  table th, table td { font-size: 0.98em; }
-  .btn, .btn-clear { width: 100%; margin: 10px 0; }
-}
-@media (max-width: 700px) {
-  .container {
-    width: 100vw !important;
-    max-width: 100vw !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    box-sizing: border-box !important;
-  }
-  .table-wrapper {
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch;
-  }
-  th.col-desc, td.col-desc, th.col-unit, td.col-unit, th.col-total-deposit, td.col-total-deposit {
-    display: none !important;
-  }
-  td.product-col {
-    width: 40% !important;
-    min-width: 80px !important;
-    max-width: 140px !important;
-    white-space: nowrap !important;
-  }
-  table {
-    table-layout: fixed !important;
-  }
-  th, td {
-    padding: 8px 6px !important;
-    font-size: 0.9em !important;
-  }
-  .actions {
-    flex-direction: column !important;
-    align-items: center !important;
-    gap: 12px !important;
-  }
-  .actions .btn, .actions .btn-clear {
-    width: 80vw !important;
-    max-width: 96vw !important;
-    min-width: 0 !important;
-  }
-}
-/* Cart Icon in NavBar */
-.cart-icon-link {
-  position: relative;
-  display: inline-block;
-  text-decoration: none;
-  color: inherit;
-  vertical-align: middle;
-  margin-left: 10px;
-}
-.cart-icon {
-  font-size: 1.24em;
-  display: flex;
-  align-items: center;
-  position: relative;
-}
-.cart-count-badge {
-  position: absolute;
-  top: -0.7em;
-  right: -0.7em;
-  background: #19c37d;
-  color: #fff;
-  font-size: 0.8em;
-  min-width: 1.15em;
-  height: 1.15em;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  box-shadow: 0 0 0.13em #0001;
-  transition: background 0.2s;
-  pointer-events: none;
-  z-index: 1;
-  display: none;
-}
 
-/* === Mobile Sticky Footer === */
-.mobile-nav {
-  display: none;
-}
-@media (max-width: 768px) {
-  .mobile-nav {
-    display: flex;
-    position: fixed;
-    bottom: 0;
-    height: 56px;
-    width: 100%;
-    background-color: #f4a940;
-    justify-content: space-around;
-    align-items: center;
-    z-index: 1000;
-    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
-    padding: 0;
-  }
-  .mobile-nav a {
-    font-size: 20px;
-    height: 56px;
-    line-height: 56px;
-    padding: 0;
-    margin: 0;
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    color: black;
-    position: relative;
-  }
-  #cart-count {
-    position: absolute;
-    top: 6px;
-    right: 10px;
-    background: red;
-    color: white;
-    font-size: 11px;
-    min-width: 16px;
-    height: 16px;
-    border-radius: 8px;
-    padding: 0 5px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-}
-        </style>
+    /* Base/layout */
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100vw;
+      max-width: 100vw;
+      overflow-x: hidden;
+      font-family: sans-serif;
+      background: #fafafa;
+    }
+    .container {
+      max-width: 950px;
+      width: 95vw;
+      margin: 44px auto;
+      padding: 38px 12px 30px;
+      background: #fff;
+      border-radius: 13px;
+      box-shadow: 0 4px 20px rgba(247,183,51,0.10), 0 1.5px 9px rgba(0,0,0,0.04);
+      box-sizing: border-box;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2em;
+      font-weight: bold;
+      color: #b47d08;
+    }
+
+    /* Logo styles */
+    .logo-container { display: none; }
+    .desktop-logo  { display: block; }
+    .brand-name    { font-size: 1.8em; font-weight: bold; color: white; white-space: nowrap; }
+    .site-logo     { height: 48px; max-width: 48px; object-fit: contain; vertical-align: middle; }
+    @media (max-width: 768px) {
+      .desktop-logo   { display: none; }
+      .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 4px 12px;
+        height: 56px;
+        margin-left: 10px;
+        white-space: nowrap;
+      }
+      .site-logo      { height: auto; max-height: 36px; }
+      .brand-name     { font-size: 1.3em; }
+    }
+    @media (max-width: 768px) {
+      h1 img.site-logo {
+        max-height: 32px !important;
+        margin-right: 8px;
+      }
+    }
+
+    /* Footer normalization */
+    footer { margin-top: 0 !important; }
+
+    /* Hide desktop footer on mobile */
+    @media (max-width: 768px) {
+      footer:not(.mobile-nav) { display: none !important; }
+    }
+
+    /* Mobile sticky nav & badge formatting */
+    .mobile-nav { display: none; }
+    @media (max-width: 768px) {
+      .mobile-nav {
+        display: flex;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 56px;
+        margin: 0;
+        padding: 0;
+        background-color: #f4a940;
+        justify-content: space-around;
+        align-items: center;
+        z-index: 1000;
+        box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
+      }
+      .mobile-nav a {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        text-decoration: none;
+        color: black;
+        position: relative;
+        line-height: 1;
+        padding: 0;
+        margin: 0;
+      }
+      /* Cart badge */
+      #cart-count {
+        position: absolute;
+        top: -8px;
+        right: -12px;
+        background: red;
+        color: white;
+        border-radius: 50%;
+        padding: 2px 6px;
+        font-size: 12px;
+        line-height: 1;
+        text-align: center;
+      }
+      /* Adjust badge size */
+      #cart-count {
+        top: 6px;
+        right: 10px;
+        font-size: 11px;
+        min-width: 16px;
+        height: 16px;
+        border-radius: 8px;
+        padding: 0 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  </style>
 </head>
 <body>
-<!-- Header: From main.css -->
-<header>
-<div class="header-bar">
-<h1>WattSun Solar</h1>
-<button aria-label="Open menu" class="nav-toggle">☰</button>
-</div>
-<nav>
-<a href="index.html">Home</a>
-<a href="solutions.html">Solutions</a>
-<a href="shop.html">Shop</a>
-<a href="financing.html">Financing</a>
-<a href="projects.html">Projects</a>
-<a href="contact.html">Contact</a>
-<!--<a href="cart.html">🛒 Cart</a>-->
-</nav>
-</header>
-<section>
-<h2 class="centered-section-title">Recent Projects</h2>
-<div class="grid">
-<!-- First row: real projects -->
-<div class="project">
-<img alt="Family Home – Karen" src="images/family-home-karen.jpg"/>
-<div class="project-info">
-<h3>Family Home – Karen</h3>
-<p>3kW rooftop solar with battery backup. Reliable clean power for the whole family, even during outages.</p>
-</div>
-</div>
-<div class="project">
-<img alt="Nairobi Factory" src="images/nairobi-factory.jpg"/>
-<div class="project-info">
-<h3>Nairobi Factory</h3>
-<p>9kW hybrid inverter system. Industrial-grade solar for uninterrupted manufacturing operations.</p>
-</div>
-</div>
-<div class="project">
-<img alt="Off-Grid Lodge – Naivasha" src="images/offgrid-lodge-naivasha.jpg"/>
-<div class="project-info">
-<h3>Off-Grid Lodge – Naivasha</h3>
-<p>Complete off-grid solar with energy storage, ensuring remote hospitality runs smoothly and sustainably.</p>
-</div>
-</div>
-<!-- Second row: placeholder projects -->
-<div class="project">
-<img alt="Project Picture 1" src="images/picture1.jpg"/>
-<div class="project-info">
-<h3>Picture 1</h3>
-<p>Sample project – description goes here.</p>
-</div>
-</div>
-<div class="project">
-<img alt="Project Picture 2" src="images/picture2.jpg"/>
-<div class="project-info">
-<h3>Picture 2</h3>
-<p>Sample project – description goes here.</p>
-</div>
-</div>
-<div class="project">
-<img alt="Project Picture 3" src="images/picture3.jpg"/>
-<div class="project-info">
-<h3>Picture 3</h3>
-<p>Sample project – description goes here.</p>
-</div>
-</div>
-</div>
-<!-- <div style="text-align:center;">
-      <a class="gold-btn" href="#">View More Projects</a>
-    </div>-->
-</section>
-<!-- Footer: From main.css -->
-<footer>
-    © 2025 WattSun Solar Kenya | <div class="footer-contacts"><a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a></div>
-</footer>
-<script>
-  const navToggle = document.querySelector('.nav-toggle');
-  const header = document.querySelector('header');
-  navToggle.addEventListener('click', function() {
-    header.classList.toggle('nav-open');
-  });
-  document.querySelectorAll('header nav a').forEach(link => {
-    link.addEventListener('click', () => header.classList.remove('nav-open'));
-  });
-</script>
-<script src="main.js">
+  <!-- Header (index.html) -->
+  <header>
+    <div class="header-bar">
+      <h1 class="desktop-logo">
+        <img src="assets/logo/Wattsun Solar log2.png"
+             alt="WattSun Solar Logo"
+             style="width: 60px; object-fit: contain; margin-right: 10px;">
+        WattSun Solar
+      </h1>
+      <div class="logo-container">
+        <img src="assets/logo/Wattsun Solar log2.png"
+             alt="WattSun Solar Logo"
+             class="site-logo"/>
+        <span class="brand-name">WattSun Solar</span>
+      </div>
+      <button aria-label="Open menu" class="nav-toggle">☰</button>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="solutions.html">Solutions</a>
+      <a href="shop.html">Shop</a>
+      <a href="financing.html">Financing</a>
+      <a href="projects.html">Projects</a>
+      <a href="contact.html">Contact</a>
+      <a aria-label="Cart" class="cart-icon-link" href="cart.html">
+        <span class="cart-icon">🛒<span id="cart-count">0</span></span>
+      </a>
+    </nav>
+  </header>
 
-document.addEventListener('DOMContentLoaded', function() {
-  document.body.addEventListener('click', function(e) {
-    const header = document.querySelector('header');
-    if (!header) return;
-    const nav = header.querySelector('nav');
-    const navToggle = header.querySelector('.nav-toggle');
-    if (
-      header.classList.contains('nav-open') &&
-      !nav.contains(e.target) &&
-      !navToggle.contains(e.target)
-    ) {
-      header.classList.remove('nav-open');
+  <div class="container">
+    <h2 class="centered-section-title">Recent Projects</h2>
+    <div class="grid">
+      <div class="project">
+        <img src="images/family-home-karen.jpg" alt="Family Home – Karen"/>
+        <div class="project-info">
+          <h3>Family Home – Karen</h3>
+          <p>3kW rooftop solar with battery backup. Reliable clean power for the whole family, even during outages.</p>
+        </div>
+      </div>
+      <div class="project">
+        <img src="images/nairobi-factory.jpg" alt="Nairobi Factory"/>
+        <div class="project-info">
+          <h3>Nairobi Factory</h3>
+          <p>9kW hybrid inverter system. Industrial-grade solar for uninterrupted manufacturing operations.</p>
+        </div>
+      </div>
+      <div class="project">
+        <img src="images/offgrid-lodge-naivasha.jpg" alt="Off-Grid Lodge – Naivasha"/>
+        <div class="project-info">
+          <h3>Off-Grid Lodge – Naivasha</h3>
+          <p>Complete off-grid solar with energy storage, ensuring remote hospitality runs smoothly and sustainably.</p>
+        </div>
+      </div>
+      <div class="project">
+        <img src="images/picture1.jpg" alt="Project Picture 1"/>
+        <div class="project-info">
+          <h3>Picture 1</h3>
+          <p>Sample project – description goes here.</p>
+        </div>
+      </div>
+      <div class="project">
+        <img src="images/picture2.jpg" alt="Project Picture 2"/>
+        <div class="project-info">
+          <h3>Picture 2</h3>
+          <p>Sample project – description goes here.</p>
+        </div>
+      </div>
+      <div class="project">
+        <img src="images/picture3.jpg" alt="Project Picture 3"/>
+        <div class="project-info">
+          <h3>Picture 3</h3>
+          <p>Sample project – description goes here.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Desktop footer (index.html) -->
+  <footer>
+    <div class="footer-contacts">
+      <a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a>
+    </div>
+    <p>© 2025 WattSun Solar. All rights reserved.</p>
+  </footer>
+
+  <!-- Mobile sticky footer (index.html) -->
+  <footer class="mobile-nav">
+    <a aria-label="Home" href="index.html">🏠</a>
+    <a aria-label="Account" href="account.html">👤</a>
+    <a aria-label="Cart" href="cart.html">🛒<span id="cart-count">0</span></a>
+    <a aria-label="Menu" href="javascript:void(0);" onclick="document.querySelector('.nav-toggle').click();">☰</a>
+  </footer>
+
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click', () =>
+      document.querySelector('header').classList.toggle('nav-open')
+    );
+    document.querySelectorAll('header nav a').forEach(link =>
+      link.addEventListener('click', () =>
+        document.querySelector('header').classList.remove('nav-open')
+      )
+    );
+
+    function updateCartCountBadge() {
+      let count = 0;
+      try {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        count = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+      } catch {}
+      const desktopBadge = document.getElementById('cart-count-badge');
+      if (desktopBadge) {
+        desktopBadge.textContent = count;
+        desktopBadge.style.display = count > 0 ? 'flex' : 'none';
+      }
+      const mobileBadge = document.getElementById('cart-count');
+      if (mobileBadge) {
+        mobileBadge.textContent = count;
+      }
     }
-  }, true);
-});
-
-</script>
-<footer class="mobile-nav">
-<a aria-label="Home" href="index.html">🏠</a>
-<a aria-label="Account" href="account.html">👤</a>
-<a aria-label="Cart" href="cart.html">🛒<span id="cart-count">0</span></a>
-<a aria-label="Menu" href="javascript:void(0);" onclick="document.querySelector('.nav-toggle').click();">☰</a>
-</footer><script>
-function updateCartCountBadge() {
-  let count = 0;
-  try {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    count = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
-  } catch (e) {}
-
-  const badge = document.getElementById('cart-count-badge');
-  const mobileCount = document.getElementById('cart-count');
-  if (badge) {
-    if (count > 0) {
-      badge.textContent = count;
-      badge.style.display = 'flex';
-    } else {
-      badge.style.display = 'none';
-    }
-  }
-  if (mobileCount) {
-    mobileCount.textContent = count;
-  }
-}
-document.addEventListener('DOMContentLoaded', updateCartCountBadge);
-window.addEventListener('storage', updateCartCountBadge);
-</script></body>
+    document.addEventListener('DOMContentLoaded', updateCartCountBadge);
+    window.addEventListener('storage', updateCartCountBadge);
+  </script>
+  <script src="main.js"></script>
+</body>
 </html>
-<!-- This HTML file lists some of the projects WattSun Solar has completed, showcasing their expertise in solar solutions. -->
-<!-- The projects include a family home, an industrial factory, and an off-grid lodge, each with a brief description and an image. -->
-<!-- The footer provides contact information and copyright notice. -->
-<!-- The page is styled using an external CSS file (main.css) for consistent design across the site. -->
-&lt;!-- The header includes navigation links to other pages like Home, Solutions, Shop, Projects

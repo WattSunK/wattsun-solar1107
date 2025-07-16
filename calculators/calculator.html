@@ -6,7 +6,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Solar Kit Calculator - WattSun Solar</title>
-<link href="main.css" rel="stylesheet"/>
+<link href="../main.css" rel="stylesheet"/>
 <style>
     body { background: #fafafa; }
     .container { width: 100%; max-width: 600px; margin: 44px auto 40px auto; background: #fff; border-radius: 18px; box-shadow: 0 4px 22px rgba(44,62,80,0.10); padding: 38px 22px 34px 22px; }
@@ -121,15 +121,15 @@
 <button aria-label="Menu" class="nav-toggle" onclick="toggleNav()">☰</button>
 </div>
 <nav>
-<a href="index.html">Home</a>
-<a href="solutions.html">Solutions</a>
-<a href="shop.html">Shop</a>
-<a href="calculator.html">Calculator</a>
-<a href="financing.html">Financing</a>
-<a href="projects.html">Projects</a>
-<a href="contact.html">Contact</a>
+<a href="/index.html">Home</a>
+<a href="../solutions.html">Solutions</a>
+<a href="/shop.html">Shop</a>
+<a href="/calculators/calculator.html">Calculator</a>
+<a href="/financing.html">Financing</a>
+<a href="/projects.html">Projects</a>
+<a href="/contact.html">Contact</a>
 <!-- Cart Icon START -->
-<a aria-label="View shopping cart" class="cart-icon-link" href="cart.html" title="View cart">
+<a aria-label="View shopping cart" class="cart-icon-link" href="../cart.html" title="View cart">
 <span class="cart-icon">
         🛒
         <span class="cart-count-badge" id="cart-count-badge">0</span>
@@ -275,188 +275,11 @@
 <a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a>
 </div>
 </footer>
-<script>
-  // --- CART BADGE LOGIC ---
-  function updateCartCountBadge() {
-    let count = 0;
-    try {
-      const cart = JSON.parse(localStorage.getItem("cart")) || [];
-      count = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
-    } catch(e){}
-    const badge = document.getElementById('cart-count-badge');
-    if (!badge) return;
-    if (count > 0) {
-      badge.textContent = count;
-      badge.style.display = 'flex';
-    } else {
-      badge.style.display = 'none';
-    }
-  }
-  document.addEventListener('DOMContentLoaded', updateCartCountBadge);
-  window.addEventListener('storage', updateCartCountBadge);
 
-  function toggleNav() {
-    document.querySelector('header').classList.toggle('nav-open');
-  }
-  function toggleSection(sectionId) {
-    var sec = document.getElementById(sectionId);
-    sec.classList.toggle('collapsed');
-  }
-  function sanitizeInput(input) {
-    let val = input.value.replace(/^0+/, '');
-    val = val.replace(/[^0-9]/g, '');
-    input.value = val === '' ? '0' : String(Number(val));
-  }
 
-  // SHOP KIT DESCRIPTIONS
-  const kitDescriptions = {
-    "1kW Kit": "Best for bedsitters, small homes or shops. Runs lights, TV, phone/laptop charging, and a small fridge for basic backup.",
-    "3kW Kit": "For medium homes, small offices, kiosks or shops. Handles lighting, TV, freezer, up to 2 fridges, iron, microwave, and essential business loads.",
-    "6kW Kit": "Large homes, small businesses, restaurants. Runs multiple kitchen devices (fridge, freezer, microwave, fryer), computers, CCTV, Wi-Fi, lighting.",
-    "9kW Kit": "Large home or mid-sized business, partial kitchen for fast food. All of above plus 3 kitchen devices at once: commercial freezer, fryer, coffee machine.",
-    "12kW Kit": "Full backup for large businesses, supermarkets, or fast food. Runs all above plus several fryers/ovens/fridges, AC, IT loads, coffee and more."
-  };
 
-  const kits = [
-    { name: '1kW Kit',    maxW: 1000, price: 120000, description: kitDescriptions["1kW Kit"] },
-    { name: '3kW Kit',    maxW: 3000, price: 320000, description: kitDescriptions["3kW Kit"] },
-    { name: '6kW Kit',    maxW: 6000, price: 590000, description: kitDescriptions["6kW Kit"] },
-    { name: '9kW Kit',    maxW: 9000, price: 850000, description: kitDescriptions["9kW Kit"] },
-    { name: '12kW Kit',   maxW: 12000, price: 1150000, description: kitDescriptions["12kW Kit"] }
-  ];
-  const applianceWatts = {
-    led_bulb: 10, tv: 60, fridge: 150, laptop: 60, phone: 5, radio: 15, fan: 40, pump: 250, iron: 1000, kettle: 1500, cooker: 1500,
-    microwave: 1200, oven: 2500, freezer: 300, washer: 1200, heater: 2000, ac: 1500, tools: 1200, borehole: 2000, cctv: 150
-  };
 
-  function calculateKit() {
-    let totalWatt = 0;
-    let form = document.getElementById('solarForm');
-    Object.keys(applianceWatts).forEach(key => {
-      const qty = parseInt(form[key]?.value) || 0;
-      totalWatt += qty * applianceWatts[key];
-    });
-    let kit = kits.find(k => totalWatt <= k.maxW);
-    if (!kit) kit = kits[kits.length - 1];
-    let resultBox = document.getElementById('result');
-    resultBox.style.display = 'block';
-    setTimeout(function() {
-      resultBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      resultBox.classList.add('result-flash');
-      setTimeout(()=>resultBox.classList.remove('result-flash'), 1000);
-    }, 100);
-    if(totalWatt === 0){
-      resultBox.innerHTML = `<span style="color:#cf4c0a"><b>No appliances selected.</b><br>Select appliances to get your kit recommendation.</span>`;
-      return;
-    }
-    resultBox.innerHTML = `
-      <div style="margin:0 auto;max-width:350px;">
-      <b>Recommended Kit:</b> <span style="color:#0a7c48">${kit.name}</span><br>
-      <b>Total Estimated Power:</b> ${totalWatt} W<br>
-      <b>Estimated Price:</b> KES ${kit.price.toLocaleString()}<br><br>
-      <div class="calc-btn-row">
-        <button type="button" class="buy-now-btn" data-kit="${kit.name}">Buy Now</button>
-        <a href="solutions.html" class="secondary">Back to Solutions</a>
-      </div>
-      </div>
-    `;
-  }
 
-  function addToCartFromCalculator(itemName, price) {
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    // Find kit info for description
-    const kitInfo = kits.find(k => k.name === itemName);
-    const description = kitInfo ? kitInfo.description : "";
-    const index = cart.findIndex(prod => prod.name === itemName);
-    if (index !== -1) {
-      cart[index].quantity = (cart[index].quantity || 1) + 1;
-    } else {
-      cart.push({ name: itemName, price: price, deposit: 0, quantity: 1, description: description });
-    }
-    localStorage.setItem("cart", JSON.stringify(cart));
-    showCartNotification(itemName + " added to cart!");
-    updateCartCountBadge();
-  }
-
-  function showCartNotification(message) {
-    var notif = document.getElementById('cart-notification');
-    notif.textContent = message;
-    notif.classList.add('show');
-    notif.style.display = "block";
-    clearTimeout(notif._timer);
-    notif._timer = setTimeout(function() {
-      notif.classList.remove('show');
-      setTimeout(() => { notif.style.display = "none"; }, 400);
-    }, 1600);
-  }
-
-  // Event delegation for dynamic Buy Now buttons
-  document.addEventListener("click", function(event) {
-    if (event.target.classList.contains("buy-now-btn")) {
-      const kitName = event.target.getAttribute("data-kit");
-      const kitInfo = kits.find(k => k.name === kitName);
-      if (!kitInfo) return;
-      addToCartFromCalculator(kitInfo.name, kitInfo.price);
-    }
-  });
-
-  // Sizing Table Side Panel Logic
-  const showBtn = document.getElementById('showSizingBtn');
-  const sizingPanel = document.getElementById('sizingPanel');
-  const sizingOverlay = document.getElementById('sizingOverlay');
-  const closeBtn = document.getElementById('closeSizingPanel');
-  function openSizingPanel() {
-    sizingPanel.style.right = '0';
-    sizingOverlay.style.display = 'block';
-    document.body.style.overflow = 'hidden';
-  }
-  function closeSizingPanel() {
-    sizingPanel.style.right = '-420px';
-    sizingOverlay.style.display = 'none';
-    document.body.style.overflow = '';
-  }
-  showBtn.onclick = openSizingPanel;
-  sizingOverlay.onclick = closeSizingPanel;
-  closeBtn.onclick = closeSizingPanel;
-
-  document.addEventListener('DOMContentLoaded', function() {
-    document.body.addEventListener('click', function(e) {
-      const header = document.querySelector('header');
-      if (!header) return;
-      const nav = header.querySelector('nav');
-      const navToggle = header.querySelector('.nav-toggle');
-      if (
-        header.classList.contains('nav-open') &&
-        !nav.contains(e.target) &&
-        !navToggle.contains(e.target)
-      ) {
-        header.classList.remove('nav-open');
-      }
-    }, true);
-  });
-</script>
-
-<footer class="mobile-nav">
-<a aria-label="Home" href="index.html">🏠</a>
-<a aria-label="Account" href="account.html">👤</a>
-<a aria-label="Cart" href="cart.html">🛒<span id="cart-count">0</span></a>
-<a aria-label="Menu" href="javascript:void(0);" onclick="document.querySelector('header').classList.toggle('nav-open')">☰</a>
-</footer>
-
-<script>
-function updateCartCountBadge() {
-  let count = 0;
-  try {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    count = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
-  } catch (e) {}
-  const mobileCount = document.getElementById('cart-count');
-  if (mobileCount) {
-    mobileCount.textContent = count;
-  }
-}
-document.addEventListener('DOMContentLoaded', updateCartCountBadge);
-window.addEventListener('storage', updateCartCountBadge);
-</script>
+  <script src="calculator.js"></script>
 </body>
 </html>

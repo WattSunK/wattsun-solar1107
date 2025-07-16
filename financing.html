@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 
 <html lang="en">
 <head>
@@ -20,7 +19,7 @@
       right: 20px;
       top: 50%;
       transform: translateY(-50%);
-      display: none;
+      display: flex !important;
       cursor: pointer;
       background: none;
       border: none;
@@ -30,11 +29,6 @@
       width: 44px;
       align-items: center;
       justify-content: center;
-    }
-    @media (max-width: 700px) {
-      .nav-toggle {
-        display: flex !important;
-      }
     }
 
     /* Mobile nav toggle */
@@ -148,90 +142,8 @@
         padding: 22px 5vw;
       }
     }
-    .cart-btn { background: #ffc043; color: white; font-weight: bold; border: none; border-radius: 6px; cursor: pointer; box-shadow: 0 3px 12px rgba(0,0,0,0.06); }
-
-    /* Cart Icon in NavBar */
-    .cart-icon-link {
-      position: relative;
-      display: inline-block;
-      text-decoration: none;
-      color: inherit;
-      vertical-align: middle;
-      margin-left: 10px;
-    }
-    .cart-icon {
-      font-size: 1.24em;
-      display: flex;
-      align-items: center;
-      position: relative;
-    }
-    .cart-count-badge {
-      position: absolute;
-      top: -0.7em;
-      right: -0.7em;
-      background: #19c37d;
-      color: #fff;
-      font-size: 0.8em;
-      min-width: 1.15em;
-      height: 1.15em;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      box-shadow: 0 0 0.13em #0001;
-      transition: background 0.2s;
-      pointer-events: none;
-      z-index: 1;
-      display: none;
-    }
-
-@media (max-width: 768px) {
-  .mobile-nav {
-    display: flex;
-    position: fixed;
-    bottom: 0;
-    height: 56px;
-    width: 100%;
-    background-color: #f4a940;
-    justify-content: space-around;
-    align-items: center;
-    z-index: 1000;
-    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
-    padding: 0;
-  }
-  .mobile-nav a {
-    font-size: 20px;
-    height: 56px;
-    line-height: 56px;
-    padding: 0;
-    margin: 0;
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    color: black;
-    position: relative;
-  }
-  #cart-count {
-    position: absolute;
-    top: 6px;
-    right: 10px;
-    background: red;
-    color: white;
-    font-size: 11px;
-    min-width: 16px;
-    height: 16px;
-    border-radius: 8px;
-    padding: 0 5px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-}
-        </style>
+  
+    .cart-btn { background: #ffc043; color: white; font-weight: bold; border: none; border-radius: 6px; cursor: pointer; box-shadow: 0 3px 12px rgba(0,0,0,0.06); }</style>
 </head>
 <body>
 <header>
@@ -246,14 +158,11 @@
 <a aria-current="page" class="active" href="financing.html">Financing</a>
 <a href="projects.html">Projects</a>
 <a href="contact.html">Contact</a>
-<!-- Cart Icon START -->
-<a aria-label="View shopping cart" class="cart-icon-link" href="cart.html" title="View cart">
-<span class="cart-icon">
-    🛒
-    <span class="cart-count-badge" id="cart-count-badge">0</span>
-</span>
+<span id="cartLinkWrapper" style="display:none;">
+<a href="cart.html">
+    🛒 Cart <span id="cartCount" style="font-weight:bold; background:#3E9F50; color:white; padding:2px 6px; border-radius:50%; font-size:0.8em; vertical-align:top;">0</span>
 </a>
-<!-- Cart Icon END -->
+</span>
 </nav>
 </header>
 <div class="container">
@@ -341,7 +250,7 @@
           monthly: kit.monthly
         });
         localStorage.setItem('cart', JSON.stringify(cart));
-        updateCartCountBadge();
+        updateCartCount?.();
         btn.remove();
         document.getElementById('loanForm').reset();
         resultDiv.textContent = "Loan added to cart!";
@@ -350,49 +259,25 @@
     }
 
   });
-
-  // --- CART BADGE LOGIC ---
-  function updateCartCountBadge() {
-    let count = 0;
-    try {
-      const cart = JSON.parse(localStorage.getItem("cart")) || [];
-      count = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
-    } catch(e){}
-    const badge = document.getElementById('cart-count-badge');
-    if (!badge) return;
-    if (count > 0) {
-      badge.textContent = count;
-      badge.style.display = 'flex';
-    } else {
-      badge.style.display = 'none';
-    }
-  }
-  document.addEventListener('DOMContentLoaded', updateCartCountBadge);
-  window.addEventListener('storage', updateCartCountBadge);
-
 </script>
-
-<footer class="mobile-nav">
-<a aria-label="Home" href="index.html">🏠</a>
-<a aria-label="Account" href="account.html">👤</a>
-<a aria-label="Cart" href="cart.html">🛒<span id="cart-count">0</span></a>
-<a aria-label="Menu" href="javascript:void(0);" onclick="document.querySelector('header').classList.toggle('nav-open')">☰</a>
-</footer>
-
 <script>
-function updateCartCountBadge() {
-  let count = 0;
-  try {
+  function updateCartCount() {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    count = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
-  } catch (e) {}
-  const mobileCount = document.getElementById('cart-count');
-  if (mobileCount) {
-    mobileCount.textContent = count;
+    const count = cart.length;
+    const badge = document.getElementById("cartCount");
+    if (badge) badge.textContent = count;
   }
-}
-document.addEventListener('DOMContentLoaded', updateCartCountBadge);
-window.addEventListener('storage', updateCartCountBadge);
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const page = window.location.pathname.toLowerCase();
+    if (page.includes("shop") || page.includes("cart") || page.includes("checkout") || page.includes("financing")) {
+      const wrapper = document.getElementById("cartLinkWrapper");
+      if (wrapper) {
+        wrapper.style.display = "inline-block";
+        updateCartCount();
+      }
+    }
+  });
 </script>
 </body>
 </html>
