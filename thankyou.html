@@ -5,8 +5,7 @@
 <meta content="width=device-width, initial-scale=1" name="viewport"/><meta charset="utf-8"/>
 <title>Thank You – WattSun Solar</title>
 <link href="main.css" rel="stylesheet"/>
-<style>
-    body {
+<style>body {
       background: #f7f6ec;
       text-align: center;
       padding-top: 80px;
@@ -89,7 +88,55 @@
     justify-content: center;
   }
 }
-        </style>
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  white-space: nowrap;
+  padding: 6px 12px;
+  margin-left: 10px;
+}
+.brand-name {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: white;
+  white-space: nowrap;
+}
+.site-logo {
+  height: 48px;
+  max-width: 48px;
+  object-fit: contain;
+  vertical-align: middle;
+}
+@media (max-width: 768px) {
+  .logo-container {
+    padding: 4px 12px;
+    height: 56px;
+  }
+  .site-logo {
+    height: auto;
+    max-height: 36px;
+    object-fit: contain;
+  }
+  .brand-name {
+    font-size: 1.3em;
+  }
+}
+    /* === Desktop & Mobile Logo Styles from index.html === */
+    .logo-container { display: none; }
+    .desktop-logo { display: block; }
+    .brand-name { font-size: 1.8em; font-weight: bold; color: white; white-space: nowrap; }
+    .site-logo { height: 48px; max-width: 48px; object-fit: contain; vertical-align: middle; }
+    @media (max-width: 768px) {
+      .desktop-logo { display: none; }
+      .logo-container { display: flex; align-items: center; gap: 12px; white-space: nowrap; padding: 4px 12px; height: 56px; margin-left: 10px; }
+      .site-logo { height: auto; max-height: 36px; object-fit: contain; }
+      .brand-name { font-size: 1.3em; }
+    }
+    @media (max-width: 768px) {
+      h1 img.site-logo { width: auto !important; max-height: 32px !important; margin-right: 8px; }
+    }
+</style>
 </head>
 <body>
 <div class="box">
@@ -138,14 +185,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 </script>
-
 <footer class="mobile-nav">
 <a aria-label="Home" href="index.html">🏠</a>
 <a aria-label="Account" href="account.html">👤</a>
 <a aria-label="Cart" href="cart.html">🛒<span id="cart-count">0</span></a>
 <a aria-label="Menu" href="javascript:void(0);" onclick="document.querySelector('.nav-toggle').click();">☰</a>
 </footer>
-
 <script>
 function updateCartCountBadge() {
   let count = 0;
