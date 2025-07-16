@@ -1,11 +1,13 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Solar Kit Calculator - WattSun Solar</title>
-  <link href="main.css" rel="stylesheet"/>
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Solar Kit Calculator - WattSun Solar</title>
+<link href="main.css" rel="stylesheet"/>
+<style>
     body { background: #fafafa; }
     .container { width: 100%; max-width: 600px; margin: 44px auto 40px auto; background: #fff; border-radius: 18px; box-shadow: 0 4px 22px rgba(44,62,80,0.10); padding: 38px 22px 34px 22px; }
     .result-flash { background: #fffbe7 !important; transition: background 0.7s; }
@@ -64,169 +66,214 @@
       z-index: 1;
       display: none;
     }
-  </style>
+  
+@media (max-width: 768px) {
+  .mobile-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    height: 56px;
+    width: 100%;
+    background-color: #f4a940;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+    padding: 0;
+  }
+  .mobile-nav a {
+    font-size: 20px;
+    height: 56px;
+    line-height: 56px;
+    padding: 0;
+    margin: 0;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: black;
+    position: relative;
+  }
+  #cart-count {
+    position: absolute;
+    top: 6px;
+    right: 10px;
+    background: red;
+    color: white;
+    font-size: 11px;
+    min-width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    padding: 0 5px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+        </style>
 </head>
 <body>
 <header>
-  <div class="header-bar">
-    <h1>WattSun Solar</h1>
-    <button aria-label="Menu" class="nav-toggle" onclick="toggleNav()">☰</button>
-  </div>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="solutions.html">Solutions</a>
-    <a href="shop.html">Shop</a>
-    <a href="calculator.html">Calculator</a>
-    <a href="financing.html">Financing</a>
-    <a href="projects.html">Projects</a>
-    <a href="contact.html">Contact</a>
-    <!-- Cart Icon START -->
-    <a href="cart.html" class="cart-icon-link" aria-label="View shopping cart" title="View cart">
-      <span class="cart-icon">
+<div class="header-bar">
+<h1>WattSun Solar</h1>
+<button aria-label="Menu" class="nav-toggle" onclick="toggleNav()">☰</button>
+</div>
+<nav>
+<a href="index.html">Home</a>
+<a href="solutions.html">Solutions</a>
+<a href="shop.html">Shop</a>
+<a href="calculator.html">Calculator</a>
+<a href="financing.html">Financing</a>
+<a href="projects.html">Projects</a>
+<a href="contact.html">Contact</a>
+<!-- Cart Icon START -->
+<a aria-label="View shopping cart" class="cart-icon-link" href="cart.html" title="View cart">
+<span class="cart-icon">
         🛒
-        <span id="cart-count-badge" class="cart-count-badge">0</span>
-      </span>
-    </a>
-    <!-- Cart Icon END -->
-  </nav>
+        <span class="cart-count-badge" id="cart-count-badge">0</span>
+</span>
+</a>
+<!-- Cart Icon END -->
+</nav>
 </header>
 <div class="container">
-  <!-- TITLE AND SIZING TABLE BUTTON ROW -->
-  <div style="display:flex; align-items:center; justify-content:center; gap:18px; margin-bottom:16px;">
-    <h2 style="margin-bottom:0; font-size:2.1em; font-weight:700; color:#222;">Solar Kit Calculator</h2>
-    <button id="showSizingBtn" class="btn-main" type="button">Sizing Table</button>
-  </div>
-  <p style="text-align:center; color:#666; margin-bottom:30px; font-size:1.13em;">
+<!-- TITLE AND SIZING TABLE BUTTON ROW -->
+<div style="display:flex; align-items:center; justify-content:center; gap:18px; margin-bottom:16px;">
+<h2 style="margin-bottom:0; font-size:2.1em; font-weight:700; color:#222;">Solar Kit Calculator</h2>
+<button class="btn-main" id="showSizingBtn" type="button">Sizing Table</button>
+</div>
+<p style="text-align:center; color:#666; margin-bottom:30px; font-size:1.13em;">
     Select the appliances you want to power, then click <b>Calculate</b> to see the best solar kit for your needs!
   </p>
-  <form autocomplete="off" class="calculator-form" id="solarForm">
-    <!-- Lighting & Devices (expanded) -->
-    <div class="calc-section" id="section-lighting">
-      <div class="calc-section-header" onclick="toggleSection('section-lighting')">
-        <span class="calc-chevron" id="chevron-lighting">▼</span> Lighting &amp; Devices
+<form autocomplete="off" class="calculator-form" id="solarForm">
+<!-- Lighting & Devices (expanded) -->
+<div class="calc-section" id="section-lighting">
+<div class="calc-section-header" onclick="toggleSection('section-lighting')">
+<span class="calc-chevron" id="chevron-lighting">▼</span> Lighting &amp; Devices
       </div>
-      <div class="calc-section-body calc-grid">
-        <label for="led_bulb">LED Bulbs</label>
-        <input id="led_bulb" min="0" name="led_bulb" oninput="sanitizeInput(this)" step="1" type="number" value="0"/>
-        <label for="tv">TV</label>
-        <input id="tv" min="0" name="tv" oninput="sanitizeInput(this)" step="1" type="number" value="0"/>
-        <label for="laptop">Laptop</label>
-        <input id="laptop" min="0" name="laptop" oninput="sanitizeInput(this)" step="1" type="number" value="0"/>
-        <label for="phone">Phone Charging</label>
-        <input id="phone" min="0" name="phone" oninput="sanitizeInput(this)" step="1" type="number" value="0"/>
-        <label for="radio">Radio</label>
-        <input id="radio" min="0" name="radio" oninput="sanitizeInput(this)" step="1" type="number" value="0"/>
-        <label for="fan">Fan</label>
-        <input id="fan" min="0" name="fan" oninput="sanitizeInput(this)" step="1" type="number" value="0"/>
-        <label for="cctv">CCTV/Security System</label>
-        <input id="cctv" min="0" name="cctv" oninput="sanitizeInput(this)" step="1" type="number" value="0"/>
+<div class="calc-section-body calc-grid">
+<label for="led_bulb">LED Bulbs</label>
+<input id="led_bulb" min="0" name="led_bulb" oninput="sanitizeInput(this)" step="1" type="number" value="0"/>
+<label for="tv">TV</label>
+<input id="tv" min="0" name="tv" oninput="sanitizeInput(this)" step="1" type="number" value="0"/>
+<label for="laptop">Laptop</label>
+<input id="laptop" min="0" name="laptop" oninput="sanitizeInput(this)" step="1" type="number" value="0"/>
+<label for="phone">Phone Charging</label>
+<input id="phone" min="0" name="phone" oninput="sanitizeInput(this)" step="1" type="number" value="0"/>
+<label for="radio">Radio</label>
+<input id="radio" min="0" name="radio" oninput="sanitizeInput(this)" step="1" type="number" value="0"/>
+<label for="fan">Fan</label>
+<input id="fan" min="0" name="fan" oninput="sanitizeInput(this)" step="1" type="number" value="0"/>
+<label for="cctv">CCTV/Security System</label>
+<input id="cctv" min="0" name="cctv" oninput="sanitizeInput(this)" step="1" type="number" value="0"/>
+</div>
+</div>
+<!-- Kitchen Appliances (collapsed by default) -->
+<div class="calc-section collapsed" id="section-kitchen">
+<div class="calc-section-header" onclick="toggleSection('section-kitchen')">
+<span class="calc-chevron" id="chevron-kitchen">▼</span> Kitchen Appliances
       </div>
-    </div>
-    <!-- Kitchen Appliances (collapsed by default) -->
-    <div class="calc-section collapsed" id="section-kitchen">
-      <div class="calc-section-header" onclick="toggleSection('section-kitchen')">
-        <span class="calc-chevron" id="chevron-kitchen">▼</span> Kitchen Appliances
+<div class="calc-section-body calc-grid">
+<label for="fridge">Fridge</label>
+<input id="fridge" min="0" name="fridge" oninput="sanitizeInput(this)" step="1" type="number" value="0"/>
+<label for="kettle">Kettle</label>
+<input id="kettle" min="0" name="kettle" oninput="sanitizeInput(this)" step="1" type="number" value="0"/>
+<label for="cooker">Cooker/Hotplate</label>
+<input id="cooker" min="0" name="cooker" oninput="sanitizeInput(this)" step="1" type="number" value="0"/>
+<label for="microwave">Microwave</label>
+<input id="microwave" min="0" name="microwave" oninput="sanitizeInput(this)" step="1" type="number" value="0"/>
+<label for="oven">Electric Oven</label>
+<input id="oven" min="0" name="oven" oninput="sanitizeInput(this)" step="1" type="number" value="0"/>
+<label for="freezer">Deep Freezer</label>
+<input id="freezer" min="0" name="freezer" oninput="sanitizeInput(this)" step="1" type="number" value="0"/>
+<label for="washer">Washing Machine</label>
+<input id="washer" min="0" name="washer" oninput="sanitizeInput(this)" step="1" type="number" value="0"/>
+</div>
+</div>
+<!-- Heavy Loads (collapsed by default) -->
+<div class="calc-section collapsed" id="section-heavy">
+<div class="calc-section-header" onclick="toggleSection('section-heavy')">
+<span class="calc-chevron" id="chevron-heavy">▼</span> Heavy Loads
       </div>
-      <div class="calc-section-body calc-grid">
-        <label for="fridge">Fridge</label>
-        <input id="fridge" min="0" name="fridge" oninput="sanitizeInput(this)" step="1" type="number" value="0"/>
-        <label for="kettle">Kettle</label>
-        <input id="kettle" min="0" name="kettle" oninput="sanitizeInput(this)" step="1" type="number" value="0"/>
-        <label for="cooker">Cooker/Hotplate</label>
-        <input id="cooker" min="0" name="cooker" oninput="sanitizeInput(this)" step="1" type="number" value="0"/>
-        <label for="microwave">Microwave</label>
-        <input id="microwave" min="0" name="microwave" oninput="sanitizeInput(this)" step="1" type="number" value="0"/>
-        <label for="oven">Electric Oven</label>
-        <input id="oven" min="0" name="oven" oninput="sanitizeInput(this)" step="1" type="number" value="0"/>
-        <label for="freezer">Deep Freezer</label>
-        <input id="freezer" min="0" name="freezer" oninput="sanitizeInput(this)" step="1" type="number" value="0"/>
-        <label for="washer">Washing Machine</label>
-        <input id="washer" min="0" name="washer" oninput="sanitizeInput(this)" step="1" type="number" value="0"/>
-      </div>
-    </div>
-    <!-- Heavy Loads (collapsed by default) -->
-    <div class="calc-section collapsed" id="section-heavy">
-      <div class="calc-section-header" onclick="toggleSection('section-heavy')">
-        <span class="calc-chevron" id="chevron-heavy">▼</span> Heavy Loads
-      </div>
-      <div class="calc-section-body calc-grid">
-        <label for="pump">Water Pump (small)</label>
-        <input id="pump" min="0" name="pump" oninput="sanitizeInput(this)" step="1" type="number" value="0"/>
-        <label for="iron">Iron Box</label>
-        <input id="iron" min="0" name="iron" oninput="sanitizeInput(this)" step="1" type="number" value="0"/>
-        <label for="heater">Water Heater</label>
-        <input id="heater" min="0" name="heater" oninput="sanitizeInput(this)" step="1" type="number" value="0"/>
-        <label for="ac">AC (Split Unit)</label>
-        <input id="ac" min="0" name="ac" oninput="sanitizeInput(this)" step="1" type="number" value="0"/>
-        <label for="tools">Power Tools</label>
-        <input id="tools" min="0" name="tools" oninput="sanitizeInput(this)" step="1" type="number" value="0"/>
-        <label for="borehole">Borehole Pump</label>
-        <input id="borehole" min="0" name="borehole" oninput="sanitizeInput(this)" step="1" type="number" value="0"/>
-      </div>
-    </div>
-    <button class="loan-btn" onclick="calculateKit()" type="button">Calculate</button>
-  </form>
-  <div class="form-section" id="result" style="display:none; text-align:center; margin-top:26px;"></div>
-  <div class="form-note">
+<div class="calc-section-body calc-grid">
+<label for="pump">Water Pump (small)</label>
+<input id="pump" min="0" name="pump" oninput="sanitizeInput(this)" step="1" type="number" value="0"/>
+<label for="iron">Iron Box</label>
+<input id="iron" min="0" name="iron" oninput="sanitizeInput(this)" step="1" type="number" value="0"/>
+<label for="heater">Water Heater</label>
+<input id="heater" min="0" name="heater" oninput="sanitizeInput(this)" step="1" type="number" value="0"/>
+<label for="ac">AC (Split Unit)</label>
+<input id="ac" min="0" name="ac" oninput="sanitizeInput(this)" step="1" type="number" value="0"/>
+<label for="tools">Power Tools</label>
+<input id="tools" min="0" name="tools" oninput="sanitizeInput(this)" step="1" type="number" value="0"/>
+<label for="borehole">Borehole Pump</label>
+<input id="borehole" min="0" name="borehole" oninput="sanitizeInput(this)" step="1" type="number" value="0"/>
+</div>
+</div>
+<button class="loan-btn" onclick="calculateKit()" type="button">Calculate</button>
+</form>
+<div class="form-section" id="result" style="display:none; text-align:center; margin-top:26px;"></div>
+<div class="form-note">
     * This is an indicative estimate. Actual system sizing may vary.
   </div>
 </div>
-
 <!-- Sizing Table Side Panel -->
 <div id="sizingPanel">
-  <button id="closeSizingPanel" style="position:absolute; top:15px; right:18px; background:transparent; border:none; font-size:2em; color:#ccb147; cursor:pointer;" type="button">×</button>
-  <h3 style="text-align:center; font-size:1.32em; font-weight:700; color:#b39708; margin-bottom:18px;">WattSun Solar Kit Sizing Table</h3>
-  <div style="overflow-x:auto;">
-    <table style="width:100%; border-collapse:collapse; font-size:0.97em;">
-      <thead style="background: #fff7cd;">
-        <tr style="color:#85620c; font-weight:bold;">
-          <th style="padding:8px 6px; border-bottom:2px solid #ffe58f;">Kit Size</th>
-          <th style="padding:8px 6px; border-bottom:2px solid #ffe58f;">Use Case</th>
-          <th style="padding:8px 6px; border-bottom:2px solid #ffe58f;">Example Appliances</th>
-        </tr>
-      </thead>
-      <tbody style="background: #fff;">
-        <tr>
-          <td style="padding:7px 6px; font-weight:600;">1 kW</td>
-          <td style="padding:7px 6px;">Small home, bedsitter, small shop, basic backup</td>
-          <td style="padding:7px 6px;">6 LED bulbs, TV, phone/laptop, Wi-Fi, POS, small fridge</td>
-        </tr>
-        <tr style="background:#fffbeee7;">
-          <td style="padding:7px 6px; font-weight:600;">3 kW</td>
-          <td style="padding:7px 6px;">Medium home, small office, kiosk, essential business</td>
-          <td style="padding:7px 6px;">All above + microwave/iron/freezer; Up to 2 fridges, POS, CCTV</td>
-        </tr>
-        <tr>
-          <td style="padding:7px 6px; font-weight:600;">6 kW</td>
-          <td style="padding:7px 6px;">Large home, small business, restaurant, critical backup</td>
-          <td style="padding:7px 6px;">All above + 2-3 kitchen appliances (fridge, freezer, microwave, fryer); Computers, CCTV, Wi-Fi</td>
-        </tr>
-        <tr style="background:#fffbeee7;">
-          <td style="padding:7px 6px; font-weight:600;">9 kW</td>
-          <td style="padding:7px 6px;">Large home, mid-size business, fast food with partial kitchen</td>
-          <td style="padding:7px 6px;">All above + 3 kitchen devices at once; Commercial freezer, fryer, coffee machine</td>
-        </tr>
-        <tr>
-          <td style="padding:7px 6px; font-weight:600;">12 kW</td>
-          <td style="padding:7px 6px;">Large business, full backup for fast food/supermarket</td>
-          <td style="padding:7px 6px;">All above + multiple fryers/ovens/fridges; full IT, CCTV, AC, coffee, and more</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div style="text-align:center; margin-top:14px; color:#887b19; font-size:0.97em;">
+<button id="closeSizingPanel" style="position:absolute; top:15px; right:18px; background:transparent; border:none; font-size:2em; color:#ccb147; cursor:pointer;" type="button">×</button>
+<h3 style="text-align:center; font-size:1.32em; font-weight:700; color:#b39708; margin-bottom:18px;">WattSun Solar Kit Sizing Table</h3>
+<div style="overflow-x:auto;">
+<table style="width:100%; border-collapse:collapse; font-size:0.97em;">
+<thead style="background: #fff7cd;">
+<tr style="color:#85620c; font-weight:bold;">
+<th style="padding:8px 6px; border-bottom:2px solid #ffe58f;">Kit Size</th>
+<th style="padding:8px 6px; border-bottom:2px solid #ffe58f;">Use Case</th>
+<th style="padding:8px 6px; border-bottom:2px solid #ffe58f;">Example Appliances</th>
+</tr>
+</thead>
+<tbody style="background: #fff;">
+<tr>
+<td style="padding:7px 6px; font-weight:600;">1 kW</td>
+<td style="padding:7px 6px;">Small home, bedsitter, small shop, basic backup</td>
+<td style="padding:7px 6px;">6 LED bulbs, TV, phone/laptop, Wi-Fi, POS, small fridge</td>
+</tr>
+<tr style="background:#fffbeee7;">
+<td style="padding:7px 6px; font-weight:600;">3 kW</td>
+<td style="padding:7px 6px;">Medium home, small office, kiosk, essential business</td>
+<td style="padding:7px 6px;">All above + microwave/iron/freezer; Up to 2 fridges, POS, CCTV</td>
+</tr>
+<tr>
+<td style="padding:7px 6px; font-weight:600;">6 kW</td>
+<td style="padding:7px 6px;">Large home, small business, restaurant, critical backup</td>
+<td style="padding:7px 6px;">All above + 2-3 kitchen appliances (fridge, freezer, microwave, fryer); Computers, CCTV, Wi-Fi</td>
+</tr>
+<tr style="background:#fffbeee7;">
+<td style="padding:7px 6px; font-weight:600;">9 kW</td>
+<td style="padding:7px 6px;">Large home, mid-size business, fast food with partial kitchen</td>
+<td style="padding:7px 6px;">All above + 3 kitchen devices at once; Commercial freezer, fryer, coffee machine</td>
+</tr>
+<tr>
+<td style="padding:7px 6px; font-weight:600;">12 kW</td>
+<td style="padding:7px 6px;">Large business, full backup for fast food/supermarket</td>
+<td style="padding:7px 6px;">All above + multiple fryers/ovens/fridges; full IT, CCTV, AC, coffee, and more</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="text-align:center; margin-top:14px; color:#887b19; font-size:0.97em;">
     *For indicative purposes. Final kit sizing should be confirmed after site survey.
   </div>
 </div>
 <!-- Overlay for side panel -->
 <div id="sizingOverlay"></div>
 <!-- Notification Bubble -->
-<div id="cart-notification" class="cart-notification">Added to cart!</div>
+<div class="cart-notification" id="cart-notification">Added to cart!</div>
 <footer>
   © 2025 WattSun Solar Kenya | 
   <div class="footer-contacts">
-    <a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a>
-  </div>
+<a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a>
+</div>
 </footer>
 <script>
   // --- CART BADGE LOGIC ---
@@ -387,6 +434,29 @@
       }
     }, true);
   });
+</script>
+
+<footer class="mobile-nav">
+<a aria-label="Home" href="index.html">🏠</a>
+<a aria-label="Account" href="account.html">👤</a>
+<a aria-label="Cart" href="cart.html">🛒<span id="cart-count">0</span></a>
+<a aria-label="Menu" href="javascript:void(0);" onclick="document.querySelector('header').classList.toggle('nav-open')">☰</a>
+</footer>
+
+<script>
+function updateCartCountBadge() {
+  let count = 0;
+  try {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    count = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+  } catch (e) {}
+  const mobileCount = document.getElementById('cart-count');
+  if (mobileCount) {
+    mobileCount.textContent = count;
+  }
+}
+document.addEventListener('DOMContentLoaded', updateCartCountBadge);
+window.addEventListener('storage', updateCartCountBadge);
 </script>
 </body>
 </html>

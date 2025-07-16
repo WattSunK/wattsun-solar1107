@@ -316,7 +316,57 @@ td.product-col {
   z-index: 1;
   display: none;
 }
-</style>
+
+/* === Mobile Sticky Footer === */
+.mobile-nav {
+  display: none;
+}
+@media (max-width: 768px) {
+  .mobile-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    height: 56px;
+    width: 100%;
+    background-color: #f4a940;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+    padding: 0;
+  }
+  .mobile-nav a {
+    font-size: 20px;
+    height: 56px;
+    line-height: 56px;
+    padding: 0;
+    margin: 0;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: black;
+    position: relative;
+  }
+  #cart-count {
+    position: absolute;
+    top: 6px;
+    right: 10px;
+    background: red;
+    color: white;
+    font-size: 11px;
+    min-width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    padding: 0 5px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+        </style>
 </head>
 <body>
 <header>
@@ -353,7 +403,6 @@ td.product-col {
 <th class="compact-col">Price (KES)</th>
 <th class="compact-col">Deposit (KES)</th>
 <th class="compact-col">Total (KES)</th>
-
 </tr>
 </thead>
 <tbody></tbody>
@@ -444,6 +493,39 @@ function updateCartCountBadge() {
     badge.style.display = 'flex';
   } else {
     badge.style.display = 'none';
+  }
+}
+document.addEventListener('DOMContentLoaded', updateCartCountBadge);
+window.addEventListener('storage', updateCartCountBadge);
+</script>
+
+<footer class="mobile-nav">
+<a aria-label="Home" href="index.html">🏠</a>
+<a aria-label="Account" href="account.html">👤</a>
+<a aria-label="Cart" href="cart.html">🛒<span id="cart-count">0</span></a>
+<a aria-label="Menu" href="javascript:void(0);" onclick="document.querySelector('.nav-toggle').click();">☰</a>
+</footer>
+
+<script>
+function updateCartCountBadge() {
+  let count = 0;
+  try {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    count = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+  } catch (e) {}
+
+  const badge = document.getElementById('cart-count-badge');
+  const mobileCount = document.getElementById('cart-count');
+  if (badge) {
+    if (count > 0) {
+      badge.textContent = count;
+      badge.style.display = 'flex';
+    } else {
+      badge.style.display = 'none';
+    }
+  }
+  if (mobileCount) {
+    mobileCount.textContent = count;
   }
 }
 document.addEventListener('DOMContentLoaded', updateCartCountBadge);

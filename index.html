@@ -256,7 +256,7 @@
 <footer class="mobile-nav">
 <a aria-label="Home" href="index.html">🏠</a>
 <a aria-label="Account" href="account.html">👤</a>
-<a aria-label="Cart" href="cart.html">🛒<span id="cart-count">2</span></a>
+<a aria-label="Cart" href="cart.html">🛒<span id="cart-count">0</span></a>
 <a aria-label="Menu" href="javascript:void(0);" onclick="document.querySelector('.nav-toggle').click();">☰</a>
 </footer>
 <script>
@@ -286,6 +286,32 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }, true);
 });
+</script>
+
+<script>
+function updateCartCountBadge() {
+  let count = 0;
+  try {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    count = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+  } catch (e) {}
+
+  const badge = document.getElementById('cart-count-badge');
+  const mobileCount = document.getElementById('cart-count');
+  if (badge) {
+    if (count > 0) {
+      badge.textContent = count;
+      badge.style.display = 'flex';
+    } else {
+      badge.style.display = 'none';
+    }
+  }
+  if (mobileCount) {
+    mobileCount.textContent = count;
+  }
+}
+document.addEventListener('DOMContentLoaded', updateCartCountBadge);
+window.addEventListener('storage', updateCartCountBadge);
 </script>
 </body>
 </html>

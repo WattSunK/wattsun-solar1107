@@ -1,0 +1,194 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Account - WattSun Solar</title>
+  <link rel="stylesheet" href="main.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding-bottom: 56px;
+      background: #fefdf8;
+    }
+    header {
+      background-color: #fff;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      position: relative;
+    }
+    .header-bar h1 {
+      font-size: 1.5em;
+      margin: 0;
+    }
+    nav {
+      display: none;
+    }
+    nav.nav-open {
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+      position: absolute;
+      top: 56px;
+      right: 0;
+      width: 80%;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+    nav a {
+      padding: 14px;
+      text-decoration: none;
+      color: #333;
+      border-bottom: 1px solid #eee;
+    }
+    .nav-toggle {
+      font-size: 1.8em;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .account-section {
+      max-width: 800px;
+      margin: 20px auto;
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .account-section h2 {
+      font-size: 1.2em;
+      color: #444;
+      margin-bottom: 10px;
+    }
+    .account-section p {
+      font-size: 0.95em;
+      color: #555;
+    }
+    .account-section input, .account-section button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 1em;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+    }
+    .account-section button {
+      background-color: #f4a940;
+      color: white;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+    .account-section button:hover {
+      background-color: #e7991f;
+    }
+    .mobile-nav {
+      display: none;
+    }
+    @media (max-width: 768px) {
+      .mobile-nav {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        height: 56px;
+        width: 100%;
+        background-color: #f4a940;
+        justify-content: space-around;
+        align-items: center;
+        z-index: 1000;
+        box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+        padding: 0;
+      }
+      .mobile-nav a {
+        font-size: 20px;
+        height: 56px;
+        line-height: 56px;
+        padding: 0;
+        margin: 0;
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: black;
+        position: relative;
+      }
+      #cart-count {
+        position: absolute;
+        top: 6px;
+        right: 10px;
+        background: red;
+        color: white;
+        font-size: 11px;
+        min-width: 16px;
+        height: 16px;
+        border-radius: 8px;
+        padding: 0 5px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="header-bar">
+    <h1>WattSun Solar</h1>
+    <button class="nav-toggle" aria-label="Toggle Menu" onclick="document.querySelector('nav').classList.toggle('nav-open')">☰</button>
+  </div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="shop.html">Shop</a>
+    <a href="calculator.html">Calculator</a>
+    <a href="financing.html">Financing</a>
+    <a href="projects.html">Projects</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<div class="account-section">
+  <h2>Track Your Order or Financing</h2>
+  <p>Enter your phone number to view your status:</p>
+  <input type="tel" placeholder="+254 7XX XXX XXX" />
+  <button>Check Status</button>
+</div>
+
+<div class="account-section">
+  <h2>Need Help?</h2>
+  <p><a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a></p>
+  <p><a href="contact.html">Contact Page</a> | <a href="faq.html">FAQ</a></p>
+</div>
+
+<footer class="mobile-nav">
+  <a href="index.html" aria-label="Home">🏠</a>
+  <a href="account.html" aria-label="Account">👤</a>
+  <a href="cart.html" aria-label="Cart">🛒<span id="cart-count">0</span></a>
+  <a href="javascript:void(0);" aria-label="Menu" onclick="document.querySelector('nav').classList.toggle('nav-open')">☰</a>
+</footer>
+
+<script>
+function updateCartCountBadge() {
+  let count = 0;
+  try {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    count = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+  } catch (e) {}
+
+  const badge = document.getElementById('cart-count');
+  if (badge) {
+    badge.textContent = count;
+  }
+}
+document.addEventListener('DOMContentLoaded', updateCartCountBadge);
+window.addEventListener('storage', updateCartCountBadge);
+</script>
+</body>
+</html>

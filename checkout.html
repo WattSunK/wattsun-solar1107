@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 
 <html lang="en">
 <head>
@@ -325,6 +326,58 @@ h2 {
     overflow-x: auto;
   }
 }
+
+/* === Mobile Sticky Footer === */
+.mobile-nav {
+  display: none;
+}
+@media (max-width: 768px) {
+  .mobile-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    height: 56px;
+    width: 100%;
+    background-color: #f4a940;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+    padding: 0;
+  }
+
+  .mobile-nav a {
+    font-size: 20px;
+    height: 56px;
+    line-height: 56px;
+    padding: 0;
+    margin: 0;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: black;
+    position: relative;
+  }
+
+  #cart-count {
+    position: absolute;
+    top: 6px;
+    right: 10px;
+    background: red;
+    color: white;
+    font-size: 11px;
+    min-width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    padding: 0 5px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
 </style>
 </head>
 <body>
@@ -362,7 +415,6 @@ h2 {
 <th class="compact-col">Deposit<br/>(KES)</th>
 <th class="compact-col">Qty</th>
 <th class="compact-col">Total<br/>(KES)</th>
-
 </tr>
 </thead>
 <tbody></tbody>
@@ -514,6 +566,11 @@ if (window.location.pathname.endsWith("thankyou.html") && sessionStorage.getItem
     sessionStorage.removeItem("clearCartOnThankYou");
 }
 </script>
+<footer class="mobile-nav">
+<a aria-label="Home" href="index.html">🏠</a>
+<a aria-label="Account" href="account.html">👤</a>
+<a aria-label="Cart" href="cart.html">🛒<span id="cart-count">2</span></a>
+<a aria-label="Menu" href="javascript:void(0);" onclick="document.querySelector('.nav-toggle').click();">☰</a>
+</footer>
 </body>
 </html>
-
