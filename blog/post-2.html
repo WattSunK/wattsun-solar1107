@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>How to Size Your Solar Kit - WattSun Solar Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../main.css">
+  <link rel="stylesheet" href="blog.css">
+</head>
+<body>
+<header>
+  <div class="header-bar">
+    <h1>WattSun Solar</h1>
+    <button class="nav-toggle" aria-label="Open menu">&#9776;</button>
+  </div>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../solutions.html">Solutions</a>
+    <a href="../shop.html">Shop</a>
+    <a href="../financing.html">Financing</a>
+    <a href="../projects.html">Projects</a>
+    <a href="../contact.html">Contact</a>
+    <a href="index.html">Blog</a>
+  </nav>
+</header>
+
+<main class="blog-main">
+  <article class="blog-card">
+    <h1>How to Size Your Solar Kit</h1>
+    <p><b>2025-07-15</b></p>
+    <h2>Step 1: List Your Appliances</h2>
+    <ul>
+      <li>Write down each device you want to power (lights, TV, fridge, etc.)</li>
+      <li>Note their wattage and estimated daily hours of use.</li>
+    </ul>
+    <h2>Step 2: Calculate Daily Consumption</h2>
+    <p>Multiply the wattage of each device by hours used, then add them up to get your total daily consumption (in watt-hours).</p>
+    <h2>Step 3: Choose Your Kit</h2>
+    <p>Compare your total needs to our kits on the <a href="../../shop.html">Shop page</a>. Need help? <a href="../../contact.html">Contact us</a> for free sizing advice.</p>
+    <p><a href="index.html">&larr; Back to Blog</a></p>
+  </article>
+</main>
+
+<footer>
+  <div class="footer-contacts">
+    <a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a>
+  </div>
+  <p>© 2025 WattSun Solar. All rights reserved.</p>
+</footer>
+
+<script>
+  const navToggle = document.querySelector('.nav-toggle');
+  const header = document.querySelector('header');
+  navToggle.addEventListener('click', function() {
+    header.classList.toggle('nav-open');
+  });
+  document.querySelectorAll('header nav a').forEach(link => {
+    link.addEventListener('click', () => header.classList.remove('nav-open'));
+  });
+</script>
+<script src="../main.js"></script>
+</body>
+</html>

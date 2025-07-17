@@ -534,15 +534,20 @@ footer a {
   .loan-btn, .hero .btn { font-size: 1em; min-width: 110px; padding: 10px 0; }
 }
 @media (max-width: 700px) {
+  
   .header-bar {
     display: flex !important;
     align-items: center !important;
-    justify-content: center !important;
+    justify-content: space-between !important;
+    padding: 0 10px !important;
     position: relative !important;
     width: 100% !important;
     box-sizing: border-box;
     min-height: 48px !important;
+    background: linear-gradient(90deg, #ffc371 0%, #ffb347 100%);
+    z-index: 2;
   }
+
   .header-bar h1 {
     flex: 1 1 auto !important;
     text-align: center !important;

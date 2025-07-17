@@ -143,7 +143,109 @@
       }
     }
   
-    .cart-btn { background: #ffc043; color: white; font-weight: bold; border: none; border-radius: 6px; cursor: pointer; box-shadow: 0 3px 12px rgba(0,0,0,0.06); }</style>
+    .cart-btn { background: #ffc043; color: white; font-weight: bold; border: none; border-radius: 6px; cursor: pointer; box-shadow: 0 3px 12px rgba(0,0,0,0.06); }
+
+/* === Mobile Enhancements === */
+    .mobile-nav {
+      display: none;
+    }
+    @media (max-width: 768px) {
+      header {
+        height: 56px;
+      }
+
+      .mobile-nav {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        height: 56px;
+        width: 100%;
+        background-color: #f4a940;
+        justify-content: space-around;
+        align-items: center;
+        z-index: 1000;
+        box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .mobile-nav a {
+        font-size: 24px;
+        text-decoration: none;
+        color: black;
+        position: relative;
+        line-height: 1;
+      }
+
+      #cart-count {
+        background: red;
+        color: white;
+        border-radius: 50%;
+        padding: 2px 6px;
+        font-size: 12px;
+        position: absolute;
+        top: -8px;
+        right: -12px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .mobile-nav a {
+        font-size: 20px;
+        padding: 6px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .mobile-nav {
+        height: 56px;
+        padding: 0;
+      }
+
+      .mobile-nav a {
+        font-size: 20px;
+        height: 56px;
+        line-height: 56px;
+        padding: 0;
+        margin: 0;
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #cart-count {
+        top: 4px;
+        right: 10px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      #cart-count {
+        position: absolute;
+        top: 6px;
+        right: 10px;
+        background: red;
+        color: white;
+        font-size: 11px;
+        min-width: 16px;
+        height: 16px;
+        border-radius: 8px;
+        padding: 0 5px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 768px) {
+      h1 img.site-logo {
+        width: auto !important;
+        max-height: 32px !important;
+        margin-right: 8px;
+      }
+    }
+
+</style>
 </head>
 <body>
 <header>
@@ -159,9 +261,7 @@
 <a href="projects.html">Projects</a>
 <a href="contact.html">Contact</a>
 <span id="cartLinkWrapper" style="display:none;">
-<a href="cart.html">
-    🛒 Cart <span id="cartCount" style="font-weight:bold; background:#3E9F50; color:white; padding:2px 6px; border-radius:50%; font-size:0.8em; vertical-align:top;">0</span>
-</a>
+<a href="cart.html">🛒<span id="cartCount" style="font-weight:bold; background:#3E9F50; color:white; padding:2px 6px; border-radius:50%; font-size:0.8em; vertical-align:top;"></span></a>
 </span>
 </nav>
 </header>
@@ -192,36 +292,79 @@
 <footer>
   © 2025 WattSun Solar Kenya | <div class="footer-contacts"><a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a></div>
 </footer>
+<footer class="mobile-nav">
+<a aria-label="Home" href="index.html">🏠</a>
+<a aria-label="Account" href="account.html">👤</a>
+<a aria-label="Cart" href="cart.html">🛒<span id="cart-count" style="position: absolute; top: 6px; right: 10px; background: red; color: white; font-size: 11px; min-width: 16px; height: 16px; border-radius: 8px; padding: 0 5px; text-align: center; display: flex; align-items: center; justify-content: center;">0</span></a>
+<a aria-label="Menu" href="javascript:void(0);" onclick="document.querySelector('.nav-toggle').click();">☰</a>
+</footer>
 <script>
-  function toggleNav() {
-    document.querySelector('header').classList.toggle('nav-open');
+document.addEventListener("DOMContentLoaded", function () {
+  const loanForm = document.getElementById("loanForm");
+  const resultDiv = document.getElementById("result");
+  const navToggle = document.querySelector(".nav-toggle");
+  const header = document.querySelector("header");
+  const nav = document.querySelector("header nav");
+
+  // Toggle menu open/close
+  if (navToggle && header) {
+    navToggle.addEventListener("click", function (e) {
+      e.stopPropagation();
+      header.classList.toggle("nav-open");
+    });
   }
-  document.getElementById('loanForm').addEventListener('submit', function(e) {
+
+  // Close menu if clicking outside
+  document.body.addEventListener("click", function (e) {
+    if (
+      header.classList.contains("nav-open") &&
+      !nav.contains(e.target) &&
+      !navToggle.contains(e.target)
+    ) {
+      header.classList.remove("nav-open");
+    }
+  }, true);
+
+  // Scroll and highlight result
+  loanForm.addEventListener("submit", function(e) {
     e.preventDefault();
+
     const price = parseFloat(document.getElementById('system').value);
     const deposit = parseFloat(document.getElementById('deposit').value);
     const term = parseInt(document.getElementById('term').value);
-    const resultDiv = document.getElementById('result');
+
     if (!price || isNaN(deposit) || isNaN(term)) {
       resultDiv.textContent = "Please fill in all fields.";
       return;
     }
+
     const minDeposit = 0.5 * price;
     if (deposit < minDeposit) {
       resultDiv.textContent = "Minimum deposit is KES " + minDeposit.toLocaleString("en-KE");
       return;
     }
+
     if (deposit > price) {
       resultDiv.textContent = "Deposit cannot be greater than system cost (KES " + price.toLocaleString("en-KE") + ")";
       return;
     }
+
     const loanAmount = price - deposit;
     const annualInterestRate = 0.15;
     const monthlyInterestRate = annualInterestRate / 12;
     const monthlyRepayment = (loanAmount * monthlyInterestRate) / (1 - Math.pow(1 + monthlyInterestRate, -term));
+
     resultDiv.textContent =
       "Loan Amount: KES " + loanAmount.toLocaleString("en-KE") +
       " | Monthly Repayment: KES " + monthlyRepayment.toFixed(0).toLocaleString("en-KE");
+
+    resultDiv.scrollIntoView({ behavior: "smooth", block: "center" });
+    resultDiv.style.transition = "background 0.3s ease-in-out";
+    resultDiv.style.background = "#fff5c2";
+    setTimeout(() => {
+      resultDiv.style.background = "transparent";
+    }, 2200);
+
     localStorage.setItem('loanKit', JSON.stringify({
       system: document.getElementById('system').selectedOptions[0].text,
       price: price,
@@ -235,7 +378,7 @@
       const btn = document.createElement('button');
       btn.textContent = "Add to Cart";
       btn.id = "addToCartBtn";
-      btn.className = "cart-btn"; // use site formatting
+      btn.className = "cart-btn";
       btn.style.margin = '14px auto 0';
       btn.style.display = 'block';
       btn.style.padding = '12px 28px';
@@ -250,34 +393,30 @@
           monthly: kit.monthly
         });
         localStorage.setItem('cart', JSON.stringify(cart));
-        updateCartCount?.();
+        updateCartCount();
         btn.remove();
         document.getElementById('loanForm').reset();
         resultDiv.textContent = "Loan added to cart!";
+        resultDiv.scrollIntoView({ behavior: "smooth", block: "center" });
       };
       document.querySelector('.disclaimer').after(btn);
     }
-
   });
-</script>
-<script>
+
   function updateCartCount() {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
     const count = cart.length;
-    const badge = document.getElementById("cartCount");
-    if (badge) badge.textContent = count;
+    const badgeDesktop = document.getElementById("cartCount");
+    const badgeMobile = document.getElementById("cart-count");
+    if (badgeDesktop) badgeDesktop.textContent = count;
+    if (badgeMobile) badgeMobile.textContent = count;
   }
 
-  document.addEventListener("DOMContentLoaded", function () {
-    const page = window.location.pathname.toLowerCase();
-    if (page.includes("shop") || page.includes("cart") || page.includes("checkout") || page.includes("financing")) {
-      const wrapper = document.getElementById("cartLinkWrapper");
-      if (wrapper) {
-        wrapper.style.display = "inline-block";
-        updateCartCount();
-      }
-    }
-  });
-</script>
-</body>
+  const wrapper = document.getElementById("cartLinkWrapper");
+  if (wrapper) {
+    wrapper.style.display = "inline-block";
+    updateCartCount();
+  }
+});
+</script></body>
 </html>

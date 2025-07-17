@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Solar Buyer’s Guide 2025 - WattSun Solar Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../main.css">
+  <link rel="stylesheet" href="blog.css">
+</head>
+<body>
+<header>
+  <div class="header-bar">
+    <h1>WattSun Solar</h1>
+    <button class="nav-toggle" aria-label="Open menu">&#9776;</button>
+  </div>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../solutions.html">Solutions</a>
+    <a href="../shop.html">Shop</a>
+    <a href="../financing.html">Financing</a>
+    <a href="../projects.html">Projects</a>
+    <a href="../contact.html">Contact</a>
+    <a href="index.html">Blog</a>
+  </nav>
+</header>
+
+<main class="blog-main">
+  <article class="blog-card">
+    <h1>Solar Buyer’s Guide 2025</h1>
+    <p><b>2025-07-15</b></p>
+    <h2>1. Why Go Solar?</h2>
+    <p>Solar energy is clean, sustainable, and can save you money on electricity bills. With the right system, you can power your essentials and enjoy reliable energy—even during outages.</p>
+    <h2>2. What to Consider When Buying</h2>
+    <ul>
+      <li><b>Your energy needs</b> – What appliances/devices do you want to power?</li>
+      <li><b>System quality</b> – Ask about panel and battery warranties, and after-sales support.</li>
+      <li><b>Financing options</b> – Look for affordable payment plans and financing solutions.</li>
+      <li><b>Installation expertise</b> – Choose installers with experience and verified projects.</li>
+    </ul>
+    <h2>3. Why Choose WattSun Solar?</h2>
+    <p>We offer quality kits, transparent pricing, and tailored financing. <a href="../../shop.html">See our shop</a> or <a href="../../contact.html">contact us</a> for a personalized quote.</p>
+    <p><a href="index.html">&larr; Back to Blog</a></p>
+  </article>
+</main>
+
+<footer>
+  <div class="footer-contacts">
+    <a href="mailto:info@wattsun.co.ke">info@wattsun.co.ke</a>
+  </div>
+  <p>© 2025 WattSun Solar. All rights reserved.</p>
+</footer>
+
+<script>
+  const navToggle = document.querySelector('.nav-toggle');
+  const header = document.querySelector('header');
+  navToggle.addEventListener('click', function() {
+    header.classList.toggle('nav-open');
+  });
+  document.querySelectorAll('header nav a').forEach(link => {
+    link.addEventListener('click', () => header.classList.remove('nav-open'));
+  });
+</script>
+<script src="../main.js"></script>
+</body>
+</html>
