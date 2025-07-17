@@ -378,71 +378,23 @@ h2 {
     justify-content: center;
   }
 }
-.logo-container {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  white-space: nowrap;
-  padding: 6px 12px;
-  margin-left: 10px;
-}
-.brand-name {
-  font-size: 1.8em;
-  font-weight: bold;
-  color: white;
-  white-space: nowrap;
-}
-.site-logo {
-  height: 48px;
-  max-width: 48px;
-  object-fit: contain;
-  vertical-align: middle;
-}
 @media (max-width: 768px) {
-  .logo-container {
-    padding: 4px 12px;
-    height: 56px;
-  }
-  .site-logo {
-    height: auto;
-    max-height: 36px;
-    object-fit: contain;
-  }
-  .brand-name {
-    font-size: 1.3em;
-  }
 }
     /* === Desktop & Mobile Logo Styles from index.html === */
-    .logo-container { display: none; }
-    .desktop-logo { display: block; }
-    .brand-name { font-size: 1.8em; font-weight: bold; color: white; white-space: nowrap; }
-    .site-logo { height: 48px; max-width: 48px; object-fit: contain; vertical-align: middle; }
-    @media (max-width: 768px) {
-      .desktop-logo { display: none; }
-      .logo-container { display: flex; align-items: center; gap: 12px; white-space: nowrap; padding: 4px 12px; height: 56px; margin-left: 10px; }
-      .site-logo { height: auto; max-height: 36px; object-fit: contain; }
-      .brand-name { font-size: 1.3em; }
-    }
-    @media (max-width: 768px) {
-      h1 img.site-logo { width: auto !important; max-height: 32px !important; margin-right: 8px; }
-    }
-</style>
+    @media (max-width: 768px) {</style>
 </head>
 <body>
 <header>
 <div class="header-bar">
 <h1 class="desktop-logo">
 <img alt="WattSun Solar Logo" src="assets/logo/Wattsun Solar log2.png" style="width: 60px; object-fit: contain; margin-right: 10px;"/>
-        WattSun Solar
-      </h1>
-<div class="logo-container">
-<img alt="WattSun Solar Logo" class="site-logo" src="assets/logo/Wattsun Solar log2.png">
-<span class="brand-name">WattSun Solar</span>
-</img></div>
+  WattSun Solar
+</h1>
 <div class="logo-container">
 <img alt="WattSun Solar Logo" class="site-logo" src="assets/logo/Wattsun Solar log2.png"/>
 <span class="brand-name">WattSun Solar</span>
 </div>
+
 <button aria-label="Open menu" class="nav-toggle" onclick="toggleNav()">☰</button>
 </div>
 <nav id="mainNav">
